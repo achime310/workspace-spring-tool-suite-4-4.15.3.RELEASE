@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
+	<!-- ############################## resultMap정의 ############################# -->
+	<resultMap id="studentResultMap"
+				type="com.mybatis3.domain.Student">
+		<result column="stud_id" property="studId"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="dob" property="dob"/>
+	</resultMap>
+	
+	<resultMap id="studentWithAddressResultMap" 
+				type="com.mybatis3.domain.Student">
+		<result column="stud_id" property="studId"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="dob" property="dob"/>
+		<association property="address" 
+					 javaType="com.mybatis3.domain.Address">
+					 <result column="addr_id" property="addrId"/>
+					 <result column="street" property="street"/>
+					 <result column="city" property="city"/>
+					 <result column="state" property="state"/>
+					 <result column="zip" property="zip"/>
+					 <result column="country" property="country"/>
+		</association>
+	</resultMap>
+	
+	<!-- ########################################################################### -->
+	<!-- 
+	/**************************************************
+	 	SELECT [student]
+	**************************************************/
+	/*
+	 * select sql의결과타입이 DTO[DTO List] 객체인경우
+	 * resultType :  Dto
+	 */
+	 -->
+	 <!-- [mybatis-config.xml]에서
+	 		typeAlias alias="Student" type="com.mybatis3.domain.Student"
+	 		를 했기때문에 resultType을 줄일수있음-->
+	<select id="findStudentById" parameterType="int" resultType="Student">
+		select stud_id as studId, name, email, dob from students where stud_id = ${studId}
+	</select>
+	
+	<select id="findAllStudents" resultType="Student">
+		select stud_id, name, email, dob from students
+	</select>
+	<!-- 
+	/*
+	 * select sql의결과타입이 DTO[DTO List] 객체인경우
+	 * resultMap :  DTO
+	 */
+	 -->
+	<select id="findStudentByIdResultMap"
+	 		parameterType="int"
+	 		resultMap="studentResultMap">
+		select stud_id, name, email, dob from students where stud_id = ${studId}
+	</select>
+	
+	<select id="findAllStudentsResultMap"
+	 		resultMap="studentResultMap">
+		select stud_id, name, email, dob from students
+	</select>
+		 
+	<!-- 
+	/**************************************************
+	 	SELECT[student + address JOIN]( 1 : 1 )
+	**************************************************/
+	/*
+	 * select sql의결과타입이 DTO,VO,Domain객체인경우
+	 * resultMap : studentWithAddressResultMap
+	 */
+	 -->
+	 
+	 <!--결과를 dto타입으로 받을수 없기에, resultMap을 사용한다 -->
+	 <select id="findStudentByIdWithAddress"
+	 		 parameterType="int" 
+	 		 resultMap="studentWithAddressResultMap">
+	 
+	 select stud_id, name, email,phone, a.addr_id, street, city, state, zip, country
+	  FROM students s 
+      left outer join addresses a 
+      on s.addr_id=a.addr_id
+      where s.stud_id=${studId}
+	 
+	 </select>
+	 
+	 
+	 <!-- 
+	/**************************************************
+	 SELECT[students + courses[course_enrollment] JOIN( 1 : N )
+	**************************************************/
+	/*
+	 * select sql의결과타입이 DTO,VO,Domain객체인경우
+	 * resultMap : studentWithCoursesResultMap
+	 */
+	 -->
+	 
+	 
+	 
+	<!-- 
+	/**************************************************
+	INSERT
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	<!-- 추후에, insert된 문장을 출력하도록 변형할 예정 -->
+	<insert id="insertStudent" parameterType="Student">
+		INSERT INTO STUDENTS (STUD_ID,NAME,EMAIL,DOB)
+		VALUES (STUDENTS_STUD_ID_SEQ.nextval,#{name},#{email},#{dob})
+	</insert>
+	<!-- 
+	/**************************************************
+	UPDATE
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	<update id="updateStudentById" parameterType="Student">
+		update students set 
+		name=#{name},
+		email=#{email}, 
+		dob=#{dob}
+		where stud_id=#{studId}
+	</update>
+	
+	<!-- 
+	/**************************************************
+	DELETE
+	***************************************************/
+		parameterType: java.lang.Integer,java.lang.String
+	-->
+	<delete id="deleteStudentById" parameterType="int">
+		delete from students where stud_id=#{studId}	
+	</delete>
+	
+	
+	
+</mapper>
