@@ -9,6 +9,7 @@
 	**************************************************/
 	 -->
 	 <select id="findUserList" resultType="com.itwill.user.User">
+	 	<!-- select * from userinfo -->
 	 	select userid, password, name, email from userinfo
 	 </select>
 	 

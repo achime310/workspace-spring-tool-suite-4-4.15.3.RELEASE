@@ -13,7 +13,7 @@ public class UserDaoMyBatis {
 
 	public static final String NAMESPACE = "com.itwill.guest.mapper.GuestMapper.";
 
-	public UserDaoMyBatis() throws Exception {
+	public UserDaoMyBatis(){
 		try {
 			sqlSessionFactory = new SqlSessionFactoryBuilder()
 					.build(Resources.getResourceAsStream("mybatis-config.xml"));
