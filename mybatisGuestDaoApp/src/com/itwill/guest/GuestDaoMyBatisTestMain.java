@@ -9,7 +9,7 @@ public class GuestDaoMyBatisTestMain {
 		System.out.println("----selectByNo---");
 		System.out.println(guestDaoMyBatis.selectByNo(1));
 		System.out.println("----insertGuest---");
-		System.out.println(guestDaoMyBatis.insertGuest(new Guest(0, "최이름", null, "email@dot.com", "http://homepage.com", "title01", "content01")));
+		System.out.println(guestDaoMyBatis.insertGuest(new Guest(0, "최바팁", "1991.03.10 18-29", "email@dot.com", "http://homepage.com", "title01", "content01")));
 		System.out.println("----updateGuest---");
 		Guest guest = guestDaoMyBatis.selectByNo(26);
 		guest.setGuest_name("바티스");

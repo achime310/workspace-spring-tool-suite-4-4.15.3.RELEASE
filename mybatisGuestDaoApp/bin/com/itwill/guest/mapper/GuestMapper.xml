@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.guest.mapper.GuestMapper">
 
-
-
 	<!-- ########################################################################### -->
 	<!-- 
 	/**************************************************
@@ -25,7 +23,8 @@
 		parameterType: DTO,VO,Domain
 	 -->
 	 <insert id="insertGuest" parameterType="Guest">
-	 insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content})
+	 <!-- insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content}) -->
+	 insert into GUEST values(guest_no_seq.nextval , #{guest_name}, to_date(#{guest_date},'YYYY/MM/DD HH24:MI'), #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content})
 	 </insert>
 	 
 	<!-- 
