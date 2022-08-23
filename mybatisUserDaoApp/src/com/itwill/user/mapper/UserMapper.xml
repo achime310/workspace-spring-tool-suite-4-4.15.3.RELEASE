@@ -13,8 +13,8 @@
 	 	select userid, password, name, email from userinfo
 	 </select>
 	 
-	 <select id="findUser" parameterType="User" resultType="com.itwill.user.User">
-		select userid,password,name,email from userinfo where userid= #{userId}
+	 <select id="findUser" parameterType="String" resultType="com.itwill.user.User">
+		select userid,password,name,email from userinfo where userid= #{test}
 	 </select>
 	 
 	 <select id="existedUser" parameterType="User" resultType="int">
@@ -28,7 +28,7 @@
 	 -->
 	 <insert id="create" parameterType="User">
 	 	insert into userinfo(userid,password,name,email) 
-	 		values(#{userId},#{password},#{name},#{email})
+	 		values(#{userid},#{password},#{name},#{email})
 	 </insert>
  	<!-- 
 	/**************************************************
