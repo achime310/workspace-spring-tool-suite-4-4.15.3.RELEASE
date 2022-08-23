@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
-	
-	
 	public ProductDaoImpl() {
-		System.out.println("1.#### ProductDaoImpl() 기본생성자"+this);
+		System.out.println("1.#### PeroductDaoImpl() 생성자:"+this);
 	}
-	
 	@Override
 	public List<Product> productList(){
-		List<Product> productList = new ArrayList<Product>();
+		List<Product> productList=new ArrayList<Product>();
 		productList.add(new Product(1,"새우깡"));
 		productList.add(new Product(2,"감자깡"));
 		productList.add(new Product(3,"양파링"));
@@ -24,5 +21,4 @@ public class ProductDaoImpl implements ProductDao {
 	public Product productDetail(int p_no) {
 		return new Product(p_no, "허니버터칩");
 	}
-	
 }

@@ -2,9 +2,7 @@ package com.itwill.product;
 
 import java.util.List;
 
-public interface ProductService {
-
-	void setProductDao(ProductDao productDao);
+public interface ProductDao {
 
 	List<Product> productList();
 
