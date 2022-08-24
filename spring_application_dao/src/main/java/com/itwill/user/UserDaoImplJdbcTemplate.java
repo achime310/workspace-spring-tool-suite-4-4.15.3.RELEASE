@@ -48,8 +48,12 @@ public class UserDaoImplJdbcTemplate implements UserDao{
 
 	@Override
 	public List<User> findUserList() throws Exception {
-		return jdbcTemplate.query(UserSQL.USER_SELECT_ALL,
-				new BeanPropertyRowMapper<User>(User.class));
+		
+		//List<User> userList = jdbcTemplate.query(UserSQL.USER_SELECT_ALL,new BeanPropertyRowMapper<User>(User.class));
+		//return userList;
+		
+		return jdbcTemplate.query(UserSQL.USER_SELECT_ALL, new BeanPropertyRowMapper<User>(User.class));
+		
 	}
 
 	@Override
@@ -59,6 +63,8 @@ public class UserDaoImplJdbcTemplate implements UserDao{
 		
 		int count = 
 		jdbcTemplate.queryForObject(UserSQL.USER_SELECT_BY_ID_COUNT, new Object[] {userId}, Integer.class);
+		//"select count(*) cnt from userinfo where userid=?";
+		
 		
 		if (count == 1) {
 			isExist = true;
