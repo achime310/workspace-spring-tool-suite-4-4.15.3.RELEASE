@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.user.mapper.UserMapper">
+
+	<resultMap type="com.itwill.user.User" id="userResultMap">
+		<result column="userid" property="userId"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+	</resultMap>
+
+	 <select id="findUserList" resultMap="userResultMap">
+	 	select * from userinfo
+	 </select>
+	 
+	<select id="findUser" parameterType="String" resultType="com.itwill.user.User"> 
+	<!--   <select id="findUser" parameterType="String" resultMap="userResultMap">-->
+		select userid,password,name,email from userinfo where userid= #{userId}
+	 </select>
+	 
+	 <select id="existedUser" parameterType="com.itwill.user.User" resultType="int">
+	 	select count(*) cnt from userinfo where userid=#{userId}
+	 </select>
+	<!-- 
+	/**************************************************
+	INSERT
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	 <insert id="create" parameterType="com.itwill.user.User">
+	 	insert into userinfo(userid,password,name,email) 
+	 		values(#{userId},#{password},#{name},#{email})
+	 </insert>
+ 	<!-- 
+	/**************************************************
+	UPDATE
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	 <update id="update" parameterType="com.itwill.user.User">
+	 	update  userinfo 
+		set password=#{password},name=#{name},email=#{email} 
+		where userid=#{userId}
+	 </update>
+  	<!-- 
+	/**************************************************
+	DELETE
+	***************************************************/
+		parameterType: java.lang.Integer,java.lang.String
+	-->
+	<!-- <delete id="remove" parameterType="String"> -->
+	<delete id="remove" parameterType="com.itwill.user.User">
+		delete userinfo where userid=#{userId}
+	</delete>
+	 
+</mapper>

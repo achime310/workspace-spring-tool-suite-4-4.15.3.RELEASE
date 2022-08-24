@@ -47,7 +47,7 @@
 		<property name="mapperLocations">
 			<list>
 				<!-- web에서는 contextPath로 인식하는 경우가 있어서, classpath를 필수기술이 아니지만 적어준다 -->
-				<value>classpath:com/itwill/guest/mapper/GuestMapper.xml</value>
+				<value>classpath:com/itwill/user/mapper/UserMapper.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -58,10 +58,9 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	<!-- Dao -->
-	<bean id="guestDao" class="com.itwill.guest.GuestDaoImplMyBatis">
+	<bean id="userDao" class="com.itwill.user.UserDaoImplMyBatis">
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
-
 
 	<!-- Service -->
 </beans>

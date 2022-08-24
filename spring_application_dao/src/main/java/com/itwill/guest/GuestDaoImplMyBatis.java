@@ -8,6 +8,8 @@ public class GuestDaoImplMyBatis implements GuestDao{
 
 	private SqlSession sqlSession;
 	
+	public static final String NAMESPACE="com.itwill.guest.mapper.GuestMapper.";
+	
 	public GuestDaoImplMyBatis() {
 		System.out.println("#### GuestDaoImplMyBatis() 기본생성자");
 	}
@@ -24,26 +26,22 @@ public class GuestDaoImplMyBatis implements GuestDao{
 
 	@Override
 	public Guest selectByNo(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"selectByNo",no);
 	}
 
 	@Override
 	public int insertGuest(Guest guest) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(NAMESPACE+"insertGuest",guest);
 	}
 
 	@Override
 	public int updateGuest(Guest guest) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"updateGuest",guest);
 	}
 
 	@Override
 	public int deleteGuest(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"deleteGuest",no);
 	}
 
 }

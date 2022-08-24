@@ -33,8 +33,7 @@ public class GuestDaoImplJdbcTemplateTestMain {
 		guestDao.updateGuest(guest);
 		System.out.println("4.updateGuest(): "+guest);
 		
-		System.out.println("5.deleteGuest(): "+guestDao.deleteGuest(88));
-		
+		System.out.println("5.deleteGuest(): "+guestDao.deleteGuest(91));
 		
 	}
 

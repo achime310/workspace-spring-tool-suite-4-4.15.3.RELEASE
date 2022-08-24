@@ -5,4 +5,46 @@
 	<select id="selectAll" resultType="com.itwill.guest.Guest">
 		select * from guest
 	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="com.itwill.guest.Guest">
+		select guest_no, guest_name,guest_date,guest_email,guest_homepage,guest_title,guest_content from guest where guest_no = #{guestNo}
+	</select>
+
+	<!-- 
+	/**************************************************
+	INSERT
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	 <insert id="insertGuest" parameterType="com.itwill.guest.Guest">
+	 <!-- insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content}) -->
+	 insert into GUEST values(guest_no_seq.nextval , #{guest_name}, to_date(#{guest_date},'YYYY/MM/DD HH24:MI'), #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content})
+	 </insert>
+	 
+	<!-- 
+	/**************************************************
+	UPDATE
+	***************************************************/
+		parameterType: DTO,VO,Domain
+	 -->
+	 <update id="updateGuest" parameterType="com.itwill.guest.Guest">
+		 update guest set 
+		 guest_name=#{guest_name},
+		 guest_email=#{guest_email},
+		 guest_homepage=#{guest_homepage},
+		 guest_title=#{guest_title},
+		 guest_content=#{guest_content}
+		 where guest_no = #{guest_no}
+	 
+	 </update>
+ 	<!-- 
+	/**************************************************
+	DELETE
+	***************************************************/
+		parameterType: java.lang.Integer,java.lang.String
+	-->
+	<delete id="deleteGuest" parameterType="int">
+		delete from guest where guest_no = #{guest_no}
+	</delete>
+	
 </mapper>
