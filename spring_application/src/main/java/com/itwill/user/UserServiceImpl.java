@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 		 */
 		//1.아이디중복체크
 		if(userDao.existedUser(user.getUserId())) {
+			System.out.println("#### UserServiceImpl : create() >>> existedUser() 호출");
 			//아이디중복
 			return -1;
 		}else {

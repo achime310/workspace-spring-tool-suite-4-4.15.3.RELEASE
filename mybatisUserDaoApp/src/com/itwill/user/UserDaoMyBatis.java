@@ -11,7 +11,7 @@ public class UserDaoMyBatis {
 
 	private SqlSessionFactory sqlSessionFactory;
 
-	public static final String NAMESPACE = "com.itwill.guest.mapper.GuestMapper.";
+	public static final String NAMESPACE = "com.itwill.user.mapper.UserMapper.";
 
 	public UserDaoMyBatis(){
 		try {

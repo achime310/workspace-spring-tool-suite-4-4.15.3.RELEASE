@@ -7,79 +7,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
-
+/*
+이름             널?       유형             
+-------------- -------- -------------- 
+GUEST_NO       NOT NULL NUMBER(10)     
+GUEST_NAME     NOT NULL VARCHAR2(50)   
+GUEST_DATE     NOT NULL DATE           
+GUEST_EMAIL             VARCHAR2(50)   
+GUEST_HOMEPAGE          VARCHAR2(50)   
+GUEST_TITLE    NOT NULL VARCHAR2(100)  
+GUEST_CONTENT  NOT NULL VARCHAR2(4000) 
+*/
 public class GuestDaoImpl implements GuestDao {
 	private DataSource dataSource;
-	
 	public GuestDaoImpl() {
 		System.out.println("2.#### GuestDaoImpl() 기본생성자호출");
 	}
-	
-
 	public GuestDaoImpl(DataSource dataSource) {
-		System.out.println("2.#### GuestDaoImpl("+dataSource+") 생성자호출");
+		System.out.println("2.#### GuestDaoImpl(DataSource dataSource) 생성자호출:"+this);
 		this.dataSource = dataSource;
 	}
-
-
-
 	public void setDataSource(DataSource dataSource) {
-		System.out.println("  #### GuestDaoImpl : setDataSource("+dataSource+") 호출");
+		System.out.println("3.#### GuestDaoImpl.setDataSource(DataSource dataSource) 메쏘드호출");
 		this.dataSource = dataSource;
 	}
-
 	@Override
 	public List<Guest> selectAll()
 			throws Exception{
-		System.out.println("#### GuestDaoImpl : selectAll() 호출");
-		
-	List<Guest> guestList = new ArrayList<Guest>();
-		
-		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
-		ResultSet rs = pstmt.executeQuery();
-		//"select * from guest";
-		while (rs.next()) {
-			guestList.add(new Guest(rs.getInt("guest_no"),
-									rs.getString("guest_name"),
-									rs.getString("guest_date"),/*sql.date는 상위(util.date)로 자동캐스팅*/
+		List<Guest> guestList=new ArrayList<Guest>();
+		Connection con=dataSource.getConnection();
+		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_ALL);
+		ResultSet rs=pstmt.executeQuery();
+		while(rs.next()) {
+			guestList.add(new Guest(rs.getInt("guest_no"), 
+									rs.getString("guest_name"), 
+									rs.getString("guest_date"),
 									rs.getString("guest_email"),
 									rs.getString("guest_homepage"),
 									rs.getString("guest_title"),
 									rs.getString("guest_content")));
 		}
-		rs.close();
-		pstmt.close();
 		con.close();
-		
 		return guestList;
 	}
 	
 	@Override
 	public Guest selectByNo(int no)throws Exception{
-		System.out.println("#### GuestDaoImpl : selectByNo(int no) 호출");
-		System.out.println("#### GuestDaoImpl : selectByNo(int no) 호출");
 		Guest guest=null;
 		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_SELECT_BY_NO);
 		pstmt.setInt(1, no);
 		ResultSet rs=pstmt.executeQuery();
 		if(rs.next()) {
-			guest=new Guest(rs.getInt("guest_no"),
-							rs.getString("guest_name"),
-							rs.getString("guest_date"),
-							rs.getString("guest_email"),
-							rs.getString("guest_homepage"),
-							rs.getString("guest_title"),
-							rs.getString("guest_content"));
+			guest=new Guest(rs.getInt("guest_no"), 
+					rs.getString("guest_name"), 
+					rs.getString("guest_date"),
+					rs.getString("guest_email"),
+					rs.getString("guest_homepage"),
+					rs.getString("guest_title"),
+					rs.getString("guest_content"));
 		}
-		
+		con.close();
 		return guest;
 	}
 	@Override
 	public int insertGuest(Guest guest)throws Exception {
-		System.out.println("#### GuestDaoImpl : insertGuest(Guest guest) 호출");
-		Connection con = dataSource.getConnection();
+		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_INSERT);
 		pstmt.setString(1, guest.getGuest_name());
 		pstmt.setString(2, guest.getGuest_email());
@@ -88,13 +81,12 @@ public class GuestDaoImpl implements GuestDao {
 		pstmt.setString(5, guest.getGuest_content());
 		int rowCount=pstmt.executeUpdate();
 		con.close();
-		
 		return rowCount;
+		
 	}
 	@Override
 	public int updateGuest(Guest guest)throws Exception {
-		System.out.println("#### GuestDaoImpl : updateGuest(Guest guest) 호출");
-		Connection con = dataSource.getConnection();
+		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_UPDATE);
 		pstmt.setString(1, guest.getGuest_name());
 		pstmt.setString(2, guest.getGuest_email());
@@ -104,13 +96,12 @@ public class GuestDaoImpl implements GuestDao {
 		pstmt.setInt(6, guest.getGuest_no());
 		int rowCount=pstmt.executeUpdate();
 		con.close();
-		
 		return rowCount;
+		
 	}
 	@Override
 	public int deleteGuest(int no)throws Exception {
-		System.out.println("#### GuestDaoImpl : deleteGuest(int no) 호출");
-		Connection con = dataSource.getConnection();
+		Connection con=dataSource.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(GuestSQL.GUEST_DELETE);
 		pstmt.setInt(1, no);
 		int rowCount=pstmt.executeUpdate();
