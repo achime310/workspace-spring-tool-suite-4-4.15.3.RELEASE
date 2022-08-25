@@ -8,14 +8,25 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
+@Repository(value = "userDao")
 public class UserDaoImpl implements UserDao {
 	private DataSource dataSource;
 
 	public UserDaoImpl() {
 		System.out.println("#### UserDaoImpl() : 디폴트생성자 호출  ");
 	}
+	
+	@Autowired
+	public UserDaoImpl(@Qualifier(value = "dataSource") DataSource dataSource) {
+		System.out.println("#### UserDaoImpl("+dataSource+") : 생성자 호출  ");
+		this.dataSource = dataSource;
+	}
 
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		System.out.println("  #### UserDaoImpl : setDataSource("+dataSource+") 호출  ");
 		this.dataSource = dataSource;

@@ -1,4 +1,4 @@
-package com.mybatis3.deep.mapper;
+package com.mybatis3.dao.mapper;
 
 import java.util.List;
 
@@ -25,5 +25,20 @@ public interface StudentMapper {
 			resultType="com.mybatis3.domain.Student" >
 		select stud_id as studid,name,email,dob from students
 	</select>
+	*/
+	
+	public Student findStudentByIdWithAddress(Integer studId);
+	/*
+	<select id="findStudentByIdWithAddress"
+	 		 parameterType="int" 
+	 		 resultMap="studentWithAddressResultMap">
+	 
+	 select stud_id, name, email,phone, a.addr_id, street, city, state, zip, country
+	  FROM students s 
+     left outer join addresses a 
+     on s.addr_id=a.addr_id
+     where s.stud_id=${studId}
+	 
+	 </select>
 	*/
 }

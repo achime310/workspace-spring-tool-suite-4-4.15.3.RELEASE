@@ -13,7 +13,7 @@ public class ReflectionProductServiceMain {
 		String daoBeanName="productDao";
 		String serviceBeanName="productService";
 		String daoClassName="com.itwill.product.ProductDaoImpl";
-		String serviceClassName="com.itwill.product.ProductService";
+		String serviceClassName="com.itwill.product.ProductServiceImpl";
 		String propertyName="productDao";
 		/*
 		 * 1.Spring Bean의 설정파일을 읽어서 Spring Container객체[ApplicationContext객체]생성

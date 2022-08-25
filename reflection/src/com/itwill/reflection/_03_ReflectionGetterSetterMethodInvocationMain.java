@@ -2,15 +2,17 @@ package com.itwill.reflection;
 
 import java.lang.reflect.Method;
 
-public class ReflectionGetterSetterMethodInvocationMain {
+public class _03_ReflectionGetterSetterMethodInvocationMain {
 
 	public static void main(String[] args) throws Exception {
 		
 		String className = "com.itwill.guest.Guest";
-		String propertyName = "guest_email";
-		String nameArg="guard@naver.com";
+		String propertyName = "guest_name";
+		String nameArg="서영이";
 		
-		
+		/*
+		 * Container가 하게 될 작업
+		 */
 		System.out.println("1.############ 객체생성 ##############");
 		Class clazz = Class.forName(className);
 		Object instance = clazz.newInstance();

@@ -3,13 +3,14 @@ package com.itwill.reflection;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class ReflectionCreateInstanceMethodInvocationMain {
+public class _02_ReflectionCreateInstanceMethodInvocationMain {
 
 	public static void main(String[] args) throws Exception{
 		System.out.println("############ 새로운 객체 만들기 ###########");
 		String className = "com.itwill.guest.Guest";
 		Class clazz = Class.forName(className);
 		/*
+		//인자 대입
 		Class parameterTypeArray[] = new Class[2];
 		parameterTypeArray[0] = Integer.TYPE;
 		parameterTypeArray[1] = Integer.TYPE;			
@@ -19,7 +20,7 @@ public class ReflectionCreateInstanceMethodInvocationMain {
 		argumentList[1] = new Integer(47);			
 		Object retobj = ct.newInstance(argumentList);
 		*/
-		Object newInstance=clazz.newInstance();
+		Object newInstance=clazz.newInstance();	//객체 생성
 		System.out.println(newInstance);
 		
 		System.out.println("############ 이름으로 setGuest_no 메쏘드 실행하기 ###########");

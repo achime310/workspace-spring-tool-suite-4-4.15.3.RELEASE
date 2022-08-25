@@ -3,10 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<properties resource="jdbc.properties"/>
-<typeAliases>
-	<typeAlias alias="Student" type="com.mybatis3.domain.Student" />
-</typeAliases>
+	<properties resource="jdbc.properties" />
+	<typeAliases>
+		<typeAlias alias="Student"
+			type="com.mybatis3.domain.Student" />
+	</typeAliases>
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -16,19 +17,16 @@
 				<property name="username" value="${jdbc.username}" />
 				<property name="password" value="${jdbc.password}" />
 			</dataSource>
-			<!-- 
-			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@182.237.126.19:1521:XE" />
-				<property name="username" value="jdeveloper55" />
-				<property name="password" value="jdeveloper55" />
-			</dataSource>
-			-->
+			<!-- <dataSource type="POOLED"> <property name="driver" value="oracle.jdbc.driver.OracleDriver" 
+				/> <property name="url" value="jdbc:oracle:thin:@182.237.126.19:1521:XE" 
+				/> <property name="username" value="jdeveloper55" /> <property name="password" 
+				value="jdeveloper55" /> </dataSource> -->
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com/mybatis3/dao/mapper/StudentBasicMapper.xml"/>
-		<mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml"/>
+		<mapper
+			resource="com/mybatis3/dao/mapper/StudentBasicMapper.xml" />
+		<mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml" />
 	</mappers>
 </configuration>
 

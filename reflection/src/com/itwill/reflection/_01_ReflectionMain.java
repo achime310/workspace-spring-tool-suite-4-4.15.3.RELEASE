@@ -5,13 +5,19 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-public class ReflectionMain {
+import com.itwill.guest.Guest;
+
+public class _01_ReflectionMain {
 	public static void main(String[] args) throws Exception {
-		String className = "com.itwill.guest.Guest";
+		String className = "com.itwill.guest.GuestS";
 		Class clazz = Class.forName(className);
+		//Class clazz = Guest.class;
 		
-		
-		
+		/*
+		 * Framework에서 하는 작업.
+		 * 		-> Type정보가 들어가지 않음.
+				-> 객체는 생성되지 않은 상태
+		 */
 		Method[] public_methods = clazz.getMethods();
 		Method[] all_methods = clazz.getDeclaredMethods();
 		Field[] public_fields = clazz.getFields();

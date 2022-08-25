@@ -9,19 +9,26 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.mybatis3.deep.mapper.StudentMapper;
+import com.mybatis3.dao.mapper.StudentMapper;
 import com.mybatis3.domain.Student;
 
 public class MapperInterfaceStudentDao {
 	private SqlSessionFactory sqlSessionFactory;
-	public static final String NAMESPACE="com.mybatis3.dao.mapper.StudentMapper.";
+	
+	//private StudentMapper studentMapper;
+	
+	//public static final String NAMESPACE="com.mybatis3.dao.mapper.StudentMapper.";
 	public MapperInterfaceStudentDao() {
 		try {
 			InputStream mybatisConfigInputStream = 
 					Resources.getResourceAsStream("mybatis-config-mapper-interface.xml");
 			SqlSessionFactoryBuilder sqlSessionFactoryBuilder=new SqlSessionFactoryBuilder();
-			this.sqlSessionFactory = 
+			this.sqlSessionFactory =
+			//SqlSessionFactory sqlSessionFactory=
 					sqlSessionFactoryBuilder.build(mybatisConfigInputStream);
+			//SqlSession sqlSession=sqlSessionFactory.openSession(true);
+			//this.studentMapper=sqlSession.getMapper(StudentMapper.class);
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,10 +37,25 @@ public class MapperInterfaceStudentDao {
 	 resultType Dto 
 	*/
 	public Student findStudentById(Integer studId) {
-		return null;
+		SqlSession sqlSession =sqlSessionFactory.openSession(true);
+		StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+		Student student = studentMapper.findStudentById(studId);
+		sqlSession.close();	//여기서 또 왜 닫아준거람?????
+		return student;
 	}
 	public List<Student> findAllStudents() {
-		return null;
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+		List<Student> studentList = studentMapper.findAllStudents();
+		sqlSession.close();
+		return studentList;
+	}
+	public Student findStudentByIdWithAddress(Integer studId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+		Student student = studentMapper.findStudentByIdWithAddress(studId);
+		sqlSession.close();
+		return student;
 	}
 	
 	

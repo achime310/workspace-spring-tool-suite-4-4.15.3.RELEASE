@@ -29,7 +29,10 @@
 		</environment>
 	</environments>
 	<mappers>
-		
+		<mapper class="com.mybatis3.dao.mapper.StudentMapper" />
+		<!-- 
+		<mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml" />	
+		 -->
 	</mappers>
 </configuration>
 
