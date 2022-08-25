@@ -9,8 +9,6 @@ public interface GuestDao {
 	Guest selectByNo(int no) throws Exception;
 
 	int insertGuest(Guest guest) throws Exception;
-	
-	//int insertGuestBySequence1(Guest guest) throws Exception;
 
 	int updateGuest(Guest guest) throws Exception;
 

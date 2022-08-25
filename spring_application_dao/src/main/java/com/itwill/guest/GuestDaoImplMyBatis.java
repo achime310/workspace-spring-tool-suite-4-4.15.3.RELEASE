@@ -44,4 +44,11 @@ public class GuestDaoImplMyBatis implements GuestDao{
 		return sqlSession.delete(NAMESPACE+"deleteGuest",no);
 	}
 
+	/*
+	@Override
+	public int insertGuestBySequence1(Guest guest) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}*/
+
 }

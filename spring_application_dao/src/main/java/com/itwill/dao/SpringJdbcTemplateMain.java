@@ -53,10 +53,14 @@ public class SpringJdbcTemplateMain {
 		String selectDtoListSql = "select * from guest";
 		List<Guest> guestList=
 				jdbcTemplate.query(selectDtoListSql, guestBeanPropertyRowMapper);
-		System.out.println("query[List<Gueset>]: "+guestList);
+		System.out.println("##########query[List<Gueset>]: "+guestList);
 		
+		/*
+		 * 	queryForList [반환타입 List<Map<String, Object>>]
+		 * 		-> Key값 = String = column 이름, Value = Object = 해당 column데이터 
+		 */
 		List<Map<String, Object>> mapList = jdbcTemplate.queryForList(selectDtoListSql);
-		System.out.println(mapList);
+		System.out.println("##########queryForList[ List<Map<String, Object>> ]: "+mapList);
 		
 		/*
 		 * queryForObject [반환타입 String]
@@ -69,7 +73,7 @@ public class SpringJdbcTemplateMain {
 		System.out.println("gueryForObject[String]: "+guest_name);
 		
 		/*
-		 * queryForObject [반환타입 List<String>]
+		 * queryForList [반환타입 List<String>]
 		 */
 		String selectStringListSql = "select guest_name from guest";
 		List<String> guest_nameList=

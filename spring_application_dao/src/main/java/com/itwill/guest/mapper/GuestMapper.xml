@@ -5,46 +5,55 @@
 	<select id="selectAll" resultType="com.itwill.guest.Guest">
 		select * from guest
 	</select>
-	
-	<select id="selectByNo" parameterType="int" resultType="com.itwill.guest.Guest">
-		select guest_no, guest_name,guest_date,guest_email,guest_homepage,guest_title,guest_content from guest where guest_no = #{guestNo}
+
+	<select id="selectByNo" parameterType="int"
+		resultType="com.itwill.guest.Guest">
+		select guest_no,
+		guest_name,guest_date,guest_email,guest_homepage,guest_title,guest_content
+		from guest where guest_no = #{guestNo}
 	</select>
 
-	<!-- 
-	/**************************************************
-	INSERT
-	***************************************************/
-		parameterType: DTO,VO,Domain
-	 -->
-	 <insert id="insertGuest" parameterType="com.itwill.guest.Guest">
-	 <!-- insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content}) -->
-	 insert into GUEST values(guest_no_seq.nextval , #{guest_name}, to_date(#{guest_date},'YYYY/MM/DD HH24:MI'), #{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content})
-	 </insert>
-	 
-	<!-- 
-	/**************************************************
-	UPDATE
-	***************************************************/
-		parameterType: DTO,VO,Domain
-	 -->
-	 <update id="updateGuest" parameterType="com.itwill.guest.Guest">
-		 update guest set 
-		 guest_name=#{guest_name},
-		 guest_email=#{guest_email},
-		 guest_homepage=#{guest_homepage},
-		 guest_title=#{guest_title},
-		 guest_content=#{guest_content}
-		 where guest_no = #{guest_no}
-	 
-	 </update>
- 	<!-- 
-	/**************************************************
-	DELETE
-	***************************************************/
-		parameterType: java.lang.Integer,java.lang.String
-	-->
-	<delete id="deleteGuest" parameterType="int">
-		delete from guest where guest_no = #{guest_no}
-	</delete>
+	<insert id="insertGuest" parameterType="com.itwill.guest.Guest">
+		<!-- insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, 
+			#{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content}) -->
+		insert into GUEST values(guest_no_seq.nextval , #{guest_name},
+		to_date(#{guest_date},'YYYY/MM/DD HH24:MI'), #{guest_email},
+		#{guest_homepage}, #{guest_title}, #{guest_content})
+	</insert>
 	
+	<!-- (필요성)insert후에, key값을 바로 반환하기 위함 -->
+	<insert id="insertGuestBySequence"
+		parameterType="com.itwill.guest.Guest">
+		<selectKey resultType="int" order="BEFORE" keyProperty="guest_no">
+			<!-- order는 insert를 기준으로 insert 전(before), insert 후(after) -->
+			<!-- key값을 select할때만 쓰는 것임. insert만 예외적으로 허용하는 것.
+					update/delete안되고, service에서 처리하세요 -->
+					<!-- Guest에 guest_no를 set해주는 작업 -->
+			select guest_no_seq.nextval from dual
+		</selectKey>
+		insert into GUEST values(#{guest_no},
+									#{guest_name},
+									sysdate,
+									#{guest_email},
+									#{guest_homepage},
+									#{guest_title},
+									#{guest_content})
+	</insert>
+
+	<update id="updateGuest" parameterType="com.itwill.guest.Guest">
+		update guest set
+			guest_name=#{guest_name},
+			guest_date= to_date(#{guest_date},'YYYY/MM/DD'),
+			guest_email=#{guest_email},
+			guest_homepage=#{guest_homepage},
+			guest_title=#{guest_title},
+			guest_content=#{guest_content}
+		where guest_no = #{guest_no}
+	</update>
+	
+	<delete id="deleteGuest" parameterType="int">
+		delete from guest where
+		guest_no = #{guest_no}
+	</delete>
+
 </mapper>

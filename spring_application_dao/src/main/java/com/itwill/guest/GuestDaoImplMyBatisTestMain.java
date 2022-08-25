@@ -19,11 +19,12 @@ public class GuestDaoImplMyBatisTestMain {
 		
 		System.out.println("2.selectByNo(): "+guestDao.selectByNo(82));
 		
-		Guest guest = new Guest(0, "최바팁", "1991.03.10 18-29", "email@dot.com", "http://homepage.com", "title01", "content01");
+		Guest guest = new Guest(0, "최바팁", "1991.03.10", "email@dot.com", "http://homepage.com", "title01", "content01");
 		System.out.println("3.insert(): "+guestDao.insertGuest(guest));
 		
 		guest = guestDao.selectByNo(82);
 		guest.setGuest_name("Autumn");
+		guest.setGuest_date("2020-02-02");
 		guest.setGuest_email("fall@dot.com");
 		guest.setGuest_homepage("http://fall.com");
 		guest.setGuest_title("가을이 오고있어");

@@ -46,7 +46,6 @@
 	<!-- Dao -->
 	<!-- Constructor Injection(setter 메쏘드를 통한 의존성 객체 주입) -->
 	<!-- 1.참조타입객체 참조값(id)을 constructor 인자로 Injection -->
-	
 	<bean id="guestDao" class="com.itwill.guest.GuestDaoImpl">
 		<!-- dataSource를 매개변수로 하는 생성자가 존재해야한다. -->
 		<constructor-arg
