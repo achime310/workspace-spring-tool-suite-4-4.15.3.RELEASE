@@ -52,5 +52,4 @@
 	<delete id="remove" parameterType="com.itwill.user.User">
 		delete userinfo where userid=#{userId}
 	</delete>
-	 
 </mapper>

@@ -17,6 +17,7 @@ public class UserDaoImplMyBatisTestMain {
 		System.out.println("----Spring Container초기화끝[ApplicationContext객체생성끝]");
 		
 		UserDao userDao= (UserDao)applicationContext.getBean("userDao");
+		/*
 		System.out.println("----findUser----");
 		System.out.println("	"+userDao.findUser("user1"));
 		System.out.println("----findUserList----");
@@ -38,6 +39,7 @@ public class UserDaoImplMyBatisTestMain {
 		
 		System.out.println("----existedUser----");
 		System.out.println("	"+userDao.existedUser("blue1"));
+		*/
 	}
 
 }

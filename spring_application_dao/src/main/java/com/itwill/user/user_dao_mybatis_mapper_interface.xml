@@ -43,24 +43,20 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="apacheDataSource" />
-		<!-- mapper xml파일 위치기술 -->
-		<property name="mapperLocations">
-			<list>
-				<!-- web에서는 contextPath로 인식하는 경우가 있어서, classpath를 필수기술이 아니지만 적어준다 -->
-				<value>classpath:com/itwill/user/mapper/UserMapper.xml</value>
-			</list>
-		</property>
-		<property name="typeAliasesPackage" value="com.itwill.user" />
+		<property name="typeAliasesPackage" value="com.itwill.user"/>
 	</bean>
-	<!-- MyBatis SqlSession(실제로 SqlSession객체는 아님.. class보면 SqlSessionTemplate안에 
-		멤버필드로 가짐) -->
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
+	
+	<!-- MapperFactoryBean -->
+	<!-- userMapperProxy객체를 만듬 -->
+	<bean id="userMapper"
+				class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="com.itwill.user.mapper.UserMapper"/>
 	</bean>
+
 	<!-- Dao -->
-	<bean id="userDao" class="com.itwill.user.UserDaoImplMyBatis">
-		<property name="sqlSession" ref="sqlSession" />
+	<bean id="userDao" class="com.itwill.user.UserDaoImplMyBatisMapperInterface">
+		<property name="userMapper" ref="userMapper" />
 	</bean>
 
 	<!-- Service -->

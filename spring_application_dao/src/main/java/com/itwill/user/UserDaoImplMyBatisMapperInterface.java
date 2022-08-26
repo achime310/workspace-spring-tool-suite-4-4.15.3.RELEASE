@@ -13,6 +13,12 @@ public class UserDaoImplMyBatisMapperInterface implements UserDao {
 		System.out.println("#### UserDaoImplMyBatisMapperInterface() : 디폴트생성자 호출  ");
 	}
 
+	
+	public void setUserMapper(UserMapper userMapper) {
+		System.out.println("#### UserDaoImplMyBatisMapperInterface() : setUserMapper("+userMapper+") 메소드 호출  ");
+		this.userMapper = userMapper;
+	}
+
 	@Override
 	public int create(User user) throws Exception {
 		System.out.println("#### UserDaoImplMyBatisMapperInterface : create() 호출  ");
