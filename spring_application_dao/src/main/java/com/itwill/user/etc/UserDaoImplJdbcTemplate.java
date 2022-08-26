@@ -1,9 +1,13 @@
-package com.itwill.user;
+package com.itwill.user.etc;
 
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.itwill.user.User;
+import com.itwill.user.UserDao;
+import com.itwill.user.UserSQL;
 
 public class UserDaoImplJdbcTemplate implements UserDao{
 	

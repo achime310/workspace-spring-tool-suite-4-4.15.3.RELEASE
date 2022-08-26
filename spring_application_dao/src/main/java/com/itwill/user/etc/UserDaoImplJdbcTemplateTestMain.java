@@ -1,7 +1,10 @@
-package com.itwill.user;
+package com.itwill.user.etc;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.itwill.user.User;
+import com.itwill.user.UserDao;
 
 public class UserDaoImplJdbcTemplateTestMain {
 

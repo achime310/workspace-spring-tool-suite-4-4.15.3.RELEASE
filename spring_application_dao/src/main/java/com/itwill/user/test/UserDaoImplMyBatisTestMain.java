@@ -1,10 +1,12 @@
-package com.itwill.user;
+package com.itwill.user.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestDao;
+import com.itwill.user.User;
+import com.itwill.user.UserDao;
 
 public class UserDaoImplMyBatisTestMain {
 

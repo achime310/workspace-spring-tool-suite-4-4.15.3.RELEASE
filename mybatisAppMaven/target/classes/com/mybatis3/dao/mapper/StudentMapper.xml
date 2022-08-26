@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
+
 	<!-- ############################## resultMap정의 ############################# -->
 	<resultMap id="studentResultMap"
 				type="com.mybatis3.domain.Student">
@@ -88,19 +89,19 @@
 	 <!-- [mybatis-config.xml]에서
 	 		typeAlias alias="Student" type="com.mybatis3.domain.Student"
 	 		를 했기때문에 resultType을 줄일수있음-->
-	<select id="findStudentById" parameterType="int" resultType="Student">
+	 		<!-- 
+	<select id="findStudentById" parameterType="int" resultType="com.mybatis3.domain.Student">
 		select stud_id as studId, name, email, dob from students where stud_id = ${studId}
 	</select>
-	
-	<select id="findAllStudents" resultType="Student">
+	<select id="findAllStudents" resultType="com.mybatis3.domain.Student">
 		select stud_id, name, email, dob from students
 	</select>
+	 -->
 	<!-- 
 	/*
 	 * select sql의결과타입이 DTO[DTO List] 객체인경우
 	 * resultMap :  DTO
 	 */
-	 -->
 	<select id="findStudentByIdResultMap"
 	 		parameterType="int"
 	 		resultMap="studentResultMap">
@@ -111,6 +112,7 @@
 	 		resultMap="studentResultMap">
 		select stud_id, name, email, dob from students
 	</select>
+	 -->
 		 
 	<!-- 
 	/**************************************************
@@ -123,6 +125,7 @@
 	 -->
 	 
 	 <!--결과를 dto타입으로 받을수 없기에, resultMap을 사용한다 -->
+	 <!-- 
 	 <select id="findStudentByIdWithAddress"
 	 		 parameterType="int" 
 	 		 resultMap="studentWithAddressResultMap">
@@ -134,7 +137,7 @@
       where s.stud_id=${studId}
 	 
 	 </select>
-	 
+	  -->
 	 
 	 <!-- 
 	/**************************************************
@@ -144,7 +147,6 @@
 	 * select sql의결과타입이 DTO,VO,Domain객체인경우
 	 * resultMap : studentWithCoursesResultMap
 	 */
-	 -->
 	 <select id="findStudentByIdWithCourses" 
 	 		 parameterType="int"
 	 		 resultMap="studentWithCoursesResultMap">
@@ -156,6 +158,7 @@
 		left outer join courses c
 		on ce.course_id=c.course_id where s.stud_id=#{studId}
 	 </select>
+	 -->
 	 
 	 
 	<!-- 
@@ -165,24 +168,23 @@
 		parameterType: DTO,VO,Domain
 	 -->
 	<!-- 추후에, insert된 문장을 출력하도록 변형할 예정 -->
-	<insert id="insertStudent" parameterType="Student">
+	<!-- 
+	<insert id="insertStudent" parameterType="com.mybatis3.domain.Student">
 		INSERT INTO STUDENTS (STUD_ID,NAME,EMAIL,DOB)
 		VALUES (STUDENTS_STUD_ID_SEQ.nextval,#{name},#{email},#{dob})
 	</insert>
-	<!-- 
-	<select id="studentIdSeqSelect" resultType="int">
-		select STUDENTS_STUD_ID_SEQ.CURRVAL from dual
-	</select>
 	 -->
+	 <!-- 
 	<insert id="insertStudentBySequence1"
-			parameterType="Student">
+			parameterType="com.mybatis3.domain.Student">
 		<selectKey resultType="int" order="BEFORE" keyProperty="studId">
-			<!-- order는 insert를 기준으로 insert 전(before), insert 후(after) -->
+			order는 insert를 기준으로 insert 전(before), insert 후(after)
 			select STUDENTS_STUD_ID_SEQ.nextval from dual
 		</selectKey>
 		insert into students (stud_id,name,email,dob)
 		values (#{studId},#{name},#{email},#{dob})
 	</insert>
+	 -->
 	<!-- 실행순서: 인자에 seq를 넣어서 작업한다는 말같은데.... -->
 	
 	
@@ -192,24 +194,25 @@
 	***************************************************/
 		parameterType: DTO,VO,Domain
 	 -->
-	<update id="updateStudentById" parameterType="Student">
+	<!-- <update id="updateStudentById" parameterType="com.mybatis3.domain.Student">
 		update students set 
 		name=#{name},
 		email=#{email}, 
 		dob=#{dob}
 		where stud_id=#{studId}
 	</update>
-	
+	 -->
 	<!-- 
 	/**************************************************
 	DELETE
 	***************************************************/
 		parameterType: java.lang.Integer,java.lang.String
 	-->
+	<!-- 
 	<delete id="deleteStudentById" parameterType="int">
 		delete from students where stud_id=#{studId}	
 	</delete>
-	
+	 -->
 	
 	
 </mapper>

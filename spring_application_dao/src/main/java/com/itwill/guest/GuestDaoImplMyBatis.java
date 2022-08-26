@@ -3,9 +3,13 @@ package com.itwill.guest;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+@Repository(value = "guestDaoImplMyBatis")
 public class GuestDaoImplMyBatis implements GuestDao{
 
+	//사실은 sqlSessionFactory이다. SqlSession은 Connection인데.. 말도안된다.
+	@Autowired(required = false)
 	private SqlSession sqlSession;
 	
 	public static final String NAMESPACE="com.itwill.guest.mapper.GuestMapper.";

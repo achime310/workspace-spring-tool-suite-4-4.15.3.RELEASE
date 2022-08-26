@@ -1,4 +1,4 @@
-package com.itwill.guest;
+package com.itwill.guest.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

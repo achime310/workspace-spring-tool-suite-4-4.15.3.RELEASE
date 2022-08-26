@@ -25,6 +25,7 @@
 		select userid,password,name,email from userinfo where userid= #{test}
 	 </select>
 	 
+	 <!-- <select id="existedUser" parameterType="java.lang.String" resultType="java.lang.Integer"> -->
 	 <select id="existedUser" parameterType="User" resultType="int">
 	 	select count(*) cnt from userinfo where userid=#{userId}
 	 </select>

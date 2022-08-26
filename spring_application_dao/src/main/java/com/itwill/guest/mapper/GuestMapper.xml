@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.guest.mapper.GuestMapper">
-
+<!-- 
 	<select id="selectAll" resultType="com.itwill.guest.Guest">
 		select * from guest
 	</select>
 
 	<select id="selectByNo" parameterType="int"
-		resultType="com.itwill.guest.Guest">
+		resultType="com.itwill.guest.Guest"
+		>
 		select guest_no,
 		guest_name,guest_date,guest_email,guest_homepage,guest_title,guest_content
 		from guest where guest_no = #{guestNo}
 	</select>
 
 	<insert id="insertGuest" parameterType="com.itwill.guest.Guest">
-		<!-- insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, 
-			#{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content}) -->
+		insert into GUEST values(guest_no_seq.nextval , #{guest_name}, sysdate, 
+			#{guest_email}, #{guest_homepage}, #{guest_title}, #{guest_content})
 		insert into GUEST values(guest_no_seq.nextval , #{guest_name},
 		to_date(#{guest_date},'YYYY/MM/DD HH24:MI'), #{guest_email},
 		#{guest_homepage}, #{guest_title}, #{guest_content})
 	</insert>
-	
+	 -->
 	<!-- (필요성)insert후에, key값을 바로 반환하기 위함 -->
-	<insert id="insertGuestBySequence"
+	<!-- <insert id="insertGuestBySequence"
 		parameterType="com.itwill.guest.Guest">
-		<selectKey resultType="int" order="BEFORE" keyProperty="guest_no">
+		<selectKey resultType="int" order="BEFORE" keyProperty="guest_no"> -->
 			<!-- order는 insert를 기준으로 insert 전(before), insert 후(after) -->
 			<!-- key값을 select할때만 쓰는 것임. insert만 예외적으로 허용하는 것.
 					update/delete안되고, service에서 처리하세요 -->
 					<!-- Guest에 guest_no를 set해주는 작업 -->
-			select guest_no_seq.nextval from dual
+<!-- 			select guest_no_seq.nextval from dual
 		</selectKey>
 		insert into GUEST values(#{guest_no},
 									#{guest_name},
@@ -39,8 +40,8 @@
 									#{guest_title},
 									#{guest_content})
 	</insert>
-
-	<update id="updateGuest" parameterType="com.itwill.guest.Guest">
+ -->
+<!-- 	<update id="updateGuest" parameterType="com.itwill.guest.Guest">
 		update guest set
 			guest_name=#{guest_name},
 			guest_date= to_date(#{guest_date},'YYYY/MM/DD'),
@@ -55,5 +56,5 @@
 		delete from guest where
 		guest_no = #{guest_no}
 	</delete>
-
+ -->
 </mapper>
