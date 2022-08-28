@@ -15,7 +15,6 @@ public class UserDaoImplMyBatisMapperInterfaceTestMain {
 		ApplicationContext applicationContext=
 				new ClassPathXmlApplicationContext("/com/itwill/user/user_dao_mybatis_mapper_interface.xml");
 		System.out.println("----Spring Container초기화끝[ApplicationContext객체생성끝]");
-		/*
 		UserDao userDao= (UserDao)applicationContext.getBean("userDao");
 		System.out.println("----findUser----");
 		System.out.println("	"+userDao.findUser("user1"));
@@ -23,22 +22,21 @@ public class UserDaoImplMyBatisMapperInterfaceTestMain {
 		System.out.println("	"+userDao.findUserList());
 		
 		System.out.println("----create----");
-		User user = new User("jdbc아이디2", "jdbc비번", "jdbc이름", "jdbc@dot.com");
-		System.out.println("	"+userDao.create(user));
+		User user = new User("시오영2", "jdbc비번", "jdbc이름", "jdbc@dot.com");
+		//System.out.println("	"+userDao.create(user));
 		
 		System.out.println("----update----");
 		user = userDao.findUser("test123");
 		user.setPassword("1234");
-		user.setName("update22");
+		user.setName("update업데이트");
 		user.setEmail("update@dot.com");
 		System.out.println("	"+userDao.update(user));
 		
 		System.out.println("----remove----");
-		System.out.println("	"+userDao.remove("2"));
+		//System.out.println("	"+userDao.remove("jdbc아이디2"));
 		
 		System.out.println("----existedUser----");
-		System.out.println("	"+userDao.existedUser("blue1"));
-		*/
+		System.out.println("	"+userDao.existedUser("blue33"));
 	}
 
 }

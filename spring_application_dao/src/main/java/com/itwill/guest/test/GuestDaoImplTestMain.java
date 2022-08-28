@@ -21,17 +21,24 @@ public class GuestDaoImplTestMain {
 		/*
 		 * GuestDao로부터 하위클래스는 못얻어도 super클래스는 얻을 수 있음.
 		 * 상위타입을 검색해서~~~
-		 * GuestDao를 imple한 자식객체의 참조값을 얻음
+		 * GuestDao를 implements한 자식객체의 참조값을 얻음
 		 */
 		
 		System.out.println("### GuestDao.selectAll():"+guestDao.selectAll());
+		
 		Guest guest = guestDao.selectByNo(65);
 		System.out.println("### GuestDao.selectByNo(65):"+guest);
+		
+		Guest newGuest=new Guest(0, "name", null, "email@korea.com", "www.naver.com", "제목", "내용");
+		guestDao.insertGuest(newGuest);
+		System.out.println("3.insertGuest:"+newGuest);
+		
 		guest.setGuest_name("수정_바팁스");
 		guest.setGuest_title("오늘은 수요일~~");
-		System.out.println("### GuestDao.updateGuest():"+guestDao.updateGuest(guest));
+		guestDao.updateGuest(guest);
 		guest= guestDao.selectByNo(65);
-		System.out.println(guest);
+		System.out.println("### GuestDao.updateGuest():"+guest);
+		System.out.println("### GuestDao.deleteGuest():"+guestDao.deleteGuest(110));
 	
 
 	}

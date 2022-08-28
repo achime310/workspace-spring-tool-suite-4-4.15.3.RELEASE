@@ -46,12 +46,12 @@ public class UserDaoImplMyBatis implements UserDao{
 
 	@Override
 	public boolean existedUser(String userId) throws Exception {
-		boolean isExist = false;
 		int rowCount = sqlSession.selectOne(NAMESPACE + "existedUser", userId);
 		if (rowCount > 0) {
-			isExist=true;
+			return true;
+		}else {
+			return false;
 		}
-		return isExist;
 	}
 
 }
