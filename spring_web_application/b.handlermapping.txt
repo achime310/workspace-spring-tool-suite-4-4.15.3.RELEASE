@@ -1,0 +1,38 @@
+<< HandlerMapping 설정>>
+● Info 
+	◆ component-scan /  annotation-config /  annotation-driven  차이점
+		▶ <context:component-scan/> 
+			- 특정 패키지(위에서는 org.controller) 안의 클래스들을 스캔하고 , 빈 인스턴스를 생성한다.
+			- 장점중 하나는 @Autowired , @Qualifier 어노테이션을 이해한다는것인데 <context:component-scan> 를 선언했다면 
+			   <context:annotation-config> 를 선언할 필요가 없다
+			- DefaultAnnotationHandlerMapping Type레벨에서, AnnotationMethodHandlerAdapter 메서드레벨에서 @RequestMapping을 처리하는데 사용되는데.
+			   이 2가지는 DispatcherServlet을 사용할 경우 디폴트로 사용되지만 다른 핸들러맵핑을 합께 사용하려고 하면 수동 지정하여야 함
+		▶ <mvc:annotation-driven/>
+			스프링 MVC 컴포넌트들을 그것의 디폴트 설정을 가지고 자동으로 활성화 하기위해 사용된다.
+			HandlerMapping 와  HandlerAdapter 를 등록을 포함한 클래스패스상에 존재하는것에 기반한 디폴트 작업을 적용한다.
+			component-scan 과 annotation-driven의 선언에는 어떤한 의존성도 없다.
+			즉,context:component-scan을 포함해주면 mvc:annotation-driven이 선언 안해준 @Controller / @RequestMapping도 이슈없이 잘 동작한다. 
+		▶ <context:annotation-config/>
+			어플리케이션 컨텍스트안에 이미 등록된 빈들의 어노테이션 활성화를 위해 사용된다.
+			(그것들이 XML 으로 설정됬는지 혹은 패키지스캐닝을 통한건지는 중요하지 않다) 
+			스프링 컨텍스트에 의해 생성되어 저장된  빈들에 대해서  @Autowired and @Qualifier 어노테이션을 해석할거란 얘기다. 
+			(context:component-scan 처럼 scan 기능은 없음)
+		▶ <context:annotation-config /> 태그를 설정하면 아래의 기능을 각각 설정하는 수고를 덜게 해준다. 
+			- RequiredAnnotationBeanPostProcessor : @Required 어노테이션 처리
+			- AutowiredAnnotationBeanPostProcessor : @Autowired 어노테이션 처리 (<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+			- CommonAnnotationBeanPostProcessor : @Resource, @PostConstruct, @PreDestroy 어노테이션 처리
+			- ConfigurationClassPostProcessor : @Configuration 어노테이션 처리
+● 설정 (기본 RequestMappingHandlerMapping 설정)
+	◆ 선언하지 않는 방법
+		<context:component-scan base-package="org.mycode.controller" /> 
+		: 패키지 org.mycode.controller 아래의 @Controller중에 @RequestMapping에 선언된 URL과 해당 @Controller 클래스의 메소드와 매핑한다.
+	◆ <mvc:annotation-driven/>을 선언하는 방법 
+		org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping ,org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter 이 구성됨
+	◆ RequestMappingHandlerMapping을 직접 선언하는 방법 (다른 HandlerMapping과 함계 사용할 때 사용.)
+		<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+● 주요 Handler Mapping 구현  Class
+	◆ SimpleUrlHandlerMapping : 패턴과 컨트롤러 이름을 비교하여 URL 패턴에 매칭될 경우 지정 컨트롤러 사용
+	◆ BeanNameUrlHandlerMapping : URL과 일치하는 이름을 갖는 bean을 컨트롤러로 사용
+	◆ ControllerClassNameHandlerMapping : URL과 매칭되는 클래스 이름을 갖는 bean을 컨트롤러로 사용.
+	◆ DefaultAnnotationHandlerMapping : @RequestMapping 어노테이션을 이용하여 요청을 처리할 컨트롤러를 구함.
+	  (버전3.1 이후 부터 RequestMappingHandlerMapping 이 기본 HandlerMapping.(DefaultAnnotationHandlerMapping이 deprecated되면서 대체됨)

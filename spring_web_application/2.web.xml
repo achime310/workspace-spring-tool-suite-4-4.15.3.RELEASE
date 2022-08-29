@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+		version="4.0">
+		<filter>
+			<filter-name>encodingFilter</filter-name>
+			<filter-class>
+				org.springframework.web.filter.CharacterEncodingFilter
+			</filter-class>
+			<init-param>
+				<param-name>encoding</param-name>
+				<param-value>UTF-8</param-value>
+			</init-param>
+		</filter>
+		<filter-mapping>
+			<filter-name>encodingFilter</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
+		
+		<!-- Creates the Spring Container shared by all Servlets and Filters -->
+		<!-- 
+			1. WebSite(Context)가 loading될때 contextConfigLocation 파라메타이름에설정된 설정파일(application-config.xml)을 로딩.
+			2. ApplicationContext객체[BeanFactory]를 생성하고설정파일에등록된빈들의 생성과 주입작업을한다.
+			3. 생성된 ApplicationContext객체는 DispatcherServlet객체의 멤버변수로 대입된다.
+		 -->
+		 <!-- The definition of the Root Spring Container(ApplicationContext) shared by all Servlets and Filters -->
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/application-config.xml</param-value>
+		</context-param>
+		<listener>
+			<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		</listener>
+	
+		<!-- Processes application requests -->
+		<servlet>
+			<servlet-name>dispatcher</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet
+			</servlet-class>
+			<!-- 
+				1. DispatcherServlet이 생성될때 contextConfigLocation 파라메타이름에설정된 설정파일(mvc-config.xml)을 로딩.
+				2. WebApplicationContext객체[BeanFactory]를 생성하고설정파일(mvc-config.xml)에등록된빈들의 생성과 주입작업을한다.
+				3. 생성된 WebApplicationContext객체는 DispatcherServlet객체의 멤버변수로 대입된다.
+			 -->
+			<init-param>
+				<param-name>contextConfigLocation</param-name>
+				<param-value>classpath:spring/mvc-config.xml</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+	
+		<servlet-mapping>
+			<servlet-name>dispatcher</servlet-name>
+			<url-pattern>*.do</url-pattern>
+		</servlet-mapping>
+	
+	</web-app>
+
+
+
+
+

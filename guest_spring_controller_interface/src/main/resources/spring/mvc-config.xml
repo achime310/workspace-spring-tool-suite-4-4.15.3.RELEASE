@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Controller객체 -->
+	<bean id="guestMainController" class="com.itwill.guest.controller.GuestMainController"/>
+	<bean id="guestListController" class="com.itwill.guest.controller.GuestListController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestViewController" class="com.itwill.guest.controller.GuestViewController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestWriteFormController" class="com.itwill.guest.controller.GuestWriteFormController"/>
+	<bean id="guestWriteActionController" class="com.itwill.guest.controller.GuestWriteActionController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestRemoveActionController" class="com.itwill.guest.controller.GuestRemoveActionController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestModifyFormController" class="com.itwill.guest.controller.GuestModifyFormController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestModifyActionController" class="com.itwill.guest.controller.GuestModifyActionController">
+		<property name="guestService" ref="guestService"/>
+	</bean>
+	<bean id="guestErrorController" class="com.itwill.guest.controller.GuestErrorController"/>
+
+	<!-- HandlerMapping객체 -->
+	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<property name="mappings">
+			<value>
+				/guest_main.do=guestMainController
+				/guest_list.do=guestListController
+				/guest_view.do=guestViewController
+				/guest_write_form.do=guestWriteFormController
+				/guest_write_action.do=guestWriteActionController
+				/guest_remove_action.do=guestRemoveActionController
+				/guest_modify_form.do=guestModifyFormController
+				/guest_modify_action.do=guestModifyActionController
+				/guest_error.do=guestErrorController
+			</value>
+		</property>
+	</bean>
+	
+</beans>
