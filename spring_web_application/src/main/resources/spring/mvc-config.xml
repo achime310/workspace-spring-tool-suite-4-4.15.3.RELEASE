@@ -6,6 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- HandlerMapping객체자동생성 -->
+	<!-- url은 annotation등록 -->
+	<mvc:annotation-driven/>
+	<!-- 
+	com.itwill.controller.annotation 와 하위패키지의 모든클래스의 Annotation(@)을스캔해서 초기화(객체생성,의존성주입)
+	 -->
+	<!-- annoation패키지의 모든 파일들의 annotation이 sacn되고 생성됨 -->
+	<context:component-scan base-package="com.itwill.controller.annotation"/>
+	
 	<!-- MVC Controller Bean -->
 	<bean id="helloController"
 		class="com.itwill.hello.controller.HelloController">
