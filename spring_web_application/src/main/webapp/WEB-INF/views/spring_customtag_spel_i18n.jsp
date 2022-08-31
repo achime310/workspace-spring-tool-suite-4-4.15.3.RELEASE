@@ -38,20 +38,19 @@ request.setAttribute("page", "index.jsp");
 		<!-- 쇼핑몰에서 카테고리할때 쓴다는데 무슨말이지 -->
 		<li><s:message code="nv.bc" arguments="게스트,게스트 리스트"
 				argumentSeparator="," /></li>
-		<br />
+		<br/>
+
 		<li>Spring Container에 등록된 MessageSource 빈객체를 @를 이용해서 JSP에서직접호출</li>
 		<li><s:eval expression="@messageSource.toString()" /></li>
 		<li><s:eval
-				expression="@messageSource.getMessage('nv.bc',new Object[]{게스트,게스트 리스트},new java.util.Locale('ko','KR'))" />
+				expression="@messageSource.getMessage('nv.bc',new Object[]{'게스트','게스트 리스트'},new java.util.Locale('ko','KR'))" />
 		</li>
 		<%-- 
 		<li><s:eval
 				expression="@messageSource.getMessage('nv.bc',new Object[]{게스트,게스트 리스트},new java.util.Locale('en','US'))" />
 		</li>
 		 --%>
-		
-		<li></li>
-		<li>
+		<br/>
 		<li>Controller에서 생성한 메세지:</li>
 		<li>Service에서 생성한 메세지:</li>
 	</ol>
