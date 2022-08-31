@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+request.setAttribute("id", "seo");
+%>
+<fmt:setLocale value="${pageContext.request.locale.language}" />
+<!-- messages폴더의 messages.properties호출 -->
+<fmt:setBundle basename="messages/messages" />
 
 <!DOCTYPE html>
 <html>
@@ -8,10 +15,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>JSTL I18N[Internationalization]국제화</h1><hr/>
-<ol>
-	
-</ol>
+	<h1>JSTL I18N[Internationalization]국제화</h1>
+	<hr />
+	<ol>
+		<li><fmt:message key="user.existed.exception">
+				<fmt:param value="${id}" />
+			</fmt:message></li>
+		<li><fmt:message key="user.notfound.exception">
+				<fmt:param value="${'tomato'}" />
+			</fmt:message></li>
+		<li><fmt:message key="password.mismatch.exception">
+				<fmt:param value="${'서영이'}" />
+				<fmt:param value="${'동일이'}" />
+				<fmt:param value="${'남오이'}" />
+		
+		</fmt:message></li>
+	</ol>
 
 </body>
 </html>

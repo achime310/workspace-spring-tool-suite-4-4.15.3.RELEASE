@@ -23,7 +23,7 @@ public class RequestParamModelAttributeController {
 												@RequestParam String guest_title,
 												@RequestParam String guest_content) {
 		
-		//주석을 넣자~~~~~~~~~~ spring이 annotation으로 reflection해서 나오는 결과~~~~~
+		//spring이 annotation으로 reflection해서 나오는 결과~~~~~
 		//spring은 표현법에 불과하다..
 		/*
 		<< 방명록쓰기 >>
