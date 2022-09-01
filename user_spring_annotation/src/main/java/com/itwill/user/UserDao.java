@@ -1,6 +1,7 @@
 package com.itwill.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserDao {
 
@@ -27,7 +28,7 @@ public interface UserDao {
 	/*
 	 * 모든사용자 정보를 데이타베이스에서 찾아서 List<User> 콜렉션 에 저장하여 반환
 	 */
-	ArrayList<User> findUserList() throws Exception;
+	List<User> findUserList() throws Exception;
 
 	/*
 	 * 인자로 전달되는 아이디를 가지는 사용자가 존재하는지의 여부를판별

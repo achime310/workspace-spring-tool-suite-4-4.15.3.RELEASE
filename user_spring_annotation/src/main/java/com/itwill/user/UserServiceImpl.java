@@ -1,8 +1,10 @@
 package com.itwill.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /*
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
+	@Qualifier("userDaoImplMyBatisMapperInterface")
 	private UserDao userDao;
 
 	public UserServiceImpl() throws Exception {
@@ -102,7 +105,7 @@ public class UserServiceImpl implements UserService{
 	 * 전체회원리스트
 	 */
 	@Override
-	public ArrayList<User> findUserList()throws Exception{
+	public List<User> findUserList()throws Exception{
 		return userDao.findUserList();
 	}
 	/*

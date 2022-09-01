@@ -7,28 +7,35 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<mvc:annotation-driven />
-	<!-- 정적리소스를 처리하기 위해 아래의 코드를 반드시 작성해야한다 -->
 	<mvc:default-servlet-handler />
-	<!-- com.itwill.controller.annotation 와 하위패키지의 모든클래스의 Annotation(@)을스캔해서 
-		초기화(객체생성,의존성주입) -->
-	<!-- annoation패키지의 모든 파일들의 annotation이 scan되고 생성됨 -->
 	<context:component-scan
 		base-package="com.itwill.user.controller" />
 
-	<!-- ViewResolver객체등록 -->
-	<!-- 1. -->
-	<bean
-		class="org.springframework.web.servlet.view.BeanNameViewResolver">
-		<property name="order" value="0" />
-	</bean>
-	<!-- 2.InternalResourceViewResolver 등록[빈으로 정의하지않아도 기본생성됨] -->
+	<!-- 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user_main" />
+			<mvc:exclude-mapping path="/user_write_form" />
+			<mvc:exclude-mapping path="/user_login_form" />
+			<mvc:exclude-mapping path="/user_login_action" />
+			<mvc:exclude-mapping path="/user_write_action" />
+			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/js/**" />
+			<mvc:exclude-mapping path="/image/**" />
+			<bean class="com.itwill.user.controller.AuthLoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+	-->
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/**"/>  
+	        <bean class="com.itwill.user.controller.AuthLoginAnnotationInterceptor" />
+	    </mvc:interceptor>
+    </mvc:interceptors>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1" />
-		<!-- InternalResouceView객체생성후 DispatcherServlet에 반환시 forward path에 prefix,suffix -->
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-
 </beans>

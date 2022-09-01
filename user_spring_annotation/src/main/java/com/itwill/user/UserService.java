@@ -1,6 +1,7 @@
 package com.itwill.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserService {
 
@@ -42,7 +43,7 @@ public interface UserService {
 	/*
 	 * 전체회원리스트
 	 */
-	ArrayList<User> findUserList() throws Exception;
+	List<User> findUserList() throws Exception;
 
 	/*
 	 * 아이디중복체크
