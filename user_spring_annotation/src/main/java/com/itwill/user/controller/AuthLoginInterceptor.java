@@ -29,21 +29,39 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("### AuthLoginInterceptor.preHandle()메써드");
-		// 1. handler 종류 확인
-		// 우리가 관심 있는 것은 Controller에 있는 메서드이므로 HandlerMethod 타입인지 체크
+		
+		/*
+		[ 핸들러 메소드(HandlerMethod)란? ]
+			HandlerMethod는 @RequestMapping이 붙은 메소드의 정보를 추상화한 객체이다. 
+			HandlerMethod는 그 자체가 실행가능한 객체가 아니라 메소드를 실행하기 위해 필요한 
+			참조정보를 담고 있는 객체 로써 다음과 같은 정보들을 가지고 있다.
+				- @Controller가붙은 컨트롤러 빈정보
+				- @RequestMapping이 붙은 메소드 메타정보
+				- @RequestMapping이 붙은 메소드 파라미터 메타정보
+				- @RequestMapping이 붙은 메소드 어노테이션 메타정보
+				- @RequestMapping이 붙은 메소드 리턴 값 메타정보
+ 
+			디스패처 서블릿은 애플리케이션이 실행될 때 모든 컨트롤러 빈의 메소드를 살펴서 
+			매핑 후보가 되는 메소드들을 추출한 뒤, 이를 HandlerMethod 형태로 저장해둔다. 
+			그리고 실제 요청이 들어오면 저장해 둔 목록에서 요청 조건에 맞는 
+			HandlerMethod를 참조해서 매핑되는 메소드를 실행한다.
+		 */
+		/***********************************************************************************
+		1. handler객체 종류 확인
+		    우리가 관심 있는 것은 @Controller객체에 있는 매핑된(@RequestMapping이 붙은) 메서드이므로 
+		    HandlerMethod 타입인지 체크
+		*************************************************************************************/   
 		if (handler instanceof HandlerMethod == false) {
 			/*
-			 * Controller객체,css,image,js(static resource)
+			 * @ Controller객체에 @RequestMapping이 붙은메쏘드 :  HandlerMethod
 			 */
-			// return true이면 Controller에 있는 메서드가 아니므로, 그대로 컨트롤러로 진행
+			//return true이면 그대로 컨트롤러로 진행
 			return true;
 		}
-		// 2.형 변환
-		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		
-		// session 객체를 가져옴
+		//HttpSession 객체를 가져옴
 		HttpSession session = request.getSession();
-		// login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
+		//login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
 		String sUserId = (String) session.getAttribute("sUserId");
 		if (sUserId == null) {
 			// 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
