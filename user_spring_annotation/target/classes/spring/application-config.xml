@@ -27,23 +27,28 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-	
-	<mybatis-spring:scan base-package="com.itwill.user.mapper"/>
-	
+	<mybatis-spring:scan base-package="com.itwill.user.mapper" />
 	<context:component-scan
 		base-package="com.itwill.user">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-
+	<!-- 국제화를위한 MessageSource -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+  		<property name="basenames" value="messages/user"/>
+  	</bean>
+	
 	<!-- jdbc.properties 파일 로딩 -->
 	<context:property-placeholder
 		location="classpath:db/jdbc.properties" />
 	<!-- DataSource등록 -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
-		p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
-		p:username="${jdbc.username}" p:password="${jdbc.password}" />
+		p:driverClassName="${jdbc.driverClassName}" 
+		p:url="${jdbc.url}"
+		p:username="${jdbc.username}" 
+		p:password="${jdbc.password}" />
+		
 	<!-- MyBatis SqlSessionFactory -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -52,16 +57,14 @@
 	</bean>
 
 	<!-- MapperFactoryBean -->
-<!-- 상단의 설정을 하므로 주석처리 	
-<bean id="userMapper"
+	<!-- 상단의 설정을 하므로 주석처리 	
+	<bean id="userMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface"
 			value="com.itwill.user.mapper.UserMapper" />
 	</bean> -->
 	<!-- annotation scan -->
-
-
 
 
 </beans>
