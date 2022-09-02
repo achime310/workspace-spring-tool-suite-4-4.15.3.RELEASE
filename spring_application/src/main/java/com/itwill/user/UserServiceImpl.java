@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
 	public int create(User user) throws Exception {
 		System.out.println("#### UserServiceImpl : create() 호출");
+		Thread.sleep(1234);
 		/*
 		 * -1:아이디중복
 		 *  1:회원가입성공
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
 			int insertRowCount=userDao.create(user);
 			return insertRowCount;
 		}
+		
 	}
 
 	/*
@@ -86,6 +88,11 @@ public class UserServiceImpl implements UserService {
 
 	public int update(User user) throws Exception {
 		System.out.println("#### UserServiceImpl : update() 호출");
+		
+		if (true) {
+			throw new Exception("회원수정시 예외발생!!!");
+		}
+		
 		return userDao.update(user);
 	}
 
@@ -97,6 +104,7 @@ public class UserServiceImpl implements UserService {
 	public List<User> findUserList() throws Exception {
 		System.out.println("#### UserServiceImpl : findUserList() 호출  ");
 		return userDao.findUserList();
+		//return null;
 	}
 
 }
