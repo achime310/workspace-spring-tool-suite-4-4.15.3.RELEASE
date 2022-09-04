@@ -10,16 +10,18 @@
 <body>
 <h4>hello.jsp</h4>
 <ol>
-<!--<c:forEach items="${helloList}" var="hello">
+<c:forEach items="${helloList}" var="hello">
 
 <li>
 ${hello}
 </li>
 
 </c:forEach>
--->
+<hr/>
 ${helloList }
 
 </ol>
+<hr/>
+<a href="index.jsp">돌아가기</a>
 </body>
 </html>

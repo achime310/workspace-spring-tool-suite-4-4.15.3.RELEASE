@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/guest.css">
 <script src="js/guest.js"></script>
+<!-- 
 <script type="text/javascript">
 	function guestCreate() {
 		if (document.f.guest_name.value == "") {
@@ -44,7 +45,7 @@
 		window.location.href = 'guest_list.do';
 	}
 </script>
-
+ -->
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>

@@ -53,7 +53,6 @@ public class GuestController {
 	 */
 	@RequestMapping(value = "/guest_view", params = "!guest_no")
 	public String guest_view() throws Exception {
-		
 		return "redirect:guest_main";
 	}
 	
@@ -92,12 +91,7 @@ public class GuestController {
 		guestService.insertGuest(guest);
 		return "redirect:guest_list";
 	}
-	// guest_write_action()에 GET방식접근 -> guest_main으로 redirect
-	@RequestMapping(value = "/guest_write_action", method = RequestMethod.GET)
-	public String guest_write_action() {
-		return "redirect:guest_main";
-	}
-
+	
 	@RequestMapping(value = "/guest_modify_form", method = RequestMethod.POST)
 	public String guest_modify_form(@RequestParam String guest_no, Model model)
 			throws Exception {
@@ -105,21 +99,12 @@ public class GuestController {
 		model.addAttribute("guest", guest);
 		return "forward:/WEB-INF/views/guest_modify_form.jsp";
 	}
-	// guest_modify_form()에 GET방식접근 -> guest_main으로 redirect
-	@RequestMapping(value = "/guest_modify_form", method = RequestMethod.GET)
-	public String guest_modify_form() {
-		return "redirect:guest_main";
-	}
 
 	@RequestMapping(value = "/guest_modify_action", method = RequestMethod.POST)
 	public String guest_modify_action(@ModelAttribute Guest guest)
 			throws Exception {
 		guestService.updateGuest(guest);
-		return "redirect:guest_view.do?guest_no=" + guest.getGuest_no();
-	}
-	@RequestMapping(value = "/guest_modify_action", method = RequestMethod.GET)
-	public String guest_modify_action() {
-		return "redirect:guest_main";
+		return "redirect:guest_view?guest_no=" + guest.getGuest_no();
 	}
 
 	@RequestMapping(value = "/guest_remove_action", method = RequestMethod.POST)
@@ -128,16 +113,23 @@ public class GuestController {
 		guestService.deleteGuest(Integer.parseInt(guest_no));
 		return "redirect:guest_list";
 	}
-	@RequestMapping(value = "/guest_remove_action", method = RequestMethod.GET)
-	public String guest_remove_action() {
-		return "redirect:guest_main";
-	}
 
 	@RequestMapping("/guest_error")
 	public String guest_error() {
 		return "forward:/WEB-INF/views/guest_error.jsp";
 	}
 
+	@RequestMapping(value = {"/guest_write_action",
+								"/guest_modify_form",
+								"/guest_modify_action",
+								"/guest_remove_action",
+								"/"
+							},
+					method = RequestMethod.GET)
+	public String user_action_get() {
+		return "redirect:guest_main";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String handle_exception(Exception e) {
 		return "forward:/WEB-INF/views/guest_error.jsp";

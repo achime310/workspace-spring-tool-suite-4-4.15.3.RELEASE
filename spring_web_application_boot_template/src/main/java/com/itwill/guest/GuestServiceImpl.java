@@ -1,6 +1,7 @@
 package com.itwill.guest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,7 +40,7 @@ public class GuestServiceImpl implements GuestService {
 		this.guestDao = guestDao;
 	}
 	@Override
-	public ArrayList<Guest> selectAll()throws Exception{
+	public List<Guest> selectAll()throws Exception{
 		return guestDao.selectAll();
 	}
 	@Override

@@ -15,13 +15,17 @@ public class HelloDao {
 	@Autowired
 	private DataSource dataSource;
 	
+	public HelloDao() {
+		System.out.println("#### HelloDao("+dataSource+") 기본생성자호출");
+	}
+	
 	public List<String> hello() throws Exception {
 		List<String> helloList = new ArrayList<String>();
 		helloList.add("CHOI");
 		helloList.add("KIM");
 		helloList.add("LEE");
 		//datasource가 잘 연결되었는지 확인하기 위함.
-		//helloList.add(dataSource.getConnection().toString());
+		helloList.add(dataSource.getConnection().toString());
 		//String getConnection=
 		//(String)DataSourceUtils.getConnection(dataSource);
 		//helloList.add(DataSourceUtils.getConnection(dataSource));

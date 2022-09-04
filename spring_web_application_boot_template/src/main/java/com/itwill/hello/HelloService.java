@@ -10,6 +10,10 @@ public class HelloService {
 	@Autowired
 	private HelloDao helloDao;
 	
+	public HelloService() {
+		System.out.println("#### HelloService("+helloDao+") 기본생성자");
+	}
+	
 	public List<String> hello() throws Exception {
 		return helloDao.hello();
 	}
