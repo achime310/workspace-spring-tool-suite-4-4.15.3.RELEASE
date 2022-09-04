@@ -14,18 +14,12 @@ import org.springframework.util.StopWatch;
 @Aspect
 public class ProfilingAroundAnnotationAdvice {
 	/*
-		<aop:aspect ref="profilingAroudAdvice">
+	<aop:aspect ref="profilingAroudAdvice">
 			<aop:around method="aroundProfiling" pointcut="execution(* com.itwill.user.UserService.*(..))"/>
-		</aop:aspe
-	 */
-	/*
-	 @Pointcut("execution(* *..UserDao.*(..))") private void
-	 profilingAroundAdvicePointCut() {}
+	</aop:aspect>
 	 */
 	
-	
-	//@Around("profilingAroundAdvicePointCut()")
-	@Around(value = "execution(* com.itwill.user.UserService.*(..))")	//이렇게 하면 pointcut을 재사용할 수 없다.
+	@Around(value = "execution(* com.itwill.user.UserService.*(..))")
 	public Object aroundProfiling(ProceedingJoinPoint pjp) throws Throwable {
 		System.out.println("###[AroundAdvice(Annotation)]메쏘드호출전 필요한작업기술");
 		StopWatch stopWatch=new StopWatch();

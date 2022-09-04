@@ -21,7 +21,8 @@ public class AopMain {
 		//userService.findUserList();
 		System.out.println(userService.findUserList());
 		
-		userService.findUser(null);
+		System.out.println(userService.findUser("시오영"));
+		
 		//userService.create(null);
 		/*
 		 * System.out.println("------------around advice---------");

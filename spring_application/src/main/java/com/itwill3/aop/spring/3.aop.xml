@@ -4,7 +4,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
-	
+	<!-- dataSource -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
@@ -47,23 +47,23 @@
 		<!-- 실행시점: before, method는 loggingBeforeAdvice의 메소드를 말함 -->
 
 		<aop:pointcut id="loggingBeforePointCut"
-			expression="execution(public java.util.List com.itwill.user.UserService.findUserList())" />
+			expression="execution(public * com.itwill.user.UserService.find*(..))" />
 
+<!-- 
 		<aop:aspect ref="loggingBeforeAdvice">
 			<aop:before method="beforeLog"
 				pointcut-ref="loggingBeforePointCut" />
 		</aop:aspect>
-
+ -->
 		<aop:aspect ref="profilingAroudAdvice">
 			<aop:around method="aroundProfiling"
 				pointcut="execution(* com.itwill.user.UserService.*(..))" />
 		</aop:aspect>
-
+<!-- 
 		<aop:aspect ref="emailSendAfterThrowingAdvice">
 			<aop:after-throwing method="emailSend"
 				throwing="exObj" pointcut="execution(* com.itwill.user.*.*(..))" />
-		</aop:aspect>
-
+		</aop:aspect> -->
 	</aop:config>
 
 	<!-- << pointcut expression >> execution("수식어 리턴타입 패키지명.클래스명.메서드명(파라미터)") 

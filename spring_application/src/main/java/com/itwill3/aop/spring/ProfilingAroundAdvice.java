@@ -18,7 +18,7 @@ public class ProfilingAroundAdvice {
 		stopWatch.stop();
 		long duration = stopWatch.getTotalTimeMillis();
 
-		Object targetObject = pjp.getTarget();	//설정에 의해서, userService가 호출된다.
+		Object targetObject = pjp.getTarget();	//호출되는 대상 객체를 구한다. 
 		String className = targetObject.getClass().getName();
 		String methodName = pjp.getSignature().getName();
 		Object[] argObjects = pjp.getArgs();
