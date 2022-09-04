@@ -17,11 +17,11 @@ public class GuestDaoImpl implements GuestDao{
 	private GuestMapper guestMapper;
 	
 	public GuestDaoImpl() {
-		System.out.println("#### GuestDaoImplMyBatisMapperInterface()기본생성자");
+		System.out.println("#### GuestDaoImpl()기본생성자");
 	}
 	//@Autowired
 	public void setGuestMapper(GuestMapper guestMapper) {
-		System.out.println("#### GuestDaoImplMyBatisMapperInterface: setGuestMapper("+guestMapper+") 메소드 호출");
+		System.out.println("#### GuestDaoImpl: setGuestMapper("+guestMapper+") 메소드 호출");
 		this.guestMapper = guestMapper;
 	}
 

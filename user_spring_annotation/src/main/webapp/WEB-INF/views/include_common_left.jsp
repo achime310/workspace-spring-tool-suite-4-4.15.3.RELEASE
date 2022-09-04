@@ -1,25 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-
-	boolean isLogin=false;
-	String sUserId=(String)session.getAttribute("sUserId");
-	if(sUserId==null){
-		isLogin=false;
-	}else if(sUserId!=null){
-		isLogin=true;
-	}
-%>    			
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"  %>   
 <p>
-	<strong>메 뉴</strong>
+	<strong><s:message code="menu.title"/></strong>
 </p>
 <ul>
-	<%if(isLogin){ %>
-		<li><a href=''><%=sUserId %>님</a></li>
-		<li><a href='user_view'>내정보</a></li>
-		<li><a href="user_logout_action">로그아웃</a></li>
-	<%}else{ %>
-		<li><a href="user_login_form">로그인</a></li>
-		<li><a href="user_write_form">회원가입</a></li>
-	<%} %>	
+	<c:if test="${sUserId!=null}">
+		<li><a href=''><s:message code="menu.id" arguments="${sUserId}"/></a></li>
+		<li><a href='user_view'><s:message code="menu.myinfo"/></a></li>
+		<li><a href="user_logout_action"><s:message code="menu.logout"/></a></li>
+	</c:if>	
+	<c:if test="${empty sUserId }">
+		<li><a href="user_login_form"><s:message code="menu.login"/></a></li>
+		<li><a href="user_write_form"><s:message code="menu.join"/></a></li>
+	</c:if>
 </ul>
