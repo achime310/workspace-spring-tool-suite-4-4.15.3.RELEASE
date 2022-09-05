@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>자바스크립트 core객체 Object,Array</h1><hr>
+<script type="text/javascript">
+	/*
+	자바스트립트 객체 생성방법
+		1. JSON[JavaScript Object Notation]
+	      - [ , ] , { , } , : , ,
+		2. 생성자함수
+		  - new Object(),new Array()
+	*/
+	/********************Object[JSON]********************/
+	var studentObject1={
+		'id':'aaa',
+		'name':'이름',
+		'weight':67.89,
+		'married':true,
+		'toString':function(){
+			let infoStr='['+this.id+']'+this.name+','+this.weight;
+			return infoStr;
+		}
+	};	
+	
+	/***** 멤버(프로퍼티) 동적추가,변경*******/
+	studentObject1.age=45;	//존재하면 덮어쓰고, 없으면 새로 생성
+	studentObject1.address='강릉시';
+	studentObject1.name='name';
+	studentObject1.setWeight=function(weight){
+		this.weight=weight;
+	};
+	console.log(studentObject1);
+	
+	document.write("-------------studentObject1출력--------------<br>");
+	document.write(studentObject1.id+"<br>");
+	document.write(studentObject1.name+"<br>");
+	document.write(studentObject1.weight+"<br>");
+	studentObject1.setWeight(88);
+	document.write(studentObject1.weight+"<br>");
+	document.write(studentObject1.married+"<br>");
+	document.write(studentObject1.toString()+"<br>");
+	document.write(studentObject1.age+"<br>");
+	
+	/********************Object[생성자함수]********************/
+	var studentObject2=new Object();
+	/***** 멤버(프로퍼티) 동적추가*******/
+	studentObject2.id='bbb';
+	studentObject2.name='네임';
+	studentObject2.weight=78.912;
+	studentObject2.married=true;
+	studentObject2.age=35;
+	studentObject2.address='서울';
+	studentObject2.setWeight=function(weight){
+		this.weight=weight;	//만약에 this가 없다면 만들어줌.
+	};
+	studentObject2.toString=function(){
+		return '['+this.id+'] '+this.name+', '+this.age+', '+this.address;
+	};
+	
+	/*******멤버(프로퍼티)동적추가********/
+	
+	document.write("-------------studentObject2출력--------------<br>");
+	document.write(studentObject2.id+"<br>");
+	document.write(studentObject2.name+"<br>");
+	document.write(studentObject2.weight+"<br>");
+	studentObject2.setWeight(88);
+	document.write(studentObject2.weight+"<br>");
+	document.write(studentObject2.married+"<br>");
+	document.write(studentObject2.toString()+"<br>");
+	document.write(studentObject2.age+"<br>");
+	
+	/********************Array[JSON]***************************/
+	let idArray=['aaa','bbb','ccc'];
+	let nameArray=['KIM','LEE','PARK'];
+	let ageArray=[30,31,32];
+	let studentObjectArray=[studentObject1,studentObject2];
+	
+	/********************Array[생성자함수] - core Object 표준객체 *******************/
+	let idArray2=new Array('aaa','bbb','ccc');
+	let nameArray2=new Array('KIM','LEE','PARK');
+	let ageArray2=new Array(30,31,32);
+	let studentObjectArray2=new Array(studentObject1,studentObject2);
+	
+	document.write('--------------------Array출력----------------------<br>');
+	for(let i=0; i<idArray.length; i++){
+		document.write(idArray[i]+", "+nameArray[i]+", "+ageArray[i]+"<br>");
+	}
+	
+	document.write('--------------------Array출력[Object]----------------------<br>');
+	for(let i=0; i<studentObjectArray.length;i++){
+		document.write(studentObjectArray[i].toString()+"<br>");
+	}
+	
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>javascript operator</h1><hr>
+<script type="text/javascript">
+	
+	//let은 전역에 선언되나 window에 속하지는 않음
+	//''쿼테이션으로 생성한 것과, 객체로 선언한 것의 메소드 차이가 있다.
+	let str1='KIM';
+	let str2=new String('KIM');
+	let str3=new String('KIM');
+	let str4=str3;
+	console.log(typeof str1);	//string
+	console.log(typeof str2);	//object
+	if(str1==str2){	
+		console.log('값과 타입일치(==)');
+	}else{
+		console.log('값과 타입이일치안함(==)');
+	}
+	
+	if(str1===str2){	//값은 같으나, 타입은 다르다. java의 equals. 같은 참조변수인지 물어봄	
+		console.log('str1===str2 값과 타입일치(===)');
+	}else{
+		console.log('str1===str2 값과 타입일치 안함(===)');
+	}
+	if(str2===str3){	//참조변수가 동일 = 값과 타입이 일치
+		console.log('str2===str3 참조변수가 동일(===)');
+	}else{
+		console.log('str2===str3 참조변수가 동일 안함(===)');
+	}
+	if(str3===str4){		
+		console.log('str3===str4 참조변수가 동일(===)');
+	}else{
+		console.log('str3===str4 참조변수가 동일 안함(===)');
+	}
+	
+	console.log('-------3항연산자------');
+	let a=12;
+	let b=20;
+	
+	let result1=(a>b)? a:b;
+	console.log('result1: '+result1);
+	
+	//결과를 나중에 대입해도 된다.
+	let result2;
+	(a>b)? result2=a: result2=b;
+	console.log('result2: '+result2);
+	
+	let level=67;
+	let msg=level>0? '양수':'음수';
+	console.log('msg: '+msg);
+	
+	console.log('-------------논리형타입으로자동변경------------');
+	//falsy한값
+	
+	let zeroNumber=0;
+	let nullValue=null;
+	let emptyStr='';
+	let undefinedVar;
+	let f=false;
+	
+	
+	if(!zeroNumber){
+		console.log('zeroNumber: '+zeroNumber+'--boolean-->'+false);
+	}
+	if(!nullValue){
+		console.log('nullValue: '+nullValue+'--boolean-->'+false);
+	}
+	if(!emptyStr){
+		console.log('emptyStr: '+'\'\'--boolean-->'+false);
+	}
+	if(!undefinedVar){
+		console.log('undefinedVar: '+undefinedVar+'--boolean-->'+false);
+	}
+	
+	//truthy
+	let zeroNumberStr='0';
+	let boolStr='false';
+	let number=123123;
+	
+	if(zeroNumberStr){
+	   console.log(zeroNumberStr+'--boolean-->'+true); 
+	}
+	if(boolStr){
+	   console.log('\''+boolStr+'\''+'--boolean-->'+true); 
+	}
+	if(number){
+	   console.log(number+'--boolean-->'+true); 
+	}
+	
+	console.log('!힌남노'+!'힌남노');
+	
+	
+	
+	
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="kQuery.js"></script>
+<script type="text/javascript">
+	/*
+	1. function객체를 변수에대입(일급함수)
+	2. function객체를 파라메타데이타로사용
+	3. function객체를 반환
+	 */
+	/*********인자로 대입할함수(변수)****************/
+	function arg_func1() {
+		document.write("### arg_func1()실행<br/>");
+	}
+	function arg_func2() {
+		document.write("### arg_func2()실행<br/>");
+	}
+
+	/****함수(익명함수)를 인자로받아서실행할함수***/
+	function func3(funcArg) {
+		document.write(">>> func3(funcArg)실행<br/>");
+		//funcArg는 변수일수도, 함수일수도, null(매개변수 필수아님)일 수도 있다.
+
+		document.write("<br/> 인자로 대입된 함수를 실행<br/>");
+		funcArg();
+		/* 
+		if( (typeof funcArg) == function){
+			funcArg; //callback 함수
+		}
+		 */
+	}
+	function func4(funcArg1, funcArg2) {
+		document.write(">>> func3(funcArg1,funcArg2)실행<br/>");
+		//funcArg는 변수일수도, 함수일수도, null(매개변수 필수아님)일 수도 있다.
+		document.write("<br/> 인자로 대입된 함수를 실행<br/>");
+		funcArg1(); //callback 함수
+		funcArg2(); //callback 함수
+	}
+
+	
+	/***********kQuery.js*************/
+	/* 
+	//이 로직은 외워야함!
+	function hello(name,funcArg){
+		let msg = name + '님 Hi, how are you!';
+		funcArg(msg);
+	}
+	//매개변수 규칙인듯..?
+	function forEach(array,userCallbackFunction){
+		for (let i = 0; i < array.length; i++) {
+			userCallbackFunction(i, array[i]);
+		}
+	}
+	 */
+	
+</script>
+</head>
+<body>
+	<h1>자바스크립트함수2</h1>
+	<hr>
+	<script type="text/javascript">
+		/*
+		<<javascript api document>
+		https://www.w3schools.com
+		 */
+
+		document.write('---------------1. 함수대입-----------------------------------------<br>');
+		
+		document.write("func3(arg_func1); <br/>");
+		func3(arg_func1);	//arg_func1를 인자로 대입하는 상황
+		
+		document.write("<br/>");
+	
+		document.write("func3(arg_func1()); <br/>");
+		//func3(arg_func1());	//arg_func1()호출의 결과를 인자로 대입하는 상황
+		
+		document.write("<hr/>");
+		document.write('---------------2. 익명함수대입된 함수형변수(funcVar1,funcVar2) 대입-------------------<br>');
+		var funcVar1=function(){
+			document.write("### funcVar1 변수에 대입된 익명함수실행<br/>");
+		};
+		var funcVar2=function(){
+			document.write("### funcVar2 변수에 대입된 익명함수실행<br/>");
+		};
+		
+		func3(funcVar1);
+		func4(funcVar1,funcVar2);
+		
+		document.write('----------------3. (최종)익명함수대입------------------------------------<br>');
+		
+		func3(function(){
+			document.write("### func3(funcArg)에 인자로 대입한 익명함수<br/>");
+		});
+		
+		func4(function(){
+			
+			document.write("### func4(funcArg1,funcArg2)에 첫번째인자로 대입한 익명함수<br/>");
+			
+				},function(){
+			document.write("### func4(funcArg1,funcArg2)에 두번째인자로 대입한 익명함수<br/>");
+			
+				});
+		
+		
+		document.write('--------------------kQuery에서 제공하는 function사용---------------------<br>');
+		
+		hello("young", function(msg){
+				
+				document.write("### 인자로 대입한 익명함수 실행<br/>");
+				document.write("### hello function에서 익명함수 실행시 대입한 인자 msg:"+msg+"<br/>");
+				//document.write(msg);
+		});
+		
+		let nameArray=['월요일','화요일','수요일','목요일','금요일','토요일','일요일'];
+		forEach(nameArray,function(index, name){
+			document.write("### i="+index+" name="+name+"<br>");			
+		});
+		
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
