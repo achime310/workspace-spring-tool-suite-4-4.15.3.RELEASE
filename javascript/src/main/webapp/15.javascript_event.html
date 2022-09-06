@@ -1,91 +1,157 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	function displayMessage(msg){
-	
-	}
-	
-	function inlineEventHandler(e){
-		
-	}
-	function button2EventHandler(e){
-		
-	}
-	function button3EventHandler1(e){
-			
-	}
-	function button3EventHandler2(e){
-			
-	}
-	
-	/*
-	이벤트등록함수(실행시점 DOMTree로딩완료시점에실행)
-		1. body맨마직막
-		2. window.onload 이벤트발생시호출 
-	*/
-	function event_regist(){
-		alert(' >>>> 실행시점 DOMTree로딩완료후 랜더링전시점에실행');
-		/*** DOM LEVEL - 0 ***/
-	
-		/*********CASE1*******/
-		
-		/*********CASE2******/
-	
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function displayMessage(msg) {
+			var resultDivE = document.getElementById('result');
+			resultDivE.innerHTML += msg + "<br/>";
+		}
+
+		function inlineEventHandler(e) {
+			var msg = "inlineEventHandler--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type;
+			displayMessage(msg);
+		}
+		function button2EventHandler(e) {
+			var msg = "button2EventHandler--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type;
+			displayMessage(msg);
+		}
+		function button3EventHandler1(e) {
+			var msg = "button3EventHandler1[click]--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type;
+			displayMessage(msg);
+		}
+		function button3EventHandler2(e) {
+			var msg = "button3EventHandler2[click]--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type;
+			displayMessage(msg);
+		}
+
 		/*
-		https://www.w3schools.com/
+		이벤트등록함수(실행시점 DOMTree로딩완료시점에실행)
+			1. body맨마직막
+			2. window.onload 이벤트발생시호출 
 		*/
-		/*** DOM LEVEL - 2 ***/
-		
-		
-		
+		function event_regist() {
+			alert(' >>>> 실행시점 DOMTree로딩완료후 랜더링전시점에실행');
+			/*** DOM LEVEL - 0 ***/
+			var button2E = document.getElementById('button2');
+			/*********CASE1*******/
+			//button2E.onclick=button2EventHandler();
+			//위와같이 하면, return데이터들이 대입된다.
+
+			//넣어준 function을 호출하면서, 인자를 넣어준다고?
+			//event로 등록된 모든 function은 event인자를 줄 수있다. 안받으면 안쓰면된다.
+			button2E.onclick = button2EventHandler;
+			/*********CASE2******/
+			//onclick이 실행될때마다, 익명의 function이 실행된다.
+			button2E.onclick = function (e) {
+				var msg = "button2EventHandler익명함수--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type + ", 이벤트value: " + e.value;
+				displayMessage(msg);
+			};
+
+			/*
+			https://www.w3schools.com/
+			*/
+			/*** DOM LEVEL - 2 ***/
+			//DOM LEVEL - 2에서는 event를 여러개 등록하면 모두 실행된다. -> 배열로 받았다가 실행됨. 뭐가 먼저 실행될지는 알수없음
+			var button3E = document.getElementById('button3');
+			button3E.addEventListener('click', button3EventHandler1);
+			button3E.addEventListener('click', button3EventHandler2);
+			button3E.addEventListener('mouseover', function (e) {
+				var msg = "button3익명EventHandler1[mouseover]--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type + ", 이벤트value: " + e.value;
+				displayMessage(msg);
+			});
+			button3E.addEventListener('mouseout', function (e) {
+				var msg = "button3익명EventHandler2[mouseout]--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type + ", 이벤트value: " + e.value;
+				displayMessage(msg);
+			});
+
+			var movie_rankOreredListElement = document.getElementById('movie_rank');
+			var movie_rankListElementArray = movie_rankOreredListElement.getElementsByTagName('li');
+
+			var movie_rankListElementArray = movie_rankOreredListElement.children;
+			var movie_rankListElementArray = movie_rankOreredListElement.childNodes;
+
+			for (var i = 0; i < movie_rankListElementArray.length; i++) {
+				movie_rankListElementArray[i].addEventListener('click', function (e) {
+					//target이 꼭 필요하다
+					var clickElement = e.target;
+					displayMessage('click한 영화:' + clickElement.innerHTML);
+					if (clickElement.style.background == 'gray') {
+						clickElement.style.background = 'white';
+						clickElement.style.color = 'black';
+					} else {
+						clickElement.style.background = 'gray';
+						clickElement.style.color = 'white';
+					}
+				});
+			}
+
+
+			/*
+				<< element1의 하위노드만검색 >>
+				element1.getElementById();
+				element1.getElementsByTagName();
+				
+				<< docuemnt 의 하위노드만검색[돔트리전체] >>
+				document.getElementById();
+				document.getElementsByTagName();
+			*/
+
+
+		};
 		/*
-			<< element2의 하위노드만검색 >>
-			element1.getElementById();
-			element1.getElementsByTagName();
-			
-			<< docuemnt 의 하위노드만검색[돔트리전체] >>
-			document.getElementById();
-			document.getElementsByTagName();
+		window.onload 이벤트발생시점
+		   -DOM Tree 생성직후 렌더링전에호출  이벤트등록
 		*/
-		
-		
-	};
-	/*
-	window.onload 이벤트발생시점
-	   -DOM Tree 생성직후 렌더링전에호출  이벤트등록
-	*/    
-	
-</script>
+		//onload될때, 여러 function을 등록하기 위해, 익명의 function사용
+		/*
+		window.onload = function () {
+			event_regist();
+		};
+		*/
+		//위와 동일한 코드이다		
+		window.addEventListener('load',function(){
+			event_regist();
+		});
+
+
+		/*
+		//button2가 없는 상태이다. -> 왜냐,head가 먼저 parsing되기 때문. function은 dom트리가 로딩되고 실행되야함.  
+		var button2E=document.getElementById('button2');  
+		button2E.onclick="javascript:"+button2EventHandler;
+		*/
+
+
+	</script>
 </head>
+
 <body>
-<h1>javascript event</h1><hr/>
-<form name="f">
-	<input 	name="button1" 
-			type="button" 
-			value="event model[inline]"
-			onclick="inlineEventHandler(event);"/>
-	<input id="button2" name="button2" type="button" value="event model[DOM level0]"/>
-	<input id="button3" name="button3" type="button" value="event model[DOM level2]"/>
-	<input id="button4" name="button4" type="button" value="event remove"/>
-</form>
-<ol id='movie_rank'>
-	<li>조커</li>
-	<li>람보</li>
-	<li>AI</li>
-	<li>알라딘</li>
-	<li>체르노빌</li>
-</ol>
-<ol id='drama_rank'>
-	<li>도깨비</li>
-	<li>사랑과전쟁</li>
-	<li>나너</li>
-	<li>우리나라</li>
-	<li>대한민국</li>
-</ol>
-<div id="result">
-</div>
+	<h1>javascript event</h1>
+	<hr />
+	<form name="f">
+		<input name="button1" type="button" value="event model[inline]" onclick="inlineEventHandler(event);" />
+		<input id="button2" name="button2" type="button" value="event model[DOM level0]" />
+		<input id="button3" name="button3" type="button" value="event model[DOM level2]" />
+		<input id="button4" name="button4" type="button" value="event remove" />
+	</form>
+	<ol id='movie_rank'>
+		<li>조커</li>
+		<li>람보</li>
+		<li>AI</li>
+		<li>알라딘</li>
+		<li>체르노빌</li>
+	</ol>
+	<ol id='drama_rank'>
+		<li>도깨비</li>
+		<li>사랑과전쟁</li>
+		<li>나너</li>
+		<li>우리나라</li>
+		<li>대한민국</li>
+	</ol>
+	<div id="result">
+	</div>
 </body>
+
 </html>

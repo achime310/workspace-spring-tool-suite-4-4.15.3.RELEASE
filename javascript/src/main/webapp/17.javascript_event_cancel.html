@@ -13,15 +13,17 @@
 		/*******이벤트등록*********/
 		document.getElementById('tweet')
 			.addEventListener('click',function(e){
-				
+				alert('tweet상세보기');
 		});
 	    document.getElementById('imageSpan')
 	    	.addEventListener('click',function(e){
-	    		
+				alert('tweet사용자프로필');
+				e.stopPropagation();
 	    });
 	    
 	    document.getElementById('mainp').addEventListener('click',function(e){
 	    	alert('main.jsp로요청');
+	    	//페이지기반요청 -> 기존의 dom트리가 날아감 -> 막아야함
 	    	/*
 	    	anchor클릭시
 	    	1.click event발생(o)
@@ -39,15 +41,17 @@
 	    	/*
 	    	2.href에기술된 url로 page요청취소( X )[e.preventDefault();]
 	    	*/
-	    	
+	    	e.preventDefault();
 	    });
 	   var formE = document.getElementById('f');
 	   formE.addEventListener('submit',function(e){
 		   /*
-	    	anchor클릭시
-	    	1.click event발생(o)
+	    	submit버튼 클릭시
+	    	1.submit event발생(o)
 	    	2.action 에기술된 url로 page요청( x )
 	    	*/
+	    	alert('submit버튼 클릭시 join.jsp로요청취소');
+	    	e.preventDefault();
 		  
 	   });
 	    

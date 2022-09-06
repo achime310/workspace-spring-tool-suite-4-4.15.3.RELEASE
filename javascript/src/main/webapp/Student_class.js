@@ -12,9 +12,11 @@ class Student {
 		this.tot = 0;
 		this.avg = 0.0;
 	}
+	
 	set id(id){
-		this.id=id;
+		this._id=id;
 	}
+	
 	get id(){
 		return this.id;
 	}

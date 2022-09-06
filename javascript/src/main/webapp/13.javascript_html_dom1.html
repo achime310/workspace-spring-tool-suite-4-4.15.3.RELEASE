@@ -5,15 +5,37 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function findById(){
+		var div1E=document.getElementById('div1');		
+		var div2E=document.getElementById('div2');		
+		var div3E=document.getElementById('div3');		
+		var div4E=document.getElementById('div4');
 		
-		
-		
+		div1E.innerHTML="<form>검색어<input type='search'/><input type='submit' value='검색'/></form>";
+		div2E.innerHTML="div 2 change";
+		div3E.style.border='3px solid red';
+		div4E.style.visibility='hidden';	//visible 또는 hidden
+				
 	}
 	function findByClass(){
-		
+		var divNodeList= document.getElementsByClassName('menu');
+		for(var i=0; i<divNodeList.length;i++ ){
+			divNodeList[i].style.color='red';
+			divNodeList[i].style.background='pink';
+			divNodeList[i].style.border='1px dotted blue';
+		}
 	}
 	var count=0;
 	function findByTagName(){
+		var h1NodeList= document.getElementsByTagName("h1");
+		for(var i=0; i<h1NodeList.length;i++ ){
+			h1NodeList[i].innerHTML='h1변경['+count++ +']';
+		}
+		
+		var liNodeList= document.getElementsByTagName("li");
+		for(var i=0; i<liNodeList.length;i++ ){
+			liNodeList[i].style.fontSize =count+'pt';
+		}
+		
 		
 	}
 </script>

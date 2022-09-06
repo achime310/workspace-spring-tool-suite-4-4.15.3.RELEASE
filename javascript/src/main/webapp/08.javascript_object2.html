@@ -1,38 +1,103 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	/*
-	생성자함수
-	*/
-    
-	/****************학생객체3개****************/
-	/*
-	JSON
-	*/
-	
-	
-	
-	
-	
-	
-	
-</script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		/*
+		생성자함수
+		*/
+		//아래의 타입은 모두 Object
+		var o = new Object();
+		var stringObject = new String("문자열");
+		var numberObject = new Number(34);
+		var arrayObject = new Array();
+		var dateObject = new Date();
+		//var studentObject = new Student();
+		//4번까지 위의 생성자를 만드려고 함
+
+		/****************학생객체3개****************/
+		/*
+		JSON
+		*/
+		var studentObject1 = {
+			'id': 'xxx',
+			'name': '김이름',
+			'kor': 45,
+			'eng': 78,
+			'math': 65,
+			'tot': 0,
+			'avg': 0.0,
+			'calculateTot': function () {
+				this.tot = this.kor + this.eng + this.math;
+			},
+			'calculateAvg': function () {
+				this.avg = this.tot / 3;
+			},
+			'toString': function () {
+				return '[' + this.id + ']' + this.name + ',' + this.kor + ',' + this.eng + ',' + this.math + ',' + this.tot + ',' + this.avg;
+			}
+		};
+		var studentObject2 = {
+			'id': 'yyy',
+			'name': '박이름',
+			'kor': 32,
+			'eng': 65,
+			'math': 15,
+			'tot': 0,
+			'avg': 0.0,
+			'calculateTot': function () {
+				this.tot = this.kor + this.eng + this.math;
+			},
+			'calculateAvg': function () {
+				this.avg = this.tot / 3;
+			},
+			'toString': function () {
+				return '[' + this.id + ']' + this.name + ',' + this.kor + ',' + this.eng + ',' + this.math + ',' + this.tot + ',' + this.avg;
+			}
+		};
+		var studentObject3 = {
+			'id': 'yyy',
+			'name': '정이름',
+			'kor': 88,
+			'eng': 28,
+			'math': 46,
+			'tot': 0,
+			'avg': 0.0,
+			'calculateTot': function () {
+				this.tot = this.kor + this.eng + this.math;
+			},
+			'calculateAvg': function () {
+				this.avg = this.tot / 3;
+			},
+			'toString': function () {
+				return '[' + this.id + ']' + this.name + ',' + this.kor + ',' + this.eng + ',' + this.math + ',' + this.tot + ',' + this.avg;
+			}
+		};
+
+
+		//var studentArray=[{..},{..},{..}];
+		//위의 형태로도 기술 가능함. 변수선언이 줄어들겠지
+		var studentArray = [studentObject1, studentObject2, studentObject3];
+
+
+	</script>
 </head>
+
 <body>
-<h1>생성자 함수1</h1><hr>
-<script type="text/javascript">
-	document.write('--------------student 리스트---------------------<br>');
-	
-</script>
+	<h1>생성자 함수1</h1>
+	<hr>
+	<script type="text/javascript">
+		document.write('--------------student 리스트---------------------<br>');
+		for (var i = 0; i < studentArray.length; i++) {
+			studentArray[i].calculateTot();
+			studentArray[i].calculateAvg();
+			document.write(studentArray[i].toString() + "<br>");
+		}
+
+
+	</script>
 </body>
+
 </html>
-
-
-
-
-
-
-

@@ -2,14 +2,17 @@ package com.itwill.guest.mapper;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
+import org.mybatis.spring.annotation.MapperScan;
 
 import com.itwill.guest.Guest;
-
+//@Repository
+//@Mapper
 public interface GuestMapper {
 	/*
 	 * 인터페이스의 풀네임은 GuestMapper.xml의 namespace와일치

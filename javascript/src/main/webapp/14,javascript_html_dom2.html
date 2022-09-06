@@ -1,62 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	var count=0;
-	function create() {
-		count++;
-		/*
-		<< Node생성기능 document객체만가지는 기능 >>
-		1.div Element(tag)
-		 */
-		
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		var count = 0;
+		function create() {
+			count++;
+			/*
+			<< Node생성기능 document객체만가지는 기능 >>
+			1.div Element(tag)
+			 */
+			//<div id="newDiv1" style="border: 1px dotted gold;">
+			var newDivE = document.createElement("div");
+			newDivE.setAttribute("id", "newDiv" + count);
+			newDivE.setAttribute("style", "border: 1px dotted gold;");
+
 			/*
 			1-1.TextNode생성
 			 */
-			
+			//새로생성된DIV1 의 TextNode
+			var newTextNode = document.createTextNode("새로생성된DIV" + count + " 의 TextNode");
+			newDivE.appendChild(newTextNode);
 			/*
 			1-2.img Element생성
 				<img src='p_red.png' width='20px' height='20px'/>
 			 */
-			
-			
-			
-			
-			
-		/*
-		2.DOM Tree에추가
-		 */
-		
 			 
-	}
+			 //innerHTML에 newTextNode가 들어있는 상태이므로... +=한다.
+			 newDivE.innerHTML+="<img src='p_red.png' width='20px' height='20px'/>";
+			 
+			 //img를 앞에 붙이려면..
+			 newDivE.innerHTML="<img src='p_blue.png' width='20px' height='20px'/>"+newDivE.innerHTML;
+			 
+			 //img를 앞뒤에 동시에 붙이려면
+			  newDivE.innerHTML=
+			     "<img src='p_red.png' width='20px' height='20px'/>"+
+			     newDivE.innerHTML+
+			     "<img src='p_blue.png' width='20px' height='20px'/>";
+			 
+			 
+			 		/*
+			2.DOM Tree에추가
+			 */
+			//<div id='parent'>의 자식으로 추가해야함
+			var parentDivE = document.getElementById('parent');
+			parentDivE.appendChild(newDivE);	//마지막으로 들어감....(중요)
 
-	function remove() {
+
+		}
+
+		function remove() {
+			if(count==0)return;
+			var removeDivE=document.getElementById("newDiv"+count);
+			var parentDivE=document.getElementById("parent");
+			parentDivE.removeChild(removeDivE);
+			count--;
+		}
+		var image_no=1;
+		function update() {
+			var bodyNodeList = document.getElementsByTagName("body");
+			var bodyE = bodyNodeList[0];
+			var bodyE = document.body;
 		
-	}
-	function update() {
-		
-	}
-</script>
+			bodyE.style.background="url('penguin"+image_no+".gif')";
+			bodyE.style.backgroundRepeatX='no-repeat';
+			bodyE.style.backgroundRepeatY='no-repeat';
+			image_no++;
+			image_no=image_no%3+1;
+		}
+	</script>
 </head>
+
 <body>
 	<h1>HTML DOM객체 CRUD</h1>
 	<hr>
 	<div id='parent'>
 		<!-- 
 		<div id="newDiv1" style="border: 1px dotted gold;">
-			<img src="p_blue.png" width="20px" height="20px">
 			새로생성된DIV1 의 TextNode
-			<img src="p_red.png" width="20px" height="20px">
 		</div>
  		-->
 	</div>
 	<div id='menu'>
-		<input type="button" value="DOM Tree Node 추가" onclick="create()"> 
-		<input type="button" value="DOM Tree Node 삭제" onclick="remove()"> 
+		<input type="button" value="DOM Tree Node 추가" onclick="create()">
+		<input type="button" value="DOM Tree Node 삭제" onclick="remove()">
 		<input type="button" value="DOM Tree Node 수정" onclick="update()">
 	</div>
 
 </body>
+
 </html>
