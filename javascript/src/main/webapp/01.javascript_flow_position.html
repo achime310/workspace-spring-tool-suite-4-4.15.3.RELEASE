@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="ex.js"></script>
+	<script>
+		window.alert('1.head');
+	</script>
+</head>
+
+<body>
+	<h1>javascript position flow</h1>
+	<script>
+		alert('2.body start');
+	</script>
+	<hr>
+
+	<ol>
+		<li>content</li>
+		<li><a href="javascript:window.alert('anchor click!!!');">content</a></li>
+		<li>content</li>
+		<li onmouseover="window.alert('event property');">content[mouseover event처리]</li>
+		<li>content</li>
+	</ol>
+
+</body>
+<script>
+	alert('3.body end');
+</script>
+</html>

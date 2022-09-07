@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		/*
+		생성자함수
+		*/
+		//아래의 타입은 모두 Object
+		var o = new Object();
+		var stringObject = new String("문자열");
+		var numberObject = new Number(34);
+		var arrayObject = new Array();
+		var dateObject = new Date();
+		//var studentObject = new Student();
+		//4번까지 위의 생성자를 만드려고 함
+
+		/*
+		학생객체를 생성해서 반환해주는 <<< 생성자함수 >>> 작성
+		*/
+		/*
+		function Student(id, name, kor, eng, math){
+			this.id='window 소속인지 확인해보자';
+		}
+		Student();
+		console.log(window);
+		*/
+		//function 이름이 대문자로 시작하든, 소문자로 시작하든 상관없다.
+		//생성자function은 관례적으로 대문자로 써준다.
+		function Student(id, name, kor, eng, math) {
+			/*
+			호출 new Student('xxx','KIM',34,12,56);
+			1.Object객체생성({})
+			2.생성된 Object객체(this)에 속성추가
+			3.생성된 Object객체(this) 반환
+			*/
+			this.id = id;
+			this.name = name;
+			this.kor = kor;
+			this.eng = eng;
+			this.math = math;
+			this.tot = 0;
+			this.avg = 0.0;
+
+			this.caculateTot = function () {
+				/*여기서 this는 window가 아닌, context객체이다.*/
+				this.tot = this.kor + this.eng + this.math;
+			};
+			this.caculateAvg = function () {
+				this.avg = this.tot / 3;
+			};
+			this.toString = function () {
+				return '['+this.id+']'+this.name+','+
+					this.kor+','+this.eng+','+
+					this.math+','+this.tot+','+this.avg;
+			};
+		}
+
+		/****************학생객체****************/
+		Student('xxx', 'KIM', 34, 12, 89);
+		Student('yyy', 'LEE', 55, 91, 73);
+		//window객체에 생성되고, 덮어씌어지는 것을 볼 수 있다.
+
+		//new 키워드가 있고 없고 다르다.
+		var studentObject1 = new Student('xxx', 'KIM', 34, 12, 89);
+		var studentObject2 = new Student('yyy', 'LEE', 55, 91, 73);
+		var studentObject3 = new Student('zzz', 'CHOI', 78, 67, 99);
+
+		var studentArray = [studentObject1, studentObject2, studentObject3];
+
+	</script>
+</head>
+
+<body>
+	<h1>생성자 함수3</h1>
+	<hr>
+	<script type="text/javascript">
+		document.write('--------------student 리스트---------------------<br>');
+
+		for (var i = 0; i < studentArray.length; i++) {
+			studentArray[i].calculateTot();
+			studentArray[i].calculateAvg();
+			document.write(studentArray[i].toString() + "<br/>");
+		}
+
+
+
+	</script>
+</body>
+
+</html>

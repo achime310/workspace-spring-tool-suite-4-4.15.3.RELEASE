@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+		var
+		변수,상수,리터럴
+		-> 문자, 숫자(number), 논리형(boolean)로만 구분
+			-> 전역변수는 window에 변수로 등록됨
+			-> OOP개념에서는 전역에 등록되지 않는게 좋음
+				-> (대안)let
+	*/
+	var a1 = 'text1';
+	var a2 = 'text2';
+	var b=123;
+	var c=123.456;
+	var d=true;
+	let let_var='let변수선언';
+	/*
+	전역에 선언된 var변수는 윈도우 속성으로 생성
+	전역에 선언된 var변수는 중복선언되어도 에러발생안함
+	
+	전역에 선언된 let변수는 윈도우 속성으로 생성되지 않음
+	전역에 선언된 let변수는 중복선언되면   에러발생안함
+	*/
+	
+	var d = false;
+	
+	//let let_var='let변수선언';
+	//[Error]Cannot redeclare block-scoped variable 'let_var'.
+	
+	/*
+		const 상수 : 변경작업이 불가능함(java에서 final static)
+	*/
+	const e='상수1';
+	const f=789;
+	
+	//e='상수1변경';
+	//[Error]Uncaught TypeError: Assignment to constant variable.
+	
+	console.log(a1);
+	console.log(a2);
+	console.log(b);
+	console.log(c);
+	console.log(d);
+	console.log(e);
+	console.log(f);
+	console.log(let_var);
+	
+	/*
+		undefined(var h;)
+			-> 이또한 값이다
+	*/
+	var g=null;
+	var h;
+	console.log(g);
+	console.log(h);
+	
+	
+	/*********Object************/
+	/*
+		 Object객체생성
+			1. 생성자함수
+			2. JSON(JavasScript Object Notation) {,},[,]
+				-> 특정표기법으로 표기하면 객체가 생성된다.
+			
+		new Object() 는 function이다
+		o1은 참조값을 가진다.
+	*/
+	var o1=new Object();
+	var o2={};
+	console.log(o1.toString);
+	console.log(o2.toString);
+	
+	
+	/*********Array************/
+	/*
+		 Array 객체생성
+			1. 생성자함수
+			2. JSON(JavasScript Object Notation)
+		-> 객체 캡슐화 개념이 없음(private안됨). getter-setter도 없음
+	*/
+	var array1=new Array();
+	var array2=[];
+	console.log(array1.length);
+	console.log(array2.length);
+	
+	
+	
+	/*****JSON을 사용한 객체(Object,Array)생성*******/
+	var student={
+		'no':1,
+		'name':'KIM'
+	};
+	console.log(student);
+	console.log(student.no);
+	console.log(student.name);
+	
+	var nameArray=['KIM','LEE','PARK','CHOI','JEONG'];
+	var scoreArray=[67,78,99,45,93];
+	console.log(nameArray);
+	console.log(scoreArray);
+	
+	for(var i=0;i<nameArray.length;i++){
+	//for(let i=0;i<nameArray.length;i++){
+		console.log(nameArray[i]+" --> "+scoreArray[i]);
+	}
+	/*
+		→ for문이 끝나도 i는 존재한다
+		→ var의 단점이다 → (해결) let으로 선언해서 사용한다
+	*/
+	
+	
+	/*
+		var :자바스트립트변수범위는 함수(function)블록에의해서만 생성된다
+		let :자바스트립트변수범위는 블록(block)에의해서만    생성된다
+	*/
+	//console.log('i-->'+i);
+	//console.log('window.i-->'+window.i);
+	console.log('--------------undefined----------------')
+	if(h==undefined){
+		console.log('1.h는 undefined 입니다');
+	}
+	if(typeof h=='undefined'){
+		console.log('2.h는 undefined 입니다');
+	}
+	
+	
+	console.log('--------------null----------------');
+	if(g==null){
+		console.log('g는 null');
+	}
+	
+	console.log("-------------- var 로선언된변수 재선언 ------------");
+	console.log("a1 : "+a1);
+	var a1=123212323;
+	console.log("a1 다시선언 : "+a1);
+	console.log("-------------- let 로선언된변수 재선언 ------------");
+	//let let_var='let_var다시선언';
+	console.log("-------------- const 로선언된변수 재선언 ------------");
+	//var e='상수 다시선언';
+</script>
+</head>
+<body>
+<h1>javascript variable</h1><hr>
+</body>
+</html>

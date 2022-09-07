@@ -30,7 +30,7 @@
 </p>
 <ul>
 	<li>문자열리터럴(EL): &dollar;{'KIM'.replace('K','N')}</li>
-	<li>문자열리터럴(SPEL):<s:eval expression="'KIM'.replace('K','N')"></s:eval></li>
+	<li>문자열리터럴(SPEL):<s:eval expression="'KIM'.replace('K','N')"/></li>
 <br/>
 	<li>숫자리터럴(EL):${123+123}</li>
 	<li>숫자리터럴(SPEL):<s:eval expression="123+123"/></li>

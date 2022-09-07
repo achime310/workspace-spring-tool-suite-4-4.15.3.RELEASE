@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="Student_class.js"></script>
+<script type="text/javascript" src="Student.js"></script>
+<script type="text/javascript">
+/****************package****************/
+var studentObject=new com.itwill.Student('package', '패키지', 34, 12, 89);
+
+
+/****************학생객체****************/
+var studentArray=[	new Student('aaa','김',12,34,56),
+    				new Student('bbb','정',45,67,89),
+    				new Student('ccc','송',78,99,12)];
+
+</script>
+</head>
+<body>
+<h1>class 를 사용한 객체생성[es6(ecma2015)]</h1><hr>
+<script type="text/javascript">
+	
+	document.write('-------------------student 리스트---------------------<br>');
+	for (var i = 0; i < studentArray.length; i++) {
+	    studentArray[i].calculateTot();
+	    studentArray[i].calculateAvg();
+	    document.write(studentArray[i].toString() + "<br>");
+	}
+	    document.write(studentObject.toString() + "<br>");
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

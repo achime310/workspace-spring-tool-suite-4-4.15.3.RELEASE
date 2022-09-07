@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function findById(){
+		var div1E=document.getElementById('div1');		
+		var div2E=document.getElementById('div2');		
+		var div3E=document.getElementById('div3');		
+		var div4E=document.getElementById('div4');
+		
+		div1E.innerHTML="<form>검색어<input type='search'/><input type='submit' value='검색'/></form>";
+		div2E.innerHTML="div 2 change";
+		div3E.style.border='3px solid red';
+		div4E.style.visibility='hidden';	//visible 또는 hidden
+				
+	}
+	function findByClass(){
+		var divNodeList= document.getElementsByClassName('menu');
+		for(var i=0; i<divNodeList.length;i++ ){
+			divNodeList[i].style.color='red';
+			divNodeList[i].style.background='pink';
+			divNodeList[i].style.border='1px dotted blue';
+		}
+	}
+	var count=0;
+	function findByTagName(){
+		var h1NodeList= document.getElementsByTagName("h1");
+		for(var i=0; i<h1NodeList.length;i++ ){
+			h1NodeList[i].innerHTML='h1변경['+count++ +']';
+		}
+		
+		var liNodeList= document.getElementsByTagName("li");
+		for(var i=0; i<liNodeList.length;i++ ){
+			liNodeList[i].style.fontSize =count+'pt';
+		}
+		
+		
+	}
+</script>
+</head>
+<body>
+	
+	<h1>HTML DOM객체 찾기</h1>
+	<h1>HTML DOM객체 찾기</h1>
+	<hr>
+	<ol>
+		<li>document.getElementById('id');[한개엘레멘트]</li>
+		<li>document.getElementsByClassName('className');[여러개엘레멘트]</li>
+		<li>document.getElementsByTagName('tagName');[여러개엘레멘트]</li>
+	</ol>
+	<div id="div1">id=div1</div>
+	<div id="div2">id=div2</div>
+	<div id="div3">id=div3</div>
+	<div id="div4" style="background-color:yellow">id=div4</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	<div class="menu">class=menu</div>
+	
+	<div id="resultDiv" style="border: 1px dashed blue;width: 70%">
+		id=resultDiv<br>
+	</div>
+	<div>
+		<input type="button" value="id로찾기" onclick="findById();"> 
+		<input type="button" value="class로찾기" onclick="findByClass();"> 
+		<input type="button" value="tagName으로찾기" onclick="findByTagName();">
+	</div>
+</body>
+</html>
