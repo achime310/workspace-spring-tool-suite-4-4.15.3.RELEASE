@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	var xhr=null;	//xhr객체를 전역에 두는 것은 문제. 다른애가 쓸수있으니까.로컬에 둬야지~ 지금은 어쩔수 없음
+	//서버에 시간을 요청하는 작업 - dom트리가 로딩되면, 1초마다 1번씩실행됨
+	function requestServerTime(){
+		xhr=new XMLHttpRequest();
+		  xhr.open('GET','04.server_clock.jsp');
+		  xhr.onload=responseServerTime;
+		  xhr.send(null);
+	}
+	//서버에 - call back작업
+	function responseServerTime(){
+		document.querySelector('#serverTimeSpan').innerHTML=xhr.responseText;
+	}
+	
+	window.onload=function(){
+		/*
+		1초마다 한번씩 requestServerTime함수실행
+		*/
+	   window.setInterval(requestServerTime,1000);
+	};
+	
+</script>
+</head>
+<body>
+<h1>clock[window.setTimeout,window.setInterval]</h1><hr/>
+<div>현재서버의시간은 <span id='serverTimeSpan'>12:45:45</span></div>
+</body>
+</html>
+
+

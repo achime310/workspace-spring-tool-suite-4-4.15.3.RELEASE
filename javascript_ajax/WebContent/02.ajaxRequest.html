@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/*
+ page기반요청
+    1. submit버튼클릭[form.submit()]
+    2. anchor tag 클릭
+    3. location.href=''
+    요청-->기존페이지 DOM Tree 제거(UI사라짐) -->응답(HTML) -->응답HTML로 DOM Tree 다시생성 --> UI렌더링
+ 
+ ajax 요청
+    1. XMLHttpRequest.send()메쏘드사용 
+    
+    요청-->기존페이지 DOM Tree 유지(UI안사라짐) -->응답데이타(text,html,json,xml) -->응답데이타 로 DOM Tree 일부변경 -->  일부UI 렌더링
+    
+ */
+    var xhr=null;	//XMLHttpRequest의 약자는 xhr
+	function ajaxRequestIdCheck(){
+		   	
+		   	var idStr=document.f.id.value;
+		   	if(idStr==null||idStr.trim()==''){
+			
+			return;
+		}
+		   	
+			/*
+			AJAX요청순서
+			*/
+			
+			/*
+			1. XMLHttpRequest객체생성 - 비동기객체
+			*/
+			xhr=new XMLHttpRequest();
+			/*
+			2. 요청속성설정 
+			*/
+			xhr.open('GET','02.ajaxRequest.jsp?id='+idStr);
+			/*
+			응답이 도착했을때 실행되는 콜백함수등록(이벤트프로퍼티(on~)에함수등록)
+			*/
+			xhr.onreadystatechange=responseCallBack;
+			/*
+			3.요청
+			*/
+			//응답이 동기로 온다면 return하라고?, return하지 않은면 비동기방식
+			xhr.send(null);	//send안에는 body데이타를 넣는다.
+			
+	}	
+	/*
+	응답이 도착했을때 실행되는 사용자정의 콜백함수
+	*/
+	function responseCallBack(){
+		/*
+		<< xhr.readyState >>
+		The state of the request. 
+		 0=unsent
+		 1=opened
+		 2=headers_received
+		 3=loading
+		 4=done
+		*/
+		console.log('responseCallBack');
+		
+		var responseStr= xhr.responseText;	//응답의 xxx가 들어잇음
+		console.log(responseStr);
+		document.querySelector('#msg').innerHTML=responseStr;
+		
+	}
+</script>
+</head>
+<body>
+<h1>ajax요청</h1><hr/>
+<form name="f" id="f" action="">
+	아이디:<input type="text" name="id" id="id"  onkeyup="ajaxRequestIdCheck();">
+	<span id="msg"></span>
+</form>
+</body>
+</html>
+
+
+
+
+
+

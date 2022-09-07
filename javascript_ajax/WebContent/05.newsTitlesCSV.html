@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	/*
+	1.tag selector
+	*/
+	h1{
+		color:cadetblue;
+		text-align: center;
+	}
+	ul{
+		list-style: none;
+		padding-left: 0px;
+	}
+	/*
+	2. class selector
+	*/
+	.titleBackClass{
+		background-color: lightgray;
+	}
+	h1.titleBackClass{
+		background-color: dimgray;
+	}
+	/*
+	3.id selector
+	*/
+	#content{
+		width: 900px;
+		/*
+		margin-top: 50px;
+		margin-right: auto;
+		margin-bottom: 50px;
+		margin-left: auto;
+		*/
+		/*margin: 50px auto 50px auto;*/
+		margin: 50px auto;
+	}
+	#newsDiv{
+		/*
+		border: 1px solid tomato;
+		*/
+		border-width: 1px;
+		border-style: solid;
+		border-color: tomato;
+		font-size: 13pt;
+		padding-left: 10%;
+	}
+	#newsDiv > ul > li:hover{
+		color: red;
+		cursor: pointer;
+	}
+	
+	
+</style>
+
+<script type="text/javascript" src="AjaxRequest.js"></script>
+<script type="text/javascript">
+	var ajaxRequest=null;
+	
+	function requestNews() {
+		ajaxRequest= new AjaxRequest('GET','05.newsTitlesCSV.jsp',responseNews,null);
+		/*
+		xhr=new XMLHttpRequest();
+	    xhr.open('GET','05.newsTitlesCSV.jsp');
+	    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	    xhr.onload=responseNews;
+	    xhr.send(null);
+	    */
+	}
+	function responseNews() {
+		/*
+		console.log(ajaxRequest.xhr.responseText);
+		console.log('responseNews');
+		*/
+		
+		var responseCSV=ajaxRequest.xhr.responseText;
+		//var responseCSV=xhr.responseText;
+		//console.log(responseCSV);
+		var newsArray=responseCSV.split('|');
+		var html="<ul>";
+		
+		for(var i=0; i<newsArray.length;i++  ){
+			var news = newsArray[i].split(',');
+				//console.log(news[0]+", "+news[1]+", "+news[2]);
+				document.getElementById("test").innerHTML+=html+news[0]+", "+news[1]+", "+news[2];
+		}
+		html+="</ul>";
+		
+		
+			/*
+			<< 서버로부터받은데이타[CSV] >>
+			9#	참으로 수고 많으셨습니다... , 연합뉴스 , 2021. 9. 29 오전 9:22:50 |
+				IS 60개국 테러 위협 영상 공개…한국도 포함 포토,SBS뉴스,2021. 9. 29 오전 9:22:50 |
+				통일부 남북 당국회담 실무접촉서 입장차,KBS뉴스,2021. 9. 29 오전 9:22:50 |
+				내년도 수도권 집값·전세값↑…2∼3년후 조정,TBC뉴스,2021. 9. 29 오전 9:22:50 |
+				국토부 폴크스바겐 경유차 연비 3단계로 조사,OMY뉴스,2021. 9. 29 오전 9:22:50 |
+				日롯데 신격호 소송 이해하는가 건강문제 제기,조선뉴스,2021. 9. 29 오전 9:22:50 |
+				국가유공자 부인 위장 재혼시 유족자격 있다,YTN뉴스,2021. 9. 29 오전 9:22:50 |
+				청소년에 한달 100건 성매매 강요 조폭 징역 6년,CBS뉴스,2021. 9. 29 오전 9:22:50 |
+				한국인들 실직·이직 공포에 시달린다,ITWILL뉴스,2021. 9. 29 오전 9:22:50
+				
+			<< 보여줘야할데이타[HTML] >>
+			<ul>
+				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
+			</ul>
+			 */
+	};
+	
+	window.onload=function(){
+		setInterval(requestNews,3000);
+	};
+	
+</script>
+</head>
+<body>
+<!--해상도가 달라져도 영향을 받지 않도록 content에 css를 조절-->
+	<div id="content">
+		<h1 class="titleBackClass" >실시간늬우스[CSV]</h1>
+		<hr>
+		<div id="newsDiv" class="titleBackClass">
+			<ul>
+				<li>뉴스1[조상일보]2019-10-07</li>		
+				<li>뉴스2[동앙일보]2019-10-07</li>		
+				<li>뉴스3[중상일보]2019-10-07</li>		
+			</ul>
+		</div>
+		<div id="test" >
+		</div>
+	</div>
+</body>
+</html>

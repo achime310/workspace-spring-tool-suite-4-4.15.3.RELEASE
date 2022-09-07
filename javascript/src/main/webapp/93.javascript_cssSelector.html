@@ -21,6 +21,9 @@ div,span{
 div.myClass{
 	background-color:pink;
 }
+span.myClass{
+	background-color:green;
+}
 </style>
 <script type="text/javascript">
 </script>
@@ -36,9 +39,27 @@ div.myClass{
 	<div class="myClass">DIV class="myClass"</div>
 	<script type="text/javascript">
 		/*********(,or)  #content or div**********/
+		var nodeList1=document.querySelectorAll('#contnet,div');
+		for (var i = 0; i < nodeList1.length; i++) {
+			nodeList1[i].style.border='1px solid blue';
+		}
+		
 		/*********class가 myClass인 모든 엘레멘트*****/
+		var nodeList2=document.querySelectorAll(".myClass");
+		for (var i = 0; i < nodeList2.length; i++) {
+			nodeList2[i].style.color='green';
+		}
+		
 		/*********div 엘레멘트중에서 class가 myClass인 모든 엘레멘트*****/
+		//변수를 받으면, 무조건 window에 올라가므로, 대부분의 경우 변수를 선언하지 않고 접근한다~
+		var nodeList3=document.querySelectorAll("div.myClass");
+		//var nodeList3=document.querySelectorAll("div .myClass"); -> div의 자손중에 myClass를 찾는다
+		nodeList3[0].style.backgroundColor='purple';
+		
 		/*********id가 content인 엘레멘트*****/
+		document.querySelector('#content').style.backgroundColor='aliceblue';
+		
+		
 	</script>
 </body>
 </html>

@@ -5,7 +5,19 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 /********************************************/
-
+function Member(id, name){
+	this.id=id;
+	this.name=name;
+}
+//method는 prototype안에 만드는게 좋음. 여기에 넣으면 instance method이다
+Member.prototype.instance_method1=function(){
+	//method내부의 this는 context.
+	document.write("Member객체.instance_method1()"+this.id+", "+this.name+"<br>");
+};
+//static이므로 this를 쓸 수 없음
+Member.static_method1=function(){
+	document.write("Member함수.static_method1() <br>");
+}
 
 /********************************************/
 </script>
@@ -15,9 +27,18 @@
 <h1>javascript static function</h1><hr/>
 <script type="text/javascript">
     /****************instance method호출************/
-	
+	var m1=new Member(1,'도레미');	//Object가 생성된 상태
+	var m2=new Member(2,'파솔라');
+		m1.instance_method1();
+    m2.instance_method1();
+    
+    //안됨
+    //m2.prototype.alert=function(){window.alert();};
+   // m2.alert();
 	/****************static method호출************/
-
+	var no = Math.round(34.12345);
+	document.write("Math.round(34.12345)-->"+no);
+	Member.static_method1();
 	
 </script>
 </body>
