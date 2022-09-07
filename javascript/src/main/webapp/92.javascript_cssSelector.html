@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CSS 선택자를 이용한 HTML DOM Element 검색</title>
 <style type="text/css">
+/*
 	#title{
 		color:maroon;
 	}
@@ -13,7 +14,7 @@
 	h2{
 		color: gold;
 	}
-
+*/
 </style>
 <script type="text/javascript">
 </script>
@@ -25,20 +26,27 @@
 	<p class="contents">p tag -->class=contents</p>
 	
 	<script type="text/javascript">
+		/*body - parsing 중이므로, window.onload를 하지 않는다~~
+			-> script가 head에 있으면 loading시간이 길어지므로, 일단 보여주고, body최하단에 써주는 경우가 많다.
+				-> 왜? dom트리 로딩 완료되고 script - parsing하려구~~ head에 있으면 렌더링전에 실행되서 오래걸리니까 
+		*/
 		/*
 		 1.id selector(#)
 		*/
-		
+		var titleDivElement = document.querySelector('#title');
+			titleDivElement.innerHTML=" 안녕 querySelector!!";
 		/*
 		2.class selector(.)
 		*/
-	
-		
+		var contentsPElement=document.querySelector(".contents");
+		contentsPElement.innerHTML+=" (변경)";
 		/*
 		3. tag selector
 		*/
-		
-		
+		var h2ElementArray=document.querySelectorAll('h2');
+		for(var i=0; i<h2ElementArray.length;i++){
+		h2ElementArray[i].style.backgroundColor='mistyrose';
+		}
 	</script>
 </body>
 </html>
