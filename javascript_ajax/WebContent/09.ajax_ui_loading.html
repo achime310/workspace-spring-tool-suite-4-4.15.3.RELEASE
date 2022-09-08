@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="httpRequest.js"></script>
-<script type="text/javascript">
-	
-	
-	function hideForm(){
-	
-		
-	}
-	
-	
-	function showForm(){
-		
-		
-		
-	}
-	function displayForm(){
-		
-	}
-</script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="icon" href="favicon.ico">
+	<!--<script type="text/javascript" src="httpRequest.js"></script>-->
+	<script type="text/javascript">
+
+
+		function hideForm() {
+			//document.querySelector("#formContent").innerHTML='';
+			var formDivElement = document.querySelector("#content");
+			formDivElement.style.display = 'none';	//안보일뿐더러, dom트리에 존재하나 화면을 차지하지 않음
+			//visibility는 화면은 차지하나 안보이는 것 뿐임
+
+		}
+
+		var xhr = null;
+		function showForm() {
+			//showForm 할때 상태에따라 조건을 줘보자
+			var formDivElement = document.querySelector("#content");
+			if (formDivElement == null) {
+				xhr = new XMLHttpRequest();
+				xhr.open('GET', 'guest_write_form.html');
+				xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhr.onload = displayForm;
+				xhr.send(null);
+			} else {
+				formDivElement.style.display = 'block';
+			}
+
+
+
+		}
+		function displayForm() {
+			document.querySelector("#formContent").innerHTML = xhr.responseText;
+		}
+	</script>
 </head>
+
 <body>
-<input type="button" value="회원가입폼" onclick="showForm();">
-<input type="button" value="회원가입취소" onclick="hideForm();">
-<div id='formContent'>
-	
-</div>
+	<input type="button" value="회원가입폼" onclick="showForm();">
+	<input type="button" value="회원가입취소" onclick="hideForm();">
+	<div id='formContent'>
+
+	</div>
 </body>
+
 </html>

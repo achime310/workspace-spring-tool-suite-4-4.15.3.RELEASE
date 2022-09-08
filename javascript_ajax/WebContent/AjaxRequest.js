@@ -20,28 +20,25 @@ function AjaxRequest(method, url,callbackFunction,params) {
 	*/
 
 	//this.xhr.onreadystatechange=function(){
-	/*
+	var xhr = this.xhr;
 	this.xhr.onload=function(){
-		callbackFunction(this);
+		callbackFunction(xhr);// function의 실행주체가 xhr이다. context가 this
 	}
-	*/
+	
 	/*
 	//this.xhr.onload=callbackFunction; 에서 인자받으려고 아래와 같이 기술
 	this.xhr.onreadystatechange=function(){
 		callbackFunction(this);
 	}
 	*/
-	this.xhr.onload=callbackFunction;
+	
+	
+	//this.xhr.onload=callbackFunction;
 	/*
 	this.xhr.onload=function () {
-		
-		document.querySelector('#newsDiv').innerHTML=this.xhr.responseText;
+		document.querySelector('#newsDiv').innerHTML=xhr.responseText;
 	};
 	*/
-	
-	
-	
-	
 	
 	this.xhr.open(this.method,this.url);
 	this.xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');

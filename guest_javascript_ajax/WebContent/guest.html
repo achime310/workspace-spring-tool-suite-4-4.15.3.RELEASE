@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>방명록 관리</title>
+	<link rel=stylesheet href="css/styles.css" type="text/css">
+	<link rel=stylesheet href="css/guest.css" type="text/css">
+	<link rel="icon" href="image/favicon-32x32.png">
+	<style type="text/css" media="screen">
+	</style>
+	<!--js파일은 server의 자원으로 1번 내려받고 계속사용한다.-->
+	<script type="text/javascript" src="js/guest_html_content.js"></script>
+	<script type="text/javascript" src="js/GuestService.js"></script>
+	<script type="text/javascript">
+	
+		var name='서영';
+		var age=32;
+		var html=`저의 이름은 ${name}이고 나이는 ${age} 살 입니다.`;
+		console.log(html);
+
+	</script>
+	<script type="text/javascript">
+	/**************************************************/
+	
+	
+
+	/**************************************************/
+		//(step1)'과 /n을 escaping하기 위해서, es6부터 지원하는 `(backtick)을 사용한다.
+		/*
+		var main_content = `<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+			codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
+			width="540px" height="350px">
+			<param name="movie" value="image/FI_main.swf">
+			<param name="play" value="true">
+			<param name="loop" value="true">
+			<param name="quality" value="high">
+			<embed src="image/enter.png" scale="exactfit" play="true" loop="true"
+				quality="high" style="margin: 10px;"
+				pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+				width="540px" height="350px"></embed>
+			</object>`;
+			*/
+		//(step2)js파일에 function으로 분리하자 -> 왜냐, 인자로 데이터(el사용)를 받기위해
+		
+
+		window.addEventListener('load', function () {
+			
+			var guestService = new GuestService();
+			
+			/*load ->
+				DOM Tree가 생성된 후 (node에 ...?)이벤트 등록
+			*/
+			/*############### event#################*/
+			/******guest_home******************/
+			document.querySelector('#menu_guest_home').addEventListener('click', function (e) {
+				//event의 target이 anchor.. event의 접근하면, guest_view에서는 guest_no에 접근해야하므로 target이 반드시필요
+				//console.log('click!!');
+
+				//1) server에 놓고 필요할때 요청해서 조각파일을 ajax요청으로 가져오던지
+				//2) html내려올때, var main_content='<div>';를 상단에 선언해놓고.... js파일써서..?
+				
+				//(step1)				
+				//document.querySelector('#content').innerHTML = main_content;
+
+				//(step2)				
+				document.querySelector('#content').innerHTML = guest_main_content();
+
+				//anchor에 걸린 url로 이동하지 못하게 해야한다. event처리할때 반드시 기술해야함.
+				e.preventDefault();
+
+			});
+			/************guest_write_form****************/
+			document.querySelector('#menu_guest_write_form').addEventListener('click', function (e) {
+				document.querySelector('#content').innerHTML = guest_write_form_content();
+				e.preventDefault();
+			});
+			/************guest_list****************/
+			document.querySelector('#menu_guest_list').addEventListener('click', function (e) {
+				/*
+				guest/guest_list_json.jsp로 ajax요청
+				*/
+				var method='GET';
+				var url='guest/guest_list_json.jsp';
+				var param=null;
+				guestService.sendRequest(method,
+											 url,
+											 function(jsonResult){
+												console.log(jsonResult);
+												var guestArray = jsonResult.data;
+												var html='';
+												for(var i=0; i< guestArray.length;i++){
+													var guest=guestArray[i];
+													html+=`<tr class="guest_item">
+																<td width="50" align="center" bgcolor="ffffff" height="20">${guest.guest_no}</td>
+																<td width="300" bgcolor="ffffff" style="padding-left: 10">
+																	<a href="#" class="user" class="guest_item_a" guest_no="${guest.guest_no}">
+																	${guest.guest_title}
+																	</a>
+																</td>
+																<td width="120" align="center" bgcolor="ffffff">${guest.guest_name}</td>
+																<td width="120" align="center" bgcolor="ffffff">${guest.guest_date}</td>
+															</tr>`;
+												}
+												
+												document.querySelector('#content').innerHTML = guest_list_content(html);
+											},
+											param);
+				e.preventDefault();
+			});
+			/******guest_detail****************/
+
+
+
+
+			//const guestService = new GuestService();
+			/*############### dynamic event#################*/
+			document.addEventListener('click', function (e) {
+				/******guest_write_action***********/
+				/******guest_modify_form***********/
+				/******guest_modify_action*********/
+				/******guest_remove_action*********/
+			});
+
+
+		});
+
+
+
+	</script>
+</head>
+
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+
+			<h1>
+				<a href="">방명록 JAVASCRIPT</a>
+			</h1>
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+
+			<p>
+				<strong>메 뉴</strong>
+			</p>
+			<ul class="guest_menus">
+				<li><a id="menu_guest_home" href="#">방명록홈</a></li>
+				<li><a id="menu_guest_list" href="#">방명록리스트</a></li>
+				<li><a id="menu_guest_write_form" href="#">방명록쓰기폼</a></li>
+
+			</ul>
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+			<!-- include_content.jsp start-->
+
+			<div id="content">
+				<!--
+				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
+					width="540px" height="350px">
+					<param name="movie" value="image/FI_main.swf">
+					<param name="play" value="true">
+					<param name="loop" value="true">
+					<param name="quality" value="high">
+					<embed src="image/enter.png" scale="exactfit" play="true"
+						loop="true" quality="high" style="margin: 10px;"
+						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+						width="540px" height="350px"></embed>
+				</object>
+				-->
+			</div>
+			<!-- include_content.jsp end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+
+			<p align="center">Copyright (&copy;) By Seo-young Choi.[최서영] All
+				rights reserved.</p>
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+</body>
+
+</html>

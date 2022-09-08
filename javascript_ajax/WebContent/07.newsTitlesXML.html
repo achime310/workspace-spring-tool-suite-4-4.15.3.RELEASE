@@ -1,73 +1,119 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-/*
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		/*
 	1.tag selector
 	*/
-h1 {
-	color: blue;
-	text-align: center;
-}
+		h1 {
+			color: blue;
+			text-align: center;
+		}
 
-ul {
-	list-style: none;
-	padding-left: 0px;
-}
-/*
+		ul {
+			list-style: none;
+			padding-left: 0px;
+		}
+
+		/*
 	2. class selector
 	*/
-.titleBackClass {
-	background-color: yellow;
-}
-/*
+		.titleBackClass {
+			background-color: yellow;
+		}
+
+		/*
 	3.id selector
 	*/
-	#content{
-		border: 1px solid black; 
-		width: 80%;
-		margin-top:50px; 
-		margin-right:auto; 
-		margin-left:auto; 
-		margin-bottom:50px; 
-		padding: 20px;
-	}
+		#content {
+			border: 1px solid black;
+			width: 80%;
+			margin-top: 50px;
+			margin-right: auto;
+			margin-left: auto;
+			margin-bottom: 50px;
+			padding: 20px;
+		}
 
-#newsDiv {
-	padding-left: 10%;
-	border: 1px solid blue;
-	font-size: 13pt;
-	background: orange;
-}
-</style>
+		#newsDiv {
+			padding-left: 10%;
+			border: 1px solid blue;
+			font-size: 13pt;
+			background: orange;
+		}
+	</style>
 
-<script type="text/javascript">
-	function requestNews() {
-		
-	}
-	function responseNews() {
+	<script type="text/javascript">
+		function requestNews() {
+			xhr = new XMLHttpRequest();
+			xhr.open('GET', '07.newsTitlesXML.jsp');
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.onload = responseNews;
+			xhr.send(null);
+		}
+		function responseNews() {
+
+			//console.log(xhr.responseText);	//responseText를 받으면 dom트리로 parsing해서 document반환
+			
+			var xmlDocument = xhr.responseXML;
+			
+			var newsElementNodeList = xmlDocument.getElementsByTagName('news');	//html에서는 tag로 검색하지 않지만, xml은 구조적인 데이터므로 tag로 검색한다.
+			
+			var html="<ul>";
+			
+			for(var i=0; i<newsElementNodeList.length;i++){
+				var newsElement= newsElementNodeList[i];
+				/*
+					<news>
+						<title>참으로 수고 많으셨습니다</title>
+						<company>연합뉴스</company>
+						<date>2020. 3. 16 오전 11:24:31</date>
+					</news>
+					//news의 자식들.. 공백,enter-key도 자식이다.. first-child-element는 공백이다.
+					//공백을 제거하고 자식을 세줄수도 있지만, 불안정
+					//tag이름으로 접근(getElementsByTagName만 사용)한다. xml은 id,class(css display용)
+				*/
+				//console.log(newsElement);
+				//console.log(newsElement.childNodes);	//white-space를 제고하고 출력되네?-> but 불안정
+				var titleElementList= newsElement.getElementsByTagName("title");
+				var titleElement= titleElementList[0];
+				var titleTextNode=titleElement.firstChild;	//또는 lastChild이지만 굳이?
+				var titleStr=titleTextNode.nodeValue;	//javaScript는 캡슐화 없고, .(dot)으로 바로 접근
+				
+				//console.log("titleText:"+titleTextNode);	//(출력)titleText:[object Text]
+				//console.log(titleStr);
+				
+				var companyStr=newsElement.getElementsByTagName('company')[0].firstChild.nodeValue;
+				var dateStr=newsElement.getElementsByTagName('date')[0].firstChild.nodeValue;
+				
+				html+="<li>"+titleStr+"["+companyStr+"-"+dateStr+"]</li>";
+				
+			}
+			html+="</ul>";
+			document.querySelector("#newsDiv").innerHTML=html;
 			
 			/*
 			<< 서버로부터받은데이타[XML] >>
 			<?xml version="1.0" encoding="UTF-8" ?>
 			<result>
-			    <count>9</count>
-			    <data>
-			        <newsList>
-			            <news>
-			                <title>참으로 수고 많으셨습니다</title>
-			                <company>연합뉴스</company>
-			                <date>2020. 3. 16 오전 11:24:31</date>
-			            </news>
-			            <news>...</news>
-			            ...
-	        	  </newsList>
-			    </data>
+				<code>1</code>
+				<data>
+					<newsList>
+						<news>
+							<title>참으로 수고 많으셨습니다</title>
+							<company>연합뉴스</company>
+							<date>2020. 3. 16 오전 11:24:31</date>
+						</news>
+						<news>...</news>
+						...
+				  </newsList>
+				</data>
 			</result>
 			*/
-			
+
 			/*	
 			<< 보여줘야할데이타[HTML] >>
 			<ul>
@@ -82,15 +128,16 @@ ul {
 				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
 			</ul>
 			 */
-			 if(xhr.readyState==4){
-				
-			 }
-	}//end function
-	window.onload=function(){
-		setInterval(requestNews,3000);
-	}
-</script>
+			if (xhr.readyState == 4) {
+
+			}
+		}//end function
+		window.onload = function () {
+			setInterval(requestNews, 3000);
+		}
+	</script>
 </head>
+
 <body>
 	<div id="content">
 		<h1 class="titleBackClass">실시간늬우스[XML]</h1>
@@ -104,4 +151,5 @@ ul {
 		</div>
 	</div>
 </body>
+
 </html>

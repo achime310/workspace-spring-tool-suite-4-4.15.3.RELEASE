@@ -1,109 +1,139 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	/*
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		/*
 	1.tag selector
 	*/
-	h1{
-		color: blue;
-		text-align: center;
-	}
-	ul{
-		list-style: none;
-		padding-left: 0px;
-	}
-	/*
+		h1 {
+			color: blue;
+			text-align: center;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0px;
+		}
+
+		/*
 	2. class selector
 	*/
-	.titleBackClass{
-		background-color: yellow;
-	}
-	/*
+		.titleBackClass {
+			background-color: yellow;
+		}
+
+		/*
 	3.id selector
 	*/
-	#content{
-		border: 1px solid black; 
-		width: 80%;
-		margin-top:50px; 
-		margin-right:auto; 
-		margin-left:auto; 
-		margin-bottom:50px; 
-		padding: 20px;
-	}
-	#newsDiv{
-		padding-left: 10%;
-		border: 1px solid blue;
-		font-size: 13pt;
-		background: orange;
-	}
-	
-</style>
-
-<script type="text/javascript">
-	
-	function requestNews() {
-			
-	}
-	
-	function responseNews() {
-			
-		/*
-		<< 서버로부터받은데이타[JSON] >>
-		{
-			"count":9,
-			"data": [
-						{
-							"newsTitle":"참으로 수고 많으셨습니다…",
-							"company":"연합뉴스",
-							"date":"2020. 10. 16 오후 12:44:38"
-						},
-						{
-							"newsTitle":"IS 60개국 테러 위협 영상 공개…한국도 포함 포토",
-							"company":"SBS뉴스",
-							"date":"2020. 10. 16 오후 12:44:38"
-						}
-						...
-					]
+		#content {
+			border: 1px solid black;
+			width: 80%;
+			margin-top: 50px;
+			margin-right: auto;
+			margin-left: auto;
+			margin-bottom: 50px;
+			padding: 20px;
 		}
-		*/
-		
-		/*	
-		<< 보여줘야할데이타[HTML] >>
-		<ul>
-			<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
-			<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
-		</ul>
-		 */
-			
-		if(xhr.readyState==4){
-			
-		} 
-	}
-	window.onload=function(){
-		setInterval(requestNews,3000);
-	};
-</script>
+
+		#newsDiv {
+			padding-left: 10%;
+			border: 1px solid blue;
+			font-size: 13pt;
+			background: orange;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		function requestNews() {
+			xhr = new XMLHttpRequest();
+			xhr.open('GET', '08.newsTitlesJSON.jsp');
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.onload = responseNews;
+			xhr.send(null);
+		}
+
+		var html = "<ul>";
+		function responseNews() {
+			//console.log(xhr.responseText);
+			var jsonObject =
+				JSON.parse(xhr.responseText);	//responseText를 JSON으로 pasing하면 객체로 만들어준다
+
+			var newsJsonArray = jsonObject.data;
+
+			for (var i = 0; i < newsJsonArray.length; i++) {
+				var newsJsonObject = newsJsonArray[i];
+				var titleStr =
+					newsJsonObject.newsTitle;
+				var companyStr =
+					newsJsonObject.company;
+				var dateStr =
+					newsJsonObject.date;
+					html +="<li>"+titleStr+"["+companyStr+", "+dateStr+"]</li>"
+			}
+		html += "</ul>";
+		document.querySelector("#newsDiv").innerHTML=html;
+
+			/*
+			<< 서버로부터받은데이타[JSON] >>
+			{	//Object
+				"code":1,
+				"data": [	//Array
+							{
+								"newsTitle":"참으로 수고 많으셨습니다…",
+								"company":"연합뉴스",
+								"date":"2020. 10. 16 오후 12:44:38"
+							},
+							{
+								"newsTitle":"IS 60개국 테러 위협 영상 공개…한국도 포함 포토",
+								"company":"SBS뉴스",
+								"date":"2020. 10. 16 오후 12:44:38"
+							}
+							...
+						]
+			}
+			*/
+
+			/*	
+			<< 보여줘야할데이타[HTML] >>
+			<ul>
+				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>IS 60개국 테러 위협 영상 공개…한국도 포함 포토[SBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>통일부 남북 당국회담 실무접촉서 입장차[KBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>내년도 수도권 집값·전세값↑…2∼3년후 조정[TBC뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국토부 폴크스바겐 경유차 연비 3단계로 조사[OMY뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>日롯데 신격호 소송 이해하는가 건강문제 제기[조선뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>국가유공자 부인 위장 재혼시 유족자격 있다[YTN뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>청소년에 한달 100건 성매매 강요 조폭 징역 6년[CBS뉴스-2021. 4. 14 오후 12:33:32]</li>
+				<li>한국인들 실직·이직 공포에 시달린다[ITWILL뉴스-2021. 4. 14 오후 12:33:32]</li>
+			</ul>
+			 */
+
+			if (xhr.readyState == 4) {
+
+			}
+		}
+		window.onload = function () {
+			setInterval(requestNews, 3000);
+		};
+	</script>
 </head>
+
 <body>
-<div id="content">
-	<h1 class="titleBackClass" >실시간늬우스[JSON]</h1><hr>
-	<div id="newsDiv">
-		<ul>
-			<li>뉴스1[조상일보]2019-10-07</li>		
-			<li>뉴스2[동앙일보]2019-10-07</li>		
-			<li>뉴스3[중상일보]2019-10-07</li>		
-		</ul>
+	<div id="content">
+		<h1 class="titleBackClass">실시간늬우스[JSON]</h1>
+		<hr>
+		<div id="newsDiv">
+			<ul>
+				<li>뉴스1[조상일보]2019-10-07</li>
+				<li>뉴스2[동앙일보]2019-10-07</li>
+				<li>뉴스3[중상일보]2019-10-07</li>
+			</ul>
+		</div>
 	</div>
-</div>
 </body>
+
 </html>

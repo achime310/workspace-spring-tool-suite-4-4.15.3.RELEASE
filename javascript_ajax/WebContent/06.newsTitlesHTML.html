@@ -50,18 +50,18 @@ h1.titleBackClass{
 <script type="text/javascript" src="AjaxRequest.js"></script>
 <script type="text/javascript">
 
-	var ajaxRequest=null;
+	//var ajaxRequest=null;
 	//var xhr=null;
 	function requestNews() {
-		ajaxRequest= new AjaxRequest('GET','06.newsTitlesHTML.jsp',responseNews,null);
+		//ajaxRequest= new AjaxRequest('GET','06.newsTitlesHTML.jsp',responseNews,null);
 		new AjaxRequest('GET','06.newsTitlesHTML.jsp',responseNews,null);
 		//new AjaxRequest('GET','06.newsTitlesHTML.jsp',null);
 	}
 	
-	function responseNews() {
+	function responseNews(xhr) {
 		
 		//document.querySelector('#newsDiv').innerHTML=ajaxRequest.xhr.responseText;
-		document.querySelector('#newsDiv').innerHTML=this.responseText;
+		document.querySelector('#newsDiv').innerHTML=xhr.responseText;
 			/*
 			<ul>
 				<li>참으로 수고 많으셨습니다...[연합뉴스-2021. 4. 14 오후 12:33:32]</li>
