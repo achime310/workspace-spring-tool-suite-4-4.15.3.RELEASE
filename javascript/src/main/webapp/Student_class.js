@@ -18,7 +18,7 @@ class Student {
 	}
 	
 	get id(){
-		return this.id;
+		return this._id;
 	}
 	calculateTot() {
 		this.tot = this.kor + this.eng + this.math;

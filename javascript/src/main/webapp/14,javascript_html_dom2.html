@@ -47,6 +47,7 @@
 			//<div id='parent'>의 자식으로 추가해야함
 			var parentDivE = document.getElementById('parent');
 			parentDivE.appendChild(newDivE);	//마지막으로 들어감....(중요)
+			//parentDivE.innerHTML=newDivE.innerHTML;
 
 
 		}
@@ -65,6 +66,7 @@
 			var bodyE = document.body;
 		
 			bodyE.style.background="url('penguin"+image_no+".gif')";
+			//bodyE.style.backgroundRepeat='repeat';
 			bodyE.style.backgroundRepeatX='no-repeat';
 			bodyE.style.backgroundRepeatY='no-repeat';
 			image_no++;

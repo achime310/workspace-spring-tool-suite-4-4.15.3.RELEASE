@@ -45,6 +45,7 @@
 			button2E.onclick = button2EventHandler;
 			/*********CASE2******/
 			//onclick이 실행될때마다, 익명의 function이 실행된다.
+			
 			button2E.onclick = function (e) {
 				var msg = "button2EventHandler익명함수--> 이벤트타겟: " + e.target + ", 이벤트타입: " + e.type + ", 이벤트value: " + e.value;
 				displayMessage(msg);
@@ -109,6 +110,9 @@
 		/*
 		window.onload = function () {
 			event_regist();
+			
+			
+			
 		};
 		*/
 		//위와 동일한 코드이다		
