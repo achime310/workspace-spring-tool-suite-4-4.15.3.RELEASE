@@ -33,18 +33,21 @@
 	
 	console.log('--------func.call(obj1)----------');
 	obj1.func1.call(obj1,'a','b');
+	//obj1.no=99;
+	//obj1.func1('cc','dd');
 	obj2.func2.call(obj1);
 	obj3.func3.call(obj1);
 	
 	console.log('--------func.apply(obj1)----------');
-	obj1.func1.apply(obj1,'a','b');
+	obj1.func1.apply(obj1,['a','b']);
 	obj2.func2.apply(obj1);
 	obj3.func3.apply(obj1);
 	
-
-	f1();
-	f2();
-	f3();
+	func1();
+	
+	//f1();
+	//f2();
+	//f3();
 
 </script>
 </body>

@@ -8,6 +8,7 @@
 function Member(id, name){
 	this.id=id;
 	this.name=name;
+	//age=3;
 }
 //method는 prototype안에 만드는게 좋음. 여기에 넣으면 instance method이다
 Member.prototype.instance_method1=function(){
@@ -16,7 +17,7 @@ Member.prototype.instance_method1=function(){
 };
 //static이므로 this를 쓸 수 없음
 Member.static_method1=function(){
-	document.write("Member함수.static_method1() <br>");
+	document.write("Member함수.static_method1() "+age+"test<br>");
 }
 
 /********************************************/
@@ -30,9 +31,15 @@ Member.static_method1=function(){
 	var m1=new Member(1,'도레미');	//Object가 생성된 상태
 	var m2=new Member(2,'파솔라');
 		m1.instance_method1();
-    m2.instance_method1();
+    	m2.instance_method1();
+    	
+    	//(출력)undefined
+    	//console.log(m1.age);
+    	
+    	//실행안됨 -> 동적으로 메소드를 넣어주어지만, 생성된 객체에서는 사용불가..static이나 다름없다..
+    	//m2.static_method1();
     
-    //안됨
+    //실행안됨
     //m2.prototype.alert=function(){window.alert();};
    // m2.alert();
 	/****************static method호출************/

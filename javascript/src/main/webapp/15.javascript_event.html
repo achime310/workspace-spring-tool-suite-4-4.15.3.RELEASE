@@ -69,10 +69,10 @@
 			});
 
 			var movie_rankOreredListElement = document.getElementById('movie_rank');
+			
 			var movie_rankListElementArray = movie_rankOreredListElement.getElementsByTagName('li');
-
 			var movie_rankListElementArray = movie_rankOreredListElement.children;
-			var movie_rankListElementArray = movie_rankOreredListElement.childNodes;
+			var movie_rankListElementArray = movie_rankOreredListElement.childNodes;	//iterable collection. 배열 아님
 
 			for (var i = 0; i < movie_rankListElementArray.length; i++) {
 				movie_rankListElementArray[i].addEventListener('click', function (e) {
