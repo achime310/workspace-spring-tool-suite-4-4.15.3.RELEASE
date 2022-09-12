@@ -6,17 +6,39 @@
 <style type="text/css">
 	
 </style>
-
+<!-- <script type="text/javascript" src="AjaxRequest.js"></script> -->
 <script type="text/javascript">
-	
+	var xhr = null;
+	function ajaxRequestPost(){
+		
+		var keywordStr = document.f.search.keyword.value;
+		console.log(keywordStr);
+		if (keywordStr == null || keywordStr.trim() == '') {
+			return;
+		}
+		
+		xhr=new XMLHttpRequest();
+		xhr.open('GET','suggest.jsp?keyword='+keywordStr);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhr.onload=callBackFunction;
+		xhr.send(null);
+	}
+	function callBackFunction(){
+		var resonseStr=xhr.responseText;
+		document.querySelector('#suggestList').innerHTML = responseStr;
+	}
+	window.addEventListener('load',function(){
+		event_regist();
+	});
+
 </script>
 </head>
 <body>
 <h1>제시어</h1>
 <hr/>
-<form action="server_search.jsp" name="search">
+<form action="suggest.jsp" name="search" id="search">
 	<img src="http://sstatic.naver.net/search/2015/h_logo.png" height="12px" align="bottom">
-	<input 	type="text" name="keyword" > &nbsp;
+	<input 	type="text" name="keyword" id="keyword"> &nbsp;
 	<input type="submit" value="검색">
 	<div id="suggest" class="suggest">
 		<div id="suggestList">

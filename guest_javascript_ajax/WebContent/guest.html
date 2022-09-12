@@ -2,25 +2,26 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>방명록 관리</title>
-	<link rel=stylesheet href="css/styles.css" type="text/css">
-	<link rel=stylesheet href="css/guest.css" type="text/css">
-	<link rel="icon" href="image/favicon-32x32.png">
-	<style type="text/css" media="screen">
-	</style>
-	<!--js파일은 server의 자원으로 1번 내려받고 계속사용한다.-->
-	<script type="text/javascript" src="js/guest_html_content.js"></script>
-	<script type="text/javascript" src="js/GuestService.js"></script>
-	<script type="text/javascript">
+<meta charset="UTF-8">
+<title>방명록 관리</title>
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/guest.css" type="text/css">
+<link rel="icon" href="image/favicon-32x32.png">
+<style type="text/css" media="screen">
+</style>
+<!--js파일은 server의 자원으로 1번 내려받고 계속사용한다.-->
+<script type="text/javascript" src="js/guest_html_content.js"></script>
+<script type="text/javascript" src="js/GuestService.js"></script>
+<script type="text/javascript">
 	
 		var name='서영';
-		var age=32;
+		var age=31;
 		var html=`저의 이름은 ${name}이고 나이는 ${age} 살 입니다.`;
 		console.log(html);
 
-	</script>
-	<script type="text/javascript">
+</script>
+
+<script type="text/javascript">
 	/**************************************************/
 	
 	
@@ -94,7 +95,7 @@
 													html+=`<tr class="guest_item">
 																<td width="50" align="center" bgcolor="ffffff" height="20">${guest.guest_no}</td>
 																<td width="300" bgcolor="ffffff" style="padding-left: 10">
-																	<a href="#" class="user" class="guest_item_a" guest_no="${guest.guest_no}">
+																	<a href="#" class="user" id="guest_item_${guest.guest_no}" guest_no="${guest.guest_no}">
 																	${guest.guest_title}
 																	</a>
 																</td>
@@ -103,12 +104,66 @@
 															</tr>`;
 												}
 												
+				var guestItem = document.querySelector('#guest_item_121');
+				console.log(guestItem);
 												document.querySelector('#content').innerHTML = guest_list_content(html);
 											},
 											param);
 				e.preventDefault();
+				
 			});
 			/******guest_detail****************/
+			//document.getElementById('guest_item_121').addEventListener('click', function (e) {
+				
+			var guestItem = document.querySelector('#guest_item_121');
+			console.log(guestItem);
+			guestItem.addEventListener('click', function (e) {
+				/*
+				guest/guest_detail_json.jsp로 ajax요청
+				*/
+				var method='GET';
+				var url='guest/guest_detail_json.jsp';
+				var param={ "guest_no":    };
+				guestService.sendRequest(method,
+											 url,
+											 function(jsonResult){
+												console.log(jsonResult);
+												var guestDataArray = jsonResult.data;
+												var guest=guestDataArray[0];
+												var html='';
+												/*
+												html+=`<input type="hidden" name="guest_no" value="${guest.guest_no}">
+													<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
+													<tbody><tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="22">번호</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_no}</td>
+													</tr>
+													<tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_name}</td>
+													</tr>
+													<tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="22">날짜</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_date}</td>
+													</tr><tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_homepage}</td>
+													</tr>
+													<tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="22">제목</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_title}</td>
+													</tr>
+													<tr>
+														<td width="100" align="center" bgcolor="E6ECDE" height="110">내용</td>
+														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_content}</td>
+													</tr>
+												</tbody></table>`;
+												*/
+												document.querySelector('#content').innerHTML = guest_view_content(html);
+											},
+											param);
+				e.preventDefault();
+			});
 
 
 
@@ -125,12 +180,12 @@
 
 		});
 
+</script> 
 
-
-	</script>
 </head>
 
-<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
+	marginwidth=0 marginheight=0>
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
@@ -193,6 +248,7 @@
 		</div>
 	</div>
 	<!--container end-->
+	
 </body>
 
 </html>

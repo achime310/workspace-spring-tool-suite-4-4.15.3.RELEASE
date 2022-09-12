@@ -62,9 +62,33 @@ function guest_modify_form_content(){
 	return `
 		`;
 }
-function guest_view_content(guest) {
-	return `
-			`;
+function guest_view_content(html) {
+	return `<table border="0" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						<td>
+							<!--contents--> <br>
+							<table style="padding-left: 10px" border="0" cellpadding="0" cellspacing="0">
+								<tbody><tr>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리
+											- 방명록 상세보기</b></td>
+								</tr>
+							</tbody></table> <!-- view Form  -->
+							<form name="f" method="post">
+								${html}
+								
+							</form> <br>
+							<table width="590" border="0" cellpadding="0" cellspacing="0">
+								<tbody><tr>
+									<td align="center">
+										<input type="button" value="수정" id="btn_guest_modify_form" guest_no="${guest.guest_no}"> &nbsp; 
+										<input type="button" value="삭제" id="btn_guest_remove_action" guest_no="${guest.guest_no}"> &nbsp; 
+										<input type="button" value="목록" id="btn_guest_list">
+									</td>
+								</tr>
+							</tbody></table>
+						</td>
+					</tr>
+				</tbody></table>`;
 }		
 function guest_write_form_content() {
 	return  `<table width="0" border="0" cellpadding="0" cellspacing="0">
