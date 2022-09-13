@@ -20,7 +20,7 @@
 	}
 %>
 
-<%	request.setCharacterEncoding("utf-8");
+<%	request.setCharacterEncoding("UTF-8");
 	String keyword = request.getParameter("keyword");
 	List keywordList = this.search(keyword);
 	out.print(keywordList.size());

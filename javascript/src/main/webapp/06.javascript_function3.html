@@ -79,26 +79,36 @@
 	//inner_function1();
 	document.write('######################outer_function1()호출  끝##################<br><br>');
 	
+	
+	
 	document.write('######################반환받은 inner_function1()호출 시작##################<br>');
 	returnInnerFunction1();
 	
-	document.write("returnInnerFunction1.outer1_var : "+returnInnerFunction1.outer1_var+"<br/>");
-	document.write("returnInnerFunction1.inner1_var : "+returnInnerFunction1.inner1_var+"<br/>");
+	document.write("returnInnerFunction1.outer1_var : "+returnInnerFunction1.outer1_var+"<br/>");	//undefined
+	document.write("returnInnerFunction1.inner1_var : "+returnInnerFunction1.inner1_var+"<br/>");	//undefined
 	
 	document.write('######################반환받은 inner_function1()호출   끝##################<br><br>');
 	
-	var returnInnerFunction2 = outer_function2();
+	
+	
+	var returnInnerFunction2 = outer_function2();	//outer_function2():내부에 변수선언과, return만 기술되어 있는 상태-> 출력내용X
 	document.write('######################반환받은 inner_function2()호출 시작##################<br>');
 	returnInnerFunction2();
-	document.write(returnInnerFunction2.inner2_var+"<br/>");
+	document.write("returnInnerFunction2.outer2_var : "+returnInnerFunction2.outer2_var+"<br/>");	//undefined
+	document.write("returnInnerFunction2.inner2_var : "+returnInnerFunction2.inner2_var+"<br/>");	//undefined
 	document.write('######################반환받은 inner_function2()호출   끝##################<br><br>');
 
-		
+	
+	
+	
 	var returnInnerFunction3 = outer_function3("외부변수데이타1");
 	document.write('######################반환받은 inner_function3()호출 시작##################<br>');
 	returnInnerFunction3();
 	returnInnerFunction3();
 	document.write('######################반환받은 inner_function3()호출   끝##################<br><br>');
+	
+	
+	
 	
 	document.write('######################반환받은 inner_function4()호출  시작##################<br>');
 	outer_function4(100,200)();

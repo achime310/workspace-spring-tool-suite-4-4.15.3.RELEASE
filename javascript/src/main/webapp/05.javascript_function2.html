@@ -26,13 +26,13 @@
 		document.write("<br/> 인자로 대입된 함수를 실행<br/>");
 		funcArg();
 		/* 
-		if( (typeof funcArg) == function){
-			funcArg; //callback 함수
+		if(typeof funcArg == function) {
+			funcArg(); //callback 함수
 		}
 		 */
 	}
 	function func4(funcArg1, funcArg2) {
-		document.write(">>> func3(funcArg1,funcArg2)실행<br/>");
+		document.write(">>> func4funcArg1,funcArg2)실행<br/>");
 		//funcArg는 변수일수도, 함수일수도, null(매개변수 필수아님)일 수도 있다.
 		document.write("<br/> 인자로 대입된 함수를 실행<br/>");
 		funcArg1(); //callback 함수
@@ -86,6 +86,7 @@
 		};
 		
 		func3(funcVar1);
+		document.write("<br/>");
 		func4(funcVar1,funcVar2);
 		
 		document.write('----------------3. (최종)익명함수대입------------------------------------<br>');
@@ -115,8 +116,8 @@
 		
 		let nameArray=['월요일','화요일','수요일','목요일','금요일','토요일','일요일'];
 		forEach(nameArray,function(index, name){
-			document.write("### i="+index+" name="+name+"<br>");			
-		});
+							document.write("### i="+index+" name="+name+"<br>");}
+				);
 		
 		
 	</script>
