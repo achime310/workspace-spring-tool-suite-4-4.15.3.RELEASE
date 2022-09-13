@@ -2,190 +2,307 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>방명록 관리</title>
-<link rel=stylesheet href="css/styles.css" type="text/css">
-<link rel=stylesheet href="css/guest.css" type="text/css">
-<link rel="icon" href="image/favicon-32x32.png">
-<style type="text/css" media="screen">
-</style>
-<!--js파일은 server의 자원으로 1번 내려받고 계속사용한다.-->
-<script type="text/javascript" src="js/guest_html_content.js"></script>
-<script type="text/javascript" src="js/GuestService.js"></script>
+	<meta charset="UTF-8">
+	<title>방명록 관리</title>
+	<link rel=stylesheet href="css/styles.css" type="text/css">
+	<link rel=stylesheet href="css/guest.css" type="text/css">
+	<link rel="icon" href="image/favicon-32x32.png">
+	<style type="text/css" media="screen">
+	</style>
+	<!--js파일은 server의 자원으로 1번 내려받고 계속사용한다.-->
+	<script type="text/javascript" src="js/guest_html_content.js"></script>
+	<script type="text/javascript" src="js/GuestService.js"></script>
+	<script type="text/javascript">
+		/*
+		javascript api document
+		
+		https://developer.mozilla.org/ko/docs/Mozilla
+		*/
+		var name = '서영';
+		var age = 31;
+		var html1 = `저의 이름은 ${name}이고 나이는 ${age} 살 입니다.`;
+		console.log(html1);
+
+		function func1() {
+			return `저의 이름은 ${name}이고 나이는 ${age} 살 입니다.`;
+		}
+		var html2 = `${func1()}`;
+
+		console.log(func1());
+		console.log(html2);
+		// console에 3가지 모두 같은 내용이 출력된다.
+
+		var noArray = [1, 2, 3, 4, 5];
+		//map은 새로운 array 반환
+		//case_1) 익명의 function사용
+		/*
+		var newNoArray= noArray.map(function(element){
+												//console.log('.');	//5번 호출 됨
+												//return 100;
+												return element+1;
+											});
+		*/
+		//case_2) 외부에 선언한 function addOne사용 
+		function addOne(element) {
+			return element + 1;
+		}
+		var newNoArray = noArray.map(addOne);	//배열에 map을 이용해서, 특정function호출하고, return.
+
+		console.log("original array: " + noArray);
+		console.log("map array: " + newNoArray);
+		var newNoArrayStr = newNoArray.join(",");	//누적에 관련된 함수 join(default는 comma)
+		console.log(".join(", ") ==> " + newNoArrayStr);
+
+
+	</script>
+
 <script type="text/javascript">
-	
-		var name='서영';
-		var age=31;
-		var html=`저의 이름은 ${name}이고 나이는 ${age} 살 입니다.`;
-		console.log(html);
+	/**************************************************/
+
+
+
+	/**************************************************/
+	//(step1)'과 /n을 escaping하기 위해서, es6부터 지원하는 `(backtick)을 사용한다.
+	/*
+	var main_content = `<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+		codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
+		width="540px" height="350px">
+		<param name="movie" value="image/FI_main.swf">
+		<param name="play" value="true">
+		<param name="loop" value="true">
+		<param name="quality" value="high">
+		<embed src="image/enter.png" scale="exactfit" play="true" loop="true"
+			quality="high" style="margin: 10px;"
+			pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+			width="540px" height="350px"></embed>
+		</object>`;
+		*/
+	//(step2)js파일에 function으로 분리하자 -> 왜냐, 인자로 데이터(el사용)를 받기위해
+
+
+	window.addEventListener('load', function () {
+
+		var guestService = new GuestService();
+
+		/*load ->
+			DOM Tree가 생성된 후 (node에 ...?)이벤트 등록
+		*/
+		/*############### event#################*/
+		/******guest_home******************/
+		document.querySelector('#menu_guest_home').addEventListener('click', function (e) {
+			//event의 target이 anchor.. event의 접근하면, guest_view에서는 guest_no에 접근해야하므로 target이 반드시필요
+			//console.log('click!!');
+
+			//1) server에 놓고 필요할때 요청해서 조각파일을 ajax요청으로 가져오던지
+			//2) html내려올때, var main_content='<div>';를 상단에 선언해놓고.... js파일써서..?
+
+			//(step1)				
+			//document.querySelector('#content').innerHTML = main_content;
+
+			//(step2)				
+			document.querySelector('#content').innerHTML = guest_main_content();
+
+			//anchor에 걸린 url로 이동하지 못하게 해야한다. event처리할때 반드시 기술해야함.
+			e.preventDefault();
+
+		});
+		/************guest_write_form****************/
+		document.querySelector('#menu_guest_write_form').addEventListener('click', function (e) {
+			document.querySelector('#content').innerHTML = guest_write_form_content();
+			e.preventDefault();
+		});
+		/************guest_list****************/
+		document.querySelector('#menu_guest_list').addEventListener('click', function (e) {
+			/*
+			guest/guest_list_json.jsp로 ajax요청
+			*/
+			/*********** 이부분에 있던 내용을 동적이벤트 처리로 보냄 ************/
+
+		});//(END) guest_list
+
+
+
+		//const guestService = new GuestService();
+		/*############### document event [dynamic content event]#################*/
+
+		//bubbling을 이용한다.. 동적이벤트를 처리한다..
+		document.addEventListener('click', function (e) {
+			/*
+			Element속성(e.target,)
+			*/
+			console.log("Event객체: " + e);
+			console.log("Event Target객체: " + e.target);
+			console.log("Event Target객체의 Element id: " + e.target.id);
+			console.log("Event Target객체의 Element id: " + e.target.getAttribute("id"));
+			console.log("Event Target객체의 Element class: " + e.target.className);
+			console.log("Event Target객체의 Element class list: " + e.target.classList);	//NodeList형태로 반환. 배열로 생각.
+			console.log("Event Target객체의 Element class list.contains('guest_itme_a'): " + e.target.classList.contains('guest_itme_a'));
+			console.log("Event Target객체의 Element guest_no: " + e.target.getAttribute("guest_no"));
+
+			/******guest_detail****************/
+			if (e.target.classList.contains('guest_itme_a')) {
+				console.log("guest item click >>>>>>>>>>>>");
+
+				guestService.sendRequest('GET',
+					'guest/guest_detail_json.jsp',
+					function (jsonResult) {
+						console.log(jsonResult);
+						var guest = jsonResult.data[0];
+						document.querySelector('#content').innerHTML = guest_view_content(guest);
+					},
+					"guest_no=" + e.target.getAttribute("guest_no")
+				);
+
+			}
+
+			/******guest_list는 동적으로도 접근할 수 있어야한다***********/
+			/******guest_list()***********/
+			if (e.target.id == 'btn_guest_list' || e.target.id == 'menu_guest_list') {
+				console.log('>>>>>>>>>btn_guest_list');
+				var method = 'GET';
+				var url = 'guest/guest_list_json.jsp';
+				var param = null;
+				guestService.sendRequest(method,
+										url,
+										function (jsonResult) {
+											console.log(jsonResult);
+											var guestArray = jsonResult.data;
+											document.querySelector('#content').innerHTML = guest_list_content(guestArray);
+										},
+										param);
+				e.preventDefault();
+			}
+
+			/******guest_write_action***********/
+			if (e.target.id == 'btn_guest_write_action' ) {
+				console.log('>>>>>>>>> btn_guest_write_action');
+				/***유효성체크****/
+				if (document.f.guest_name.value == "") {
+					alert("이름을 입력하십시요.");
+					document.f.guest_name.focus();
+					return ;
+				}
+				if (document.f.guest_email.value == "") {
+					alert("이메일을 입력하십시요.");
+					document.f.guest_email.focus();
+					return ;
+				}
+				if (document.f.guest_homepage.value == "") {
+					alert("홈페이지를 입력하십시요.");
+					document.f.guest_homepage.focus();
+					return ;
+				}
+			
+				if (document.f.guest_title.value == "") {
+					alert("제목을 입력하십시요.");
+					document.f.guest_title.focus();
+					return ;
+				}
+				if (document.f.guest_content.value == "") {
+					alert("내용을 입력하십시요.");
+					document.f.guest_content.focus();
+					return ;
+				}
+				
+				var f= document.querySelector('#guest_write_form');
+				//jQuery에서는 param을 더 편하게 입력가능하다
+				var param='';
+				param+='guest_name='+f.guest_name.value;
+				param+='&guest_email='+f.guest_email.value;
+				param+='&guest_homepage='+f.guest_homepage.value;
+				param+='&guest_title='+f.guest_title.value;
+				param+='&guest_content='+f.guest_content.value;
+				
+				guestService.sendRequest('POST',
+										'guest/guest_write_action_json.jsp',
+										function(jsonResult){
+											//console.log(jsonResult);
+											//console.log(jsonResult.code);
+											if(jsonResult.code==1){
+												/*
+												#menu_guest_list anchor의 click event trigger[발생]
+												*/
+												//click한 효과. event강제발생
+												document.querySelector('#menu_guest_list').click();
+
+											}else if(jsonResult.code==2){
+												alert(jsonResult.msg);
+											}
+										},
+										param);
+			}
+			
+			/******guest_modify_form***********/
+			if(e.target.id=='btn_guest_modify_form'){
+				//console.log(e.target.getAttribute("guest_no"));
+				var param='guest_no='+e.target.getAttribute("guest_no");
+				
+				guestService.sendRequest('POST',
+											'guest/guest_modify_form_json.jsp',
+										function(jsonResult){
+											console.log(jsonResult.data[0]);
+											var guest = jsonResult.data[0];
+											document.querySelector('#content').innerHTML = guest_modify_form_content(guest);
+										},
+										param);
+			}
+			/******guest_modify_action*********/
+			if(e.target.id=='btn_guest_modify_action'){
+				console.log('>>>수정 action');
+				
+				var f= document.querySelector('#guest_modify_form');
+				console.log(f.guest_no.value);
+				//jQuery에서는 param을 더 편하게 입력가능하다
+				var param='';
+				param+='guest_no='+f.guest_no.value;
+				param+='guest_name='+f.guest_name.value;
+				param+='&guest_email='+f.guest_email.value;
+				param+='&guest_homepage='+f.guest_homepage.value;
+				param+='&guest_title='+f.guest_title.value;
+				param+='&guest_content='+f.guest_content.value;
+				
+				guestService.sendRequest('POST',
+										'guest/guest_modify_action_json.jsp',
+										function(jsonResult){
+											if(jsonResult.code==1){
+												/*
+												#menu_guest_list anchor의 click event trigger[발생]
+												*/
+												//click한 효과. event강제발생
+												document.querySelector('#menu_guest_list').click();
+
+											}else if(jsonResult.code==2){
+												alert(jsonResult.msg);
+											}
+											
+										},
+										param);
+				
+				
+			}
+			/******guest_remove_action*********/
+			if(e.target.id=='btn_guest_remove_action'){
+				console.log('>>>삭제');
+				
+			}
+
+			e.preventDefault();
+		});//document click event end
+		/*
+		load시 홈화면 보이게 함
+		*/
+		
+		document.querySelector('#content').innerHTML=guest_main_content();
+		//document.querySelector('#menu_guest_home').click();
+		
+
+	});//load evnet end
 
 </script>
 
-<script type="text/javascript">
-	/**************************************************/
-	
-	
-
-	/**************************************************/
-		//(step1)'과 /n을 escaping하기 위해서, es6부터 지원하는 `(backtick)을 사용한다.
-		/*
-		var main_content = `<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-			codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-			width="540px" height="350px">
-			<param name="movie" value="image/FI_main.swf">
-			<param name="play" value="true">
-			<param name="loop" value="true">
-			<param name="quality" value="high">
-			<embed src="image/enter.png" scale="exactfit" play="true" loop="true"
-				quality="high" style="margin: 10px;"
-				pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-				width="540px" height="350px"></embed>
-			</object>`;
-			*/
-		//(step2)js파일에 function으로 분리하자 -> 왜냐, 인자로 데이터(el사용)를 받기위해
-		
-
-		window.addEventListener('load', function () {
-			
-			var guestService = new GuestService();
-			
-			/*load ->
-				DOM Tree가 생성된 후 (node에 ...?)이벤트 등록
-			*/
-			/*############### event#################*/
-			/******guest_home******************/
-			document.querySelector('#menu_guest_home').addEventListener('click', function (e) {
-				//event의 target이 anchor.. event의 접근하면, guest_view에서는 guest_no에 접근해야하므로 target이 반드시필요
-				//console.log('click!!');
-
-				//1) server에 놓고 필요할때 요청해서 조각파일을 ajax요청으로 가져오던지
-				//2) html내려올때, var main_content='<div>';를 상단에 선언해놓고.... js파일써서..?
-				
-				//(step1)				
-				//document.querySelector('#content').innerHTML = main_content;
-
-				//(step2)				
-				document.querySelector('#content').innerHTML = guest_main_content();
-
-				//anchor에 걸린 url로 이동하지 못하게 해야한다. event처리할때 반드시 기술해야함.
-				e.preventDefault();
-
-			});
-			/************guest_write_form****************/
-			document.querySelector('#menu_guest_write_form').addEventListener('click', function (e) {
-				document.querySelector('#content').innerHTML = guest_write_form_content();
-				e.preventDefault();
-			});
-			/************guest_list****************/
-			document.querySelector('#menu_guest_list').addEventListener('click', function (e) {
-				/*
-				guest/guest_list_json.jsp로 ajax요청
-				*/
-				var method='GET';
-				var url='guest/guest_list_json.jsp';
-				var param=null;
-				guestService.sendRequest(method,
-											 url,
-											 function(jsonResult){
-												console.log(jsonResult);
-												var guestArray = jsonResult.data;
-												var html='';
-												for(var i=0; i< guestArray.length;i++){
-													var guest=guestArray[i];
-													html+=`<tr class="guest_item">
-																<td width="50" align="center" bgcolor="ffffff" height="20">${guest.guest_no}</td>
-																<td width="300" bgcolor="ffffff" style="padding-left: 10">
-																	<a href="#" class="user" id="guest_item_${guest.guest_no}" guest_no="${guest.guest_no}">
-																	${guest.guest_title}
-																	</a>
-																</td>
-																<td width="120" align="center" bgcolor="ffffff">${guest.guest_name}</td>
-																<td width="120" align="center" bgcolor="ffffff">${guest.guest_date}</td>
-															</tr>`;
-												}
-												
-				var guestItem = document.querySelector('#guest_item_121');
-				console.log(guestItem);
-												document.querySelector('#content').innerHTML = guest_list_content(html);
-											},
-											param);
-				e.preventDefault();
-				
-			});
-			/******guest_detail****************/
-			//document.getElementById('guest_item_121').addEventListener('click', function (e) {
-				
-			var guestItem = document.querySelector('#guest_item_121');
-			console.log(guestItem);
-			guestItem.addEventListener('click', function (e) {
-				/*
-				guest/guest_detail_json.jsp로 ajax요청
-				*/
-				var method='GET';
-				var url='guest/guest_detail_json.jsp';
-				var param={ "guest_no":    };
-				guestService.sendRequest(method,
-											 url,
-											 function(jsonResult){
-												console.log(jsonResult);
-												var guestDataArray = jsonResult.data;
-												var guest=guestDataArray[0];
-												var html='';
-												/*
-												html+=`<input type="hidden" name="guest_no" value="${guest.guest_no}">
-													<table border="0" cellpadding="0" cellspacing="1" width="590" bgcolor="BBBBBB">
-													<tbody><tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="22">번호</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_no}</td>
-													</tr>
-													<tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="22">이름</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_name}</td>
-													</tr>
-													<tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="22">날짜</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_date}</td>
-													</tr><tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="22">홈페이지</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_homepage}</td>
-													</tr>
-													<tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="22">제목</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_title}</td>
-													</tr>
-													<tr>
-														<td width="100" align="center" bgcolor="E6ECDE" height="110">내용</td>
-														<td width="490" bgcolor="ffffff" align="left" style="padding-left: 10px">${guest.guest_content}</td>
-													</tr>
-												</tbody></table>`;
-												*/
-												document.querySelector('#content').innerHTML = guest_view_content(html);
-											},
-											param);
-				e.preventDefault();
-			});
-
-
-
-
-			//const guestService = new GuestService();
-			/*############### dynamic event#################*/
-			document.addEventListener('click', function (e) {
-				/******guest_write_action***********/
-				/******guest_modify_form***********/
-				/******guest_modify_action*********/
-				/******guest_remove_action*********/
-			});
-
-
-		});
-
-</script> 
-
 </head>
 
-<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
-	marginwidth=0 marginheight=0>
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
 	<!-- container start-->
 	<div id="container">
 		<!-- header start -->
@@ -248,7 +365,7 @@
 		</div>
 	</div>
 	<!--container end-->
-	
+
 </body>
 
 </html>
