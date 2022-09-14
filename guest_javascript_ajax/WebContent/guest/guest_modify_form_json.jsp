@@ -11,13 +11,15 @@
 	StringBuffer jsonData = new StringBuffer();
 	
 	if(request.getMethod().equalsIgnoreCase("GET")){
-		code=0;
+		code=2;
 		url="guest_main";
 		msg="잘못된요청방식입니다.";
 	}else{
 		String guest_no = request.getParameter("guest_no");
-		if (guest_no == null || guest_no.equals(""))
-			guest_no = "212";
+		if (guest_no == null || guest_no.equals("")){
+			code=2;
+			msg="guest_no 파라메타가존재하지 않습니다";
+		}else{
 		System.out.println("*********jQuery Ajax요청정보(guest_modify_form_json.jsp)*********");
 		System.out.println("1.jQuery Ajax요청방식    :" + request.getMethod());
 		System.out.println("2.jQuery Ajax요청파라메타:" + guest_no);
@@ -34,7 +36,9 @@
 		jsonData.append("\"guest_homepage\":\"" + guest.getGuest_homepage() + "\",");
 		jsonData.append("\"guest_content\":\"" + guest.getGuest_content() + "\"");
 		jsonData.append("}");
-		
+		code=1;
+		msg="";
+		}
 	}
 %>
 { 

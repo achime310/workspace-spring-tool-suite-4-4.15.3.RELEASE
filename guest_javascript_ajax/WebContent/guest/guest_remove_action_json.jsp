@@ -8,7 +8,7 @@
 	StringBuffer jsonData = new StringBuffer();
 	
 	if(request.getMethod().equalsIgnoreCase("GET")){
-		code=0;
+		code=2;
 		url="guest_main";
 		msg="잘못된요청방식입니다.";
 	}else{
