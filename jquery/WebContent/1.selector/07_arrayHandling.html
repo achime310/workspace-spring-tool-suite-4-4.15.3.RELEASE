@@ -8,13 +8,21 @@
 <script type="text/javascript">
 $(function() {
 	
-	console.log('1. li element array:');
-	console.log('2. li element array index 0:');
-	console.log('3. li element array index 0 firstChild.nodeValue:');
-	console.log('4. li index 4 li element:');
-	console.log('5. li index 4 li element.firstChild.nodeValue:');
+	//var listElementArray=$('#nameList > li');	//jQueryWrapper객체만 반환됨
+	//console.log(listElementArray);
+	var listElementArray=$('#nameList > li').get();	
+	var listElement0=$('#nameList > li').get(0);	
 	
+	console.log('1. li element array:'+listElementArray);
+	console.log('2. li element array index 0:'+listElement0);
+	console.log('3. li element array index 0: listElement0.firstChild.nodeValue:'+listElement0.firstChild.nodeValue);
+	console.log('#. element를 wrapping하면..:$(listElement0) --> '+$(listElement0));
+	console.log('3. ii element array index 0: $(listElement0).text() -->'+$(listElement0).text());
+	console.log('4. li index 4 li element:'+$('#nameList >li').get(4));
+	console.log('5. li index 4 li element.firstChild.nodeValue:'+$('#nameList >li').get(4).firstChild.nodeValue);
+	//(결론)jQuery객체인지, 표준객체인지 구분해야함
 	
+	$('h2').text('Members of this Group are '+$('#nameList> li').get().length);
 	
 });
 </script>

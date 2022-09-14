@@ -14,10 +14,33 @@
 				{'id':'guard4','name':'kim4','address':'경기파'},
 				{'id':'guard5','name':'kim5','address':'경기솔'}
 		];
-		/*
+		/* <<utility function>>
 		$.grep();
 		*/
+		var filterNameArray = $.grep(memberNameArray,function(name,i){
+			if(name.startsWith('k')){
+				return true;
+			}else{
+				return false;
+			}
+		},false);
+		console.log(filterNameArray);
 		
+		$.each(filterNameArray,function(i,name){
+			$('.selected1').append(name+" ");
+		});
+		
+		var filterMemberArray=$.grep(memberArray,function(member,index){
+			if(member.address=='경기미'){
+				return true;
+			}else{
+				return false;
+			}
+		},true);
+		
+		$.each(filterMemberArray,function(index,member){
+			$('.selected2').append(`[${member.id}] ${member.name}, ${member.address}<br>`);
+		});
 		
 	});
 </script>

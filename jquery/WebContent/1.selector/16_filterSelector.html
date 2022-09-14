@@ -29,6 +29,7 @@ td{
 	 - https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-classes
    ●  jQuery에서 제공하는 가상(pseudo) 클래스
 	   ex> :eq(0),:odd , :even
+	   -> nth-child보다 편리함
    ● 가상(pseudo) 클래스를 사용한 스타일 적용 방법
 	  - 아래와 같은 가상 클래스(pseudo-class)를 사용하여 
 	    링크에 다양한 스타일을 적용할 수 있습니다.
@@ -40,27 +41,30 @@ td{
 		※ LVHA-순서(:link — :visited — :hover — :active)
 
 */
+/*
 a{
 	text-decoration: none;
-	cursor: wait;
+	cursor: crosshair;
 }
+
 a:link{
-	color: orange;
+	color: Sienna;
 }
 
 a:visited{
-	color: maroon;
+	color: dimgray;
+	background: honeydew;
 }
 a:hover{
-	background: yellow;
-	color: green;
+	background: Thistle;
+	color: Olive;
+	font-style: italic;
 }
 a:active{
-	background: white;
+	background: orange;
 	font-size: 30pt;
 	font-weight: bold;
 }
-
 tr:first-child{
 	background: green;
 }
@@ -71,11 +75,32 @@ tr:last-child {
 	background: blue;
 }
 
+h2::first-letter{
+	font-size: 30px;
+	background: Tan;
+    font-weight: bold;
+    color: brown;
+}
+*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+	//jQuery에서 제공하는 가상(pseudo) 클래스
 	$(function(){
+		$('tr').css('background','white');
+		$('tr:eq(0)').css('background','olive');
+		$('td:eq(39)').css('background','PaleGoldenRod');
+		$('tr:eq(0)>td:eq(9)').css('color','white');
+		$('tr:eq(1)>td:gt(2)').css('font-style','italic').css('font-weight','bold');
+		
+		$('tr:eq(2)>td:odd').css('background','darksalmon');
+		$('tr:eq(2)>td:even').css('background','darkslategrey');
+		
+		$('tr:eq(3)>td:first').css('color','Darkkhaki');
+		$('tr:eq(3)>td:last').css('color','DarkOrange');
+		
+		
 		
 	});
 </script>

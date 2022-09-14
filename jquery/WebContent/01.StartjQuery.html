@@ -12,7 +12,7 @@
 <!-- 
 	#2. << CDN 호스트사용 >>
  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script type="text/javascript">
 	
 	/*
@@ -35,13 +35,34 @@
 	 */
 	
 	 $(function(){
-		   /*
-			DOM tree loading후 렌더링전에 호출
-			*/
+	   /*
+		DOM tree loading후 렌더링전에 호출
+		*/
+		console.log("1."+window.jQuery);
+		console.log("2."+window.$);
 			
-			
-			
-		 
+		var jQueryWrapperObject1=$('h1');	
+		var jQueryWrapperObject2=$('h2');
+		console.log('3.factory function return: '+jQueryWrapperObject1);	
+		console.log('4.factory function return: '+jQueryWrapperObject2);	
+		jQueryWrapperObject1.css('color','blue');
+		jQueryWrapperObject2.css('color','orange');
+		
+		$('h3').text("오늘은 jQuery를 진짜로 사용합니다.");
+		$('h4').text("factory function은 jQueryObject를 반환합니다.");
+		$('h5').text("수요일이네요");
+		$('h6').text("마지막까지 힘내세요");
+		
+		$('h3').css('color','tomato').css('background','pink');
+		$('h4').css('color','blue').css('background','lightgray');
+		$('h5').css('color','green').css('background','lightyellow');
+		
+		$('h6').text('이제시작~').css('color','purple');
+		
+		console.log($('h1').text());
+		console.log($('h2').text());
+		console.log($('h3').text());
+		
 	 });
 	 
 	 window.onload=function(){

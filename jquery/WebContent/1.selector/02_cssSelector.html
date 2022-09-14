@@ -6,6 +6,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		var h2Text=$('h2').text();	//자식의 모든 text를 꺼냄 -> 1개만 꺼내려면?
+		$('#title').html(h2Text);
+		//console.log($('#title').html());
+		//$('.contents').text("<u>jQuery는 오픈소스입니다.</u>");	//parsing안된채로 나옴
+		$('.contents').html("<u>jQuery는 오픈소스입니다.</u>");		//innerHTML과 유사
+		
 		
 	});
 </script>

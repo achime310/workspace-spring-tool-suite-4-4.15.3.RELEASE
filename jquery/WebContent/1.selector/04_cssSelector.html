@@ -18,11 +18,17 @@ div, span {
 <script type="text/javascript">
 	$(function(){
 		/***********직계자식 > **********/
+		$('body > div').css('border','3px dotted darkblue');
+		$('body > span').css('border','5px solid tomato');
+		
 		/***********자손모두  **********/
+		$('body  div').css('background','mediumslateblue');
+		$('body  span').css('background','orchid');
 		
 		/*
 		$('body > *').css();
 		*/
+		$('body > *').css('font-style','oblique');
 		
 	});
 		

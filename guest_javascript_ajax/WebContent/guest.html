@@ -59,8 +59,6 @@
 <script type="text/javascript">
 	/**************************************************/
 
-
-
 	/**************************************************/
 	//(step1)'과 /n을 escaping하기 위해서, es6부터 지원하는 `(backtick)을 사용한다.
 	/*
@@ -152,7 +150,7 @@
 					},
 					"guest_no=" + e.target.getAttribute("guest_no")
 				);
-
+				
 			}
 
 			/******guest_list는 동적으로도 접근할 수 있어야한다***********/
@@ -176,7 +174,8 @@
 			/******guest_write_action***********/
 			if (e.target.id == 'btn_guest_write_action' ) {
 				console.log('>>>>>>>>> btn_guest_write_action');
-				/***유효성체크****/
+				
+				/************ 유효성체크 ************/
 				if (document.f.guest_name.value == "") {
 					alert("이름을 입력하십시요.");
 					document.f.guest_name.focus();
@@ -192,7 +191,6 @@
 					document.f.guest_homepage.focus();
 					return ;
 				}
-			
 				if (document.f.guest_title.value == "") {
 					alert("제목을 입력하십시요.");
 					document.f.guest_title.focus();
@@ -203,6 +201,7 @@
 					document.f.guest_content.focus();
 					return ;
 				}
+				/*************************************/
 				
 				var f= document.querySelector('#guest_write_form');
 				//jQuery에서는 param을 더 편하게 입력가능하다
@@ -234,6 +233,7 @@
 			
 			/******guest_modify_form***********/
 			if(e.target.id=='btn_guest_modify_form'){
+				
 				//console.log(e.target.getAttribute("guest_no"));
 				var param='guest_no='+e.target.getAttribute("guest_no");
 				
@@ -249,13 +249,40 @@
 			/******guest_modify_action*********/
 			if(e.target.id=='btn_guest_modify_action'){
 				console.log('>>>수정 action');
+				/************ 유효성체크 ************/
+					if (document.f.guest_name.value == "") {
+						alert("이름을 입력하십시요.");
+						document.f.guest_name.focus();
+						return;
+					}
+					if (document.f.guest_email.value == "") {
+						alert("이메일을 입력하십시요.");
+						document.f.guest_email.focus();
+						return;
+					}
+					if (document.f.guest_homepage.value == "") {
+						alert("홈페이지를 입력하십시요.");
+						document.f.guest_homepage.focus();
+						return;
+					}
+					if (document.f.guest_title.value == "") {
+						alert("제목을 입력하십시요.");
+						document.f.guest_title.focus();
+						return;
+					}
+					if (document.f.guest_content.value == "") {
+						alert("내용을 입력하십시요.");
+						document.f.guest_content.focus();
+						return;
+					}
+				/*************************************/
 				
 				var f= document.querySelector('#guest_modify_form');
 				console.log(f.guest_no.value);
 				//jQuery에서는 param을 더 편하게 입력가능하다
 				var param='';
 				param+='guest_no='+f.guest_no.value;
-				param+='guest_name='+f.guest_name.value;
+				param+='&guest_name='+f.guest_name.value;
 				param+='&guest_email='+f.guest_email.value;
 				param+='&guest_homepage='+f.guest_homepage.value;
 				param+='&guest_title='+f.guest_title.value;
@@ -265,11 +292,25 @@
 										'guest/guest_modify_action_json.jsp',
 										function(jsonResult){
 											if(jsonResult.code==1){
-												/*
+												
+												/* (CASE_1)
 												#menu_guest_list anchor의 click event trigger[발생]
 												*/
 												//click한 효과. event강제발생
-												document.querySelector('#menu_guest_list').click();
+												//document.querySelector('#menu_guest_list').click();
+												
+												/* (CASE_2)
+												해당 guest_no의 guest_detail로 보내기
+												*/
+												guestService.sendRequest('GET',
+																	'guest/guest_detail_json.jsp',
+																	function (jsonResult) {
+																		console.log(jsonResult);
+																		var guest = jsonResult.data[0];
+																		document.querySelector('#content').innerHTML = guest_view_content(guest);
+																	},
+																	param
+																);
 
 											}else if(jsonResult.code==2){
 												alert(jsonResult.msg);
@@ -278,25 +319,42 @@
 										},
 										param);
 				
-				
 			}
 			/******guest_remove_action*********/
 			if(e.target.id=='btn_guest_remove_action'){
-				console.log('>>>삭제');
-				
+				console.log('>>> 삭제');
+				console.log(e.target.getAttribute("guest_no"));
+				if (window.confirm("정말 삭제하시겠습니까?")) {
+					var param = 'guest_no='+e.target.getAttribute("guest_no");
+					guestService.sendRequest('POST',
+												'guest/guest_remove_action_json.jsp',
+												function(jsonResult){
+													console.log(jsonResult.data[0]);
+													if(jsonResult.code==1){
+														/*
+														#menu_guest_list anchor의 click event trigger[발생]
+														*/
+														//click한 효과. event강제발생
+														document.querySelector('#menu_guest_list').click();
+		
+													}else if(jsonResult.code==2){
+														alert(jsonResult.msg);
+												}
+											},
+											param);
+				}
 			}
 
 			e.preventDefault();
-		});//document click event end
+		});//(END)document click event
+		
 		/*
 		load시 홈화면 보이게 함
 		*/
-		
 		document.querySelector('#content').innerHTML=guest_main_content();
 		//document.querySelector('#menu_guest_home').click();
-		
 
-	});//load evnet end
+	});//(END)load evnet
 
 </script>
 

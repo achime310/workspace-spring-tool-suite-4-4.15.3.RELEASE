@@ -15,7 +15,22 @@
 				{'id':'guard5','name':'kim5','address':'경기솔'}
 		];
 		
+		//nodelist에서 호출하는 function
+		//$('h2').append(' (test)append');
+		$('h2').append(memberNameArray.length+" 명");
 		
+		/*[each]utility method
+			each는 array의 갯수만큼 function을 호출 해줌
+		*/
+		//each(array,callback)
+		$.each(memberNameArray,function(i,name){
+			$('#memberNameList').append('<li>'+name+'</li>');
+		});
+		
+		//each(objec,callback)
+		$.each(memberArray,function(i,member){
+			$('#memberList').append(`<li>[${member.id}] ${member.name}, ${member.address}</li>`);
+		});
 		
 	});
 </script>
