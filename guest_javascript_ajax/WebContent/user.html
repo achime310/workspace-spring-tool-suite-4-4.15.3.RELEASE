@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>회원관리</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/user.css" type="text/css">
+
+<script type="text/javascript" src="js/user_html_content.js"></script>
+<script type="text/javascript" src="js/UserService.js"></script>
+<script type="text/javascript">
+	window.addEventListener('load',function(){
+		var userService = new UserService();
+		
+		/************ user_home ************/
+		document.querySelector('#menu_user_home').addEventListener('click',function(e){
+			console.log('click!!');
+			document.querySelector('#content').innerHTML=user_main_content();
+		});
+		
+		/************ user_write_form ************/
+		document.querySelector('#menu_user_write_form').addEventListener('click',function(e){
+			console.log('click!!');
+			
+			var param=null;
+			userService.sendRequest('GET',
+										'user/user_write_form_json.jsp',
+										function(jsonResult){
+											console.log(jsonResult);
+											var msg = jsonResult.data[0];
+											var fUser = jsonResult.data[1];
+											document.querySelector('#content').innerHTML=user_write_form_content(fUser,msg);
+										},
+										param);
+			
+			
+		});
+		
+		/*##### document event [dynamic content event] #####*/
+		document.addEventListener('click', function (e) {
+			console.log("Event객체: " + e);
+			console.log("Event Target객체: " + e.target);
+			console.log("Event Target객체의 Element id: " + e.target.id);
+			console.log("Event Target객체의 Element id: " + e.target.getAttribute("id"));
+			console.log("Event Target객체의 Element class: " + e.target.className);
+			console.log("Event Target객체의 Element class list: " + e.target.classList);	//NodeList형태로 반환. 배열로 생각.
+			//console.log("Event Target객체의 Element class list.contains('guest_itme_a'): " + e.target.classList.contains('guest_itme_a'));
+			//console.log("Event Target객체의 Element guest_no: " + e.target.getAttribute("guest_no"));
+			
+			
+			
+		});
+		
+	});
+</script>
+</head>
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+			<h1>
+				<a href="">회원관리 JAVASCRIPT</a>
+			</h1>
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+			<p>
+				<strong>메 뉴</strong>
+			</p>
+			<ul class="user_menus">
+				<!-- admin과 같은 UI를 사용할경우, 아래와 비슷하게 조건을 줘서 구현하면 된다. -->
+					<li><a id="menu_user_home" href="#">회원관리 홈</a></li>
+					
+					<li><a id="menu_user" href="#"> 님</a></li>
+					<li><a id="menu_user_view" href="#">내정보</a></li>
+					<li><a id="menu_user_logout_action" href="#">로그아웃</a></li>
+
+					<li><a id="menu_user_write_form" href="#">회원가입</a></li>
+					<li><a id="menu_user_login_form" href="#">로그인</a></li>
+			</ul>
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+
+			<!-- include_content.jsp start-->
+			<div id="content">
+			
+			</div>
+
+			<!-- include_content.jsp end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+			<p align="center">Copyright (&copy;) By Seo-young Choi.[최서영] All rights reserved.</p>
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+</body>
+</html>

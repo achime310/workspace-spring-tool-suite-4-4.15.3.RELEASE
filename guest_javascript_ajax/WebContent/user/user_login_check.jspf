@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//로그인체크
+	String sUserId=(String)session.getAttribute("sUserId");
+	//로그인안한사람이 접근한다면
+	if(sUserId==null){
+		response.sendRedirect("user_main.jsp");
+		return;
+	}
+%>
