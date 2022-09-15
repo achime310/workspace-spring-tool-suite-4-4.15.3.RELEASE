@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		//keyup event
+		$('#id').keyup(function(e){
+			if($('#id').val().trim()==''){
+				return;
+			}
+			/*기술 순서는 관계 없다*/
+			$.ajax({
+				url:'03.ajaxRequestGETPOST.jsp',/*요청url*/
+				method:'POST',/*요청method*/
+				data:$('#postForm').serialize(),/*요청data(parameter)*/
+				beforeSend:function(){
+					$('#postResultSpan').html('loading...');
+				},
+				/*호출 후 data도착전에 호출되는 function*/
+				success:function(responseStr){
+					$('#postResultSpan').html(responseStr);
+				}/*호출 후 성공시 호출되는 function*/
+				
+			});
+		});
+		
+		
+		
+		
+		
+		
+	});
+
+</script>
+</head>
+<body>
+<h1>AJAX GET,POST요청</h1><hr/>
+<form id="postForm" name="postForm">
+	아이디[POST]:<input type="text" name="id" id="id">
+	<span id="postResultSpan"></span>
+</form>
+</body>
+</html>

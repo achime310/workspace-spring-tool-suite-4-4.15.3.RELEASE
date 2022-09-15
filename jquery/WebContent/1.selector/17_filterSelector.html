@@ -30,7 +30,8 @@ td:not(.notSelect){
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
+		$('tr>td.notSelect').css('border','1px double red');
+		$('tr>td:not(.notSelect').css('background','orange');
 		
 	});
 </script>

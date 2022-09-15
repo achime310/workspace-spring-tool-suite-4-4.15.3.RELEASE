@@ -29,7 +29,12 @@ td {
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	
+	$('#txtInput').keyup(function(e){
+		$('#txtKeyCode').val(e.key+'['+e.keyCode+']'+e.code);	//key는 문자, keyCode는 숫자
+		if(e.keyCode==13){
+			alert('가입하시겠습니까?');
+		}
+	});
 });
 </script>
 </head>

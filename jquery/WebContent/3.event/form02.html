@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,31 +36,62 @@ td {
 			element 속성(attribute) 접근
 			*/
 			//attribute set
-			
-			
+			$('#p_image').attr('src','icon1.png');	//setter
+			$('#p_image').attr('width','5%');
+			$('#p_image').attr('height','5%');
 			//attribute get
+			console.log($('#p_image').attr('src'));	//getter
+			console.log($('#p_image').attr('width'));
+			console.log($('#p_image').attr('height'));
 		
 			
 			/*
 			form태그안에 있는 input element 접근
 			*/
 			//read
-			/*
-			console.log("1.$('#id').attr('value')		  [x]:"+$('#id').attr('value'));
+			console.log('---------- dom tree loading 후에 form element value get ----------');
+			console.log("1.$('#id').attr('value')		  [x]:"+$('#id').attr('value'));	//초기 dom트리 값만 가져옴-> 사용자가 입력한 변경값을 가져올수 없음.
 			console.log("1.$('#id').val()        		  [o]:"+$('#id').val());
 			console.log("2.$('#name').val()      		  [o]:"+$('#name').val());
 			console.log("3.$('#alias').val()     		  [o]:"+$('#alias').val());
 			console.log("4.$('#job option:selected').val()[o]:"+$('#job option:selected').val());
-			*/
 			/*
 			 입력 엘레멘트의 값을 접근할때는  .val() 을사용
 		      - .val() 은 DOM트리생성이후에 동적으로변하는 
 		           사용자입력데이타를 읽을수있다
+		           -> 동적인 데이터에는 .attr을 아예 안쓰면 된다.
 		     */
 			
 			//set
+			$('#id').val('yyy');
+			$('#name').val('김변경이');
+			$('#alias').val('!주의!');
+			$('#job').val('프리랜서');
+			//$('#job>option')[2].selected=true;
 			
-	
+			//$(document.f) == $('#f')
+			$('#f').submit(function(e){
+				console.log('---------- submit시에 form element value get ----------');
+				console.log("1.$('#id').attr('value')		  [x]:"+$('#id').attr('value'));	//초기 dom트리 값만 가져옴-> 사용자가 입력한 변경값을 가져올수 없음.
+				console.log("1.$('#id').val()        		  [o]:"+$('#id').val());
+				console.log("2.$('#name').val()      		  [o]:"+$('#name').val());
+				console.log("3.$('#alias').val()     		  [o]:"+$('#alias').val());
+				console.log("4.$('#job option:selected').val()[o]:"+$('#job option:selected').val());
+				/*
+				폼을이용한 서버로의 jquery ajax요청
+				1.parameter생성
+				2.유효성체크
+				3.jqury ajax요청
+				4.submit default중지
+				*/
+				var parameter= $(e.target).serialize();
+				console.log(">>>>>>>>>>요청파라메타생성"+parameter);
+				//$.ajax(); 라는 것도 있긴 함.
+				console.log(">>>>>>>>>>ajax요청");
+				e.preventDefault();
+				console.log(">>>>>>>>>>페이지요청중지");
+				
+			});
 			
 			
 		

@@ -4,26 +4,32 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(function(){
+        	
+        	$('h1,h3').next().hide();	//같은레벨의 노드(next-sibling) -> style="display: none;
+        	
         	$('h1,h3').click(function(e){
-        		/**************기본효과(slide)*********
-        		//$(e.target).next().hide();
-        		//$(e.target).next().show();
-        		$(e.target).next().toggle();
-        		************************************/
-        		/**************slide효과***************
-        		//$(e.target).next().slideUp();
-        		//$(e.target).next().slideDown();
-        		$(e.target).next().slideToggle()
-        		****/
-        		
-        		/**************fade효과***************/
-        		//$(e.target).next().fadeOut();
-        		//$(e.target).next().fadeIn();
-        		$(e.target).next().fadeToggle(2000,function(){
-        			alert('fadeToggle이완료된후 실행하는 function');
+        		/**************기본효과(slide)********/
+        		/* 
+        		$(e.target).next().show();
+        		$(e.target).next().hide();
+        		 */
+        		//$(e.target).next().toggle();
+        		 
+        		/**************slide효과**************/
+        		/* 
+        		$(e.target).next().slideDown();
+        		$(e.target).next().slideUp();
+        		 */
+        		$(e.target).next().slideToggle(2000,function(){
+        			alert('slideToggle이 완료된 후 실행하는 function');
         		});
         		
-        		
+        		/**************fade효과***************/
+        		/* 
+        		$(e.target).next().fadeIn();
+        		$(e.target).next().fadeOut();
+        		 */
+        		//$(e.target).next().fadeToggle(200);	//default는 400ms
         		
         	});
         	

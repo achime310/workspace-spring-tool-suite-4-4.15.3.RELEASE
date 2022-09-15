@@ -27,20 +27,27 @@ td {
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-	
 		/*
 		var tdElementNodeList = document.getElementsByTagName("td")
 		for (var i = 0; i < tdElementNodeList.length; i++) {
 			tdElementNodeList[i].addEventListener("click", function(e) {
-				console.log("event[표준객체]:"+e);
+				console.log("event[표준객체]:"+e);			//[object PointerEvent]
 				console.log("e.target[표준객체]:"+e.target);
 				console.log(e.target.firstChild.nodeValue);
-				console.log("this   :"+this);
+				console.log("this   :"+this);	//function을 가지고 있는 객체
 				console.log(this.firstChild.nodeValue);
 			});
 		}
 		*/
-		
+		//아래의 event객체는 jQuery에서 wrapping한 객체이지만, 거의 같은 속성을 가진다.
+		$('td').click(function(e){
+			console.log("event[표준객체의 super set?]:"+e);		//[object Object]
+			console.log("e.target[표준객체]:"+e.target);		//td
+			console.log(e.target.firstChild.nodeValue);
+			console.log("this   :"+this);	//function을 가지고 있는 객체 = td
+			console.log(this.firstChild.nodeValue);
+			
+		});
 			
 		
 		

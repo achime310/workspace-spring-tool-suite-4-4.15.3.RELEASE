@@ -30,7 +30,16 @@ td {
 			2.jquery ajax요청
 			3.submit default중지
 			*/
-			
+			$('#f').submit(function(e){
+				alert('submit-->');
+				
+				var parameter1 = $(e.target).serialize();	//queryString을 return.
+				var parameter2 = $('#f').serialize();	//queryString을 return.
+				console.log("parameter1: "+parameter1);
+				console.log("parameter2: "+parameter2);	//parameter1과2는 같은값을 갖는다.
+				
+				e.preventDefault()
+			});
 			
 			
 			/*
