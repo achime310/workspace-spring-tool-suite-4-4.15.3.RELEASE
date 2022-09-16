@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>방명록 관리</title>
+	<link rel=stylesheet href="css/styles.css" type="text/css">
+	<link rel=stylesheet href="css/guest.css" type="text/css">
+	<link rel="icon" href="image/favicon-32x32.png">
+	<style type="text/css" media="screen">
+	</style>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="js/guest_html_content.js"></script>
+
+	<script type="text/javascript">
+
+	</script>
+	<script type="text/javascript">
+		$(function () {
+			/*
+			DOM Tree가 생성된후이벤트등록
+			*/
+			/*############### event#################*/
+			/*********guest_home******************/
+			$('#menu_guest_home').click(function (e) {
+				$('#content').html(guest_main_content());
+				//하지 않으면, history 발생한다구?
+				e.preventDefault();
+			});
+			/*********guest_write_form************/
+			$('#menu_guest_write_form').click(function (e) {
+				$('#content').html(guest_write_form_content());
+				e.preventDefault();
+			});
+
+			/*############### document event [dynamic content event]#################*/
+			/*********guest_list******************/
+			$(document).on('click', '#menu_guest_list,#btn_guest_list', function (e) {
+				//-> controller에 옮겨야겠죠?
+				$.ajax({
+					url: 'guest/guest_list_json.jsp',
+					method: 'GET',
+					success: function (jsonResult) {
+						var guestArray = jsonResult.data;
+						$('#content').html(guest_list_content(guestArray));
+					}
+				});
+				e.preventDefault();
+			});
+
+			$(document).on('click', 'guest_item_a', function (e) {
+				console.log("guest item click >> " + $(e.target).hasClass('guest_item_a'));
+
+				var param = "";
+				param = $(e.target).attr("guest_no");
+				console.log(param);
+				//-> controller에 옮겨야겠죠?
+				$.ajax({
+					url: 'guest/guest_detail_json.jsp?guest_no=' + param,
+					method: 'GET',
+					success: function (jsonResult) {
+						var guest = jsonResult.data[0];
+						$('#content').html(guest_view_content(guest));
+					}
+				});
+				e.preventDefault();
+			});
+/*
+			$('guest_item_a').click(function(){
+				console.log("guest item click >> ");
+			});
+*/
+
+			$(document).on('click', function (e) {
+				console.log($(e.target).id.val());
+
+				/*********guest_detail****************/
+				//if ($(e.target).find('guest_item_a')) {
+				/*
+			if ($(e.target).hasClass('guest_item_a')) {
+				console.log("guest item click >> " + $(e.target).hasClass('guest_item_a'));
+
+				var param = "";
+				param = $(e.target).attr("guest_no");
+				console.log(param);
+				//-> controller에 옮겨야겠죠?
+				$.ajax({
+					url: 'guest/guest_detail_json.jsp?guest_no=' + param,
+					method: 'GET',
+					success: function (jsonResult) {
+						var guest = jsonResult.data[0];
+						$('#content').html(guest_view_content(guest));
+					}
+				});
+				e.preventDefault();
+			}
+			/*********guest_list******************/
+				//if ( $("[id = 'btn_guest_list']") || $("[id = 'menu_guest_list']")) {
+				/*
+				if ($(e.target).id == '#btn_guest_list') {
+					console.log("btn_guest_list || menu_guest_list -  click >>>>>>>>>>>>");
+					$.ajax({
+						url: 'guest/guest_list_json.jsp',
+						method: 'GET',
+						success: function (jsonResult) {
+							var guestArray = jsonResult.data;
+							$('#content').html(guest_list_content(guestArray));
+						}
+					});
+					e.preventDefault();
+				}
+				
+				/*********guest_write_action**********/
+				//if (e.target.id == 'btn_guest_write_action' ) {
+				/*
+			if ($("[id = 'btn_guest_write_action']")) {
+				console.log('>>>>>>>>> btn_guest_write_action');
+			}
+			
+			*/
+
+				//e.preventDefault();
+			});
+
+			/*********guest_modify_form***********/
+			/*********guest_modify_action*********/
+			/*********guest_remove_action*********/
+		});
+
+
+
+
+
+
+
+
+
+
+	</script>
+</head>
+
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+
+			<h1>
+				<a href="">방명록 JQUERY</a>
+			</h1>
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+
+			<p>
+				<strong>메 뉴</strong>
+			</p>
+			<ul class="guest_menus">
+				<li><a id="menu_guest_home" href="test.jsp">방명록홈</a></li>
+				<li><a id="menu_guest_list" href="#">방명록리스트</a></li>
+				<li><a id="menu_guest_write_form" href="#">방명록쓰기폼</a></li>
+
+			</ul>
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+			<!-- include_content.jsp start-->
+
+			<div id="content">
+
+			</div>
+			<!-- include_content.jsp end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+
+			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
+				rights reserved.</p>
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+</body>
+
+</html>

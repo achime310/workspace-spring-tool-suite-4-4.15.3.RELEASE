@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/*
+	1.tag selector
+	*/
+h1 {
+	text-align: center;
+	color: blue;
+}
+
+ul {
+	list-style: none;
+	padding: 0px;
+}
+/*
+	2. class selector
+	*/
+.titleBackClass {
+	background-color: pink;
+}
+
+h1.titleBackClass {
+	background-color: gold;
+}
+
+/*
+	3.id selector
+	*/
+#content {
+	border: 1px solid black;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding: 20px 20px 20px 20px;
+}
+
+#newsDiv {
+	padding-left: 5%;
+	border: 1px solid blue;
+}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setInterval(function(){
+		    $.ajax({
+				url:'06.newsTitlesHTML',
+				dataType:'html',
+				success:function(responseHtml){
+				    $('#newsDiv').html(responseHtml);
+				}
+		    });
+		    
+		},3000);
+	});
+</script>
+</head>
+<body>
+	<div id="content">
+		<h1 class="titleBackClass"  >실시간늬우스[HTML]</h1>
+		<hr>
+		<div id="newsDiv" class="titleBackClass">
+			<!-- 
+		<ul>
+			<li>뉴스1[조상일보]2019-10-07</li>		
+			<li>뉴스2[동앙일보]2019-10-07</li>		
+			<li>뉴스3[중상일보]2019-10-07</li>		
+		</ul>
+		 -->
+		</div>
+	</div>
+	
+</body>
+</html>

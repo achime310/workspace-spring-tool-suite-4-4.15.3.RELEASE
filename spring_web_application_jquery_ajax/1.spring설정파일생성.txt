@@ -1,0 +1,75 @@
+
+****************************************************************
+ 	spring설정파일생성 
+****************************************************************
+ 
+ 1 . jdbc.properties파일생성 
+	- src/main/resources/db 위치에 jdbc.properties파일생성
+		
+		---------------------------jdbc.properties----------------------------------
+		################### DataSource Configuration ##########################
+		jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+		jdbc.url=jdbc:oracle:thin:@182.237.126.19:1521:XE
+		jdbc.username=javadeveloper100
+		jdbc.password=javadeveloper100
+		----------------------------------------------------------------------------
+ 2 . datasource-config.xml 파일생성
+ 	- src/main/resources/spring 위치에 datasource-config.xml파일생성
+ 		
+ 		--------------------------datasource-config.xml-----------------------------
+ 		<?xml version="1.0" encoding="UTF-8"?>
+		<beans xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:context="http://www.springframework.org/schema/context"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+			<context:property-placeholder location="classpath:db/jdbc.properties"/>
+			<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+				<property name="driverClassName"  value="${jdbc.driverClassName}"/>
+				<property name="url"  value="${jdbc.url}"/>
+				<property name="username"  value="${jdbc.username}"/>
+				<property name="password"  value="${jdbc.password}"/>
+			</bean>
+		</beans>
+ 		----------------------------------------------------------------------------
+
+ 3 . application-config.xml 파일생성
+  	- src/main/resources/spring 위치에 application-config.xml 파일생성
+  	
+	  	-------------------------application-config.xml------------------------------
+	  	<?xml version="1.0" encoding="UTF-8"?>
+		<beans xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:context="http://www.springframework.org/schema/context"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+			<!-- 데이타소스설정 import-->
+			<import resource="datasource-config.xml"/>
+					
+		</beans>
+	  	--------------------------------------------------------------------------------
+  	
+ 4 . mvc-config.xml	
+ 
+ 		----------------------------------mvc-config.xml--------------------------------
+ 		<?xml version="1.0" encoding="UTF-8"?>
+		<beans xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:context="http://www.springframework.org/schema/context"
+			xmlns:mvc="http://www.springframework.org/schema/mvc"
+			xmlns:p="http://www.springframework.org/schema/p"
+			xmlns:aop="http://www.springframework.org/schema/aop"
+			xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+			<!--DefaultAnnotationHandlerMapping 객체자동생성-->
+			<mvc:annotation-driven/>
+			<!--기본 ViewResolver 객체설정-->
+			<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+				<property name="prefix" value="/WEB-INF/views/"/>
+				<property name="suffix" value=".jsp"/>
+			</bean>
+		</beans>
+ 		--------------------------------------------------------------------------------
+ 

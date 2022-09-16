@@ -1,0 +1,29 @@
+***************************************************************
+ 	pom.xml파일 spring-framework.version,java compiler설정 
+****************************************************************
+
+
+   A.java.version 와 spring-framework.version 설정
+   ################################################ 
+     <properties>
+		<java-version>1.8</java-version>
+		<org.springframework-version>4.3.25.RELEASE</org.springframework-version>
+		..
+	  </properties>   
+   
+   B.java compiler설정
+   ################################################    
+     <build>
+       <plugins>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                </configuration>
+            </plugin>
+            ..
+        </plugins> 
+      </build>

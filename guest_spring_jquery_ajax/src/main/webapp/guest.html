@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>방명록 관리</title>
+<link rel=stylesheet href="css/styles.css" type="text/css">
+<link rel=stylesheet href="css/guest.css" type="text/css">
+<link rel="icon" href="image/favicon-32x32.png">
+<style type="text/css" media="screen">
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/guest_html_content.js"></script>
+
+<script type="text/javascript">
+		
+</script>
+<script type="text/javascript">
+$(function(){
+    /*
+    DOM Tree가 생성된후이벤트등록
+    */
+    /*############### event#################*/
+    /*********guest_home******************/
+    $('#menu_guest_home').click(function(e){
+		$('#content').html(guest_main_content());
+		e.preventDefault();
+    });
+    /*********guest_write_form************/
+    $('#menu_guest_write_form').click(function(e){
+			$('#content').html(guest_write_form_content());
+			e.preventDefault();
+	 });
+    /*********guest_detail****************/
+    /*********guest_list******************/
+    $(document).on('click','#menu_guest_list',function(e){
+		$.ajax({
+		    url:'guest_list_json',
+		    method:'GET',
+		    success:function(jsonResult){
+				var guestArray = jsonResult.data;
+				$('#content').html(guest_list_content(guestArray));
+		    }
+		});
+		e.preventDefault();
+    });
+    /*********guest_write_action**********/
+    /*********guest_modify_form***********/
+    /*********guest_modify_action*********/
+    /*********guest_remove_action*********/
+});	
+	
+
+	
+	
+	
+
+
+
+
+ 
+</script>
+</head>
+<body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
+	marginwidth=0 marginheight=0>
+	<!-- container start-->
+	<div id="container">
+		<!-- header start -->
+		<div id="header">
+			<!-- include_common_top.jsp start-->
+
+			<h1>
+				<a href="">방명록 JQUERY</a>
+			</h1>
+			<!-- include_common_top.jsp end-->
+		</div>
+		<!-- header end -->
+		<!-- navigation start-->
+		<div id="navigation">
+			<!-- include_common_left.jsp start-->
+
+			<p>
+				<strong>메 뉴</strong>
+			</p>
+			<ul class="guest_menus">
+				<li><a id="menu_guest_home" href="test.jsp">방명록홈</a></li>
+				<li><a id="menu_guest_list" href="#">방명록리스트</a></li>
+				<li><a id="menu_guest_write_form" href="#">방명록쓰기폼</a></li>
+
+			</ul>
+			<!-- include_common_left.jsp end-->
+		</div>
+		<!-- navigation end-->
+		<!-- wrapper start -->
+		<div id="wrapper">
+			<!-- content start -->
+			<!-- include_content.jsp start-->
+
+			<div id="content">
+				
+			</div>
+			<!-- include_content.jsp end-->
+			<!-- content end -->
+		</div>
+		<!--wrapper end-->
+		<div id="footer">
+			<!-- include_common_bottom.jsp start-->
+
+			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
+				rights reserved.</p>
+			<!-- include_common_bottom.jsp end-->
+		</div>
+	</div>
+	<!--container end-->
+</body>
+</html>

@@ -17,6 +17,7 @@
 		
 		<li><a href='response_xml_view_object.do'>Controller가 view 객체[XMLView]을반환 [출력]</a></li>
 		<li><a href='response_xml_view_name.do'>Controller가 view name(String) [xmlView]을반환 [출력]</a></li>
+		
 		<li><a href='response_string.do'>Controller가 응답 text데이타를반환[@ResponseBody]</a></li>
 		<li><a href='response_html.do'>Controller가 응답 html데이타를반환[@ResponseBody]</a></li>
 		<li><a href='response_xml.do'>Controller가 응답 Dto객체를xml로반환[@ResponseBody]</a></li>

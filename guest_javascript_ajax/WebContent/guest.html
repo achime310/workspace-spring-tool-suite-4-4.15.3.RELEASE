@@ -133,11 +133,11 @@
 			console.log("Event Target객체의 Element id: " + e.target.getAttribute("id"));
 			console.log("Event Target객체의 Element class: " + e.target.className);
 			console.log("Event Target객체의 Element class list: " + e.target.classList);	//NodeList형태로 반환. 배열로 생각.
-			console.log("Event Target객체의 Element class list.contains('guest_itme_a'): " + e.target.classList.contains('guest_itme_a'));
+			console.log("Event Target객체의 Element class list.contains('guest_item_a'): " + e.target.classList.contains('guest_item_a'));
 			console.log("Event Target객체의 Element guest_no: " + e.target.getAttribute("guest_no"));
 
 			/******guest_detail****************/
-			if (e.target.classList.contains('guest_itme_a')) {
+			if (e.target.classList.contains('guest_item_a')) {
 				console.log("guest item click >>>>>>>>>>>>");
 
 				guestService.sendRequest('GET',

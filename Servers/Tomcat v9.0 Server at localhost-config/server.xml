@@ -152,7 +152,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="jquery_ajax" path="/jquery_ajax" reloadable="true" source="org.eclipse.jst.jee.server:jquery_ajax"/><Context docBase="javascript_ajax" path="/javascript_ajax" reloadable="true" source="org.eclipse.jst.jee.server:javascript_ajax"/></Host>
+      <Context docBase="spring_web_application_jquery_ajax" path="/spring_web_application_jquery_ajax" reloadable="true" source="org.eclipse.jst.jee.server:spring_web_application_jquery_ajax"/><Context docBase="guest_javascript_ajax" path="/guest_javascript_ajax" reloadable="true" source="org.eclipse.jst.jee.server:guest_javascript_ajax"/><Context docBase="guest_jquery_ajax" path="/guest_jquery_ajax" reloadable="true" source="org.eclipse.jst.jee.server:guest_jquery_ajax"/><Context docBase="guest_spring_jquery_ajax" path="/guest_spring_jquery_ajax" reloadable="true" source="org.eclipse.jst.jee.server:guest_spring_jquery_ajax"/><Context docBase="jquery_ajax" path="/jquery_ajax" reloadable="true" source="org.eclipse.jst.jee.server:jquery_ajax"/><Context docBase="jquery" path="/jquery" reloadable="true" source="org.eclipse.jst.jee.server:jquery"/></Host>
     </Engine>
   </Service>
 </Server>

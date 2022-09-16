@@ -29,10 +29,12 @@
 											console.log(jsonResult);
 											var msg = jsonResult.data[0];
 											var fUser = jsonResult.data[1];
+											//msg= $(msg).trim();
+											if(msg == "[object Object]") msg="";
+											
 											document.querySelector('#content').innerHTML=user_write_form_content(fUser,msg);
 										},
 										param);
-			
 			
 		});
 		

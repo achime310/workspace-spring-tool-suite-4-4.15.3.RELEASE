@@ -2,7 +2,7 @@ function guest_item_content(guest){
 	return `<tr class="guest_item">
 				<td width="50" align="center" bgcolor="ffffff" height="20">${guest.guest_no}</td>
 				<td width="300" bgcolor="ffffff" style="padding-left: 10">
-					<a href="#" class="user guest_itme_a" guest_no="${guest.guest_no}">
+					<a href="#" class="user guest_item_a" guest_no="${guest.guest_no}">
 					${guest.guest_title}
 					</a>
 				</td>

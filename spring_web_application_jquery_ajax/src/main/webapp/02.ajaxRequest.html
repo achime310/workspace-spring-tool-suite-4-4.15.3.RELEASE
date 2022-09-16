@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#id').keyup(function(e){
+		    var idStr=$('#id').val();
+		    if(idStr.trim()==''){
+				return;
+		    }
+		    /*
+		    jQuery ajax요청
+		    */
+		    $.ajax({
+				url:'02.ajaxRequest',
+				method:'GET',
+				data:"id="+idStr,
+				dataType:'text',
+				beforeSend:function(){
+				    $('#msg').html(
+					    "<img src='loading.gif' width='20px' height='20px'>");
+				},
+				success:function(responseData){
+				    if(responseData.trim()=='사용가능'){
+					 	$('#msg').html(responseData).css('color','green');
+				    }else if(responseData.trim()=='사용불가능'){
+					 	$('#msg').html(responseData).css('color','orange');
+					
+				    }
+				   
+				},
+				complete:function(){
+				    
+				},
+				error:function(){
+				   $('#msg').html('error!!!').css('color','red');
+				}
+		    });
+		    
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>ajax요청</h1>
+	<hr />
+	<form name="f" id="f" action="">
+		아이디:<input type="text" name="id" id="id"> <span id="msg"></span>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+
