@@ -69,6 +69,8 @@
 				datType:'json',
 				success:function(resultJsonObject){
 				   var newsJsonArray=resultJsonObject.data;
+				   console.log(resultJsonObject.data);
+				   console.log(resultJsonObject);
 				   var html='<ul>';
 				   $.each(newsJsonArray,function(i,newsJsonObject){
 				       html+=`

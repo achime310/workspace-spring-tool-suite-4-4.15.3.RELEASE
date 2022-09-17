@@ -25,6 +25,9 @@
 								guest_title,guest_content);
 		GuestService guestService=new GuestService();
 		int rowCount=guestService.updateGuest(guest);
+		
+		guest=guestService.selectByNo(Integer.parseInt(guest_noStr));
+		
 		code=1;
 		url="guest_view_content";
 		msg="";

@@ -1,4 +1,7 @@
 package com.itwill.guest;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 /*
 이름             널?       유형             
 -------------- -------- -------------- 
@@ -10,6 +13,7 @@ GUEST_HOMEPAGE          VARCHAR2(50)
 GUEST_TITLE    NOT NULL VARCHAR2(100)  
 GUEST_CONTENT  NOT NULL VARCHAR2(4000) 
 */
+//@JacksonXmlRootElement(localName = "guest")
 public class Guest {
 	private int guest_no;
 	private String guest_name;

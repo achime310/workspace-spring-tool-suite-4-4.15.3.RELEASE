@@ -35,6 +35,8 @@
 		jsonData.append("\"guest_homepage\":\"" + guest.getGuest_homepage() + "\",");
 		jsonData.append("\"guest_content\":\"" + guest.getGuest_content() + "\"");
 		jsonData.append("}");
+		
+		System.out.println(jsonData);
 	}
 %>
 { 

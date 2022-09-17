@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>방명록 관리</title>
@@ -8,58 +9,201 @@
 <link rel="icon" href="image/favicon-32x32.png">
 <style type="text/css" media="screen">
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="js/guest_html_content.js"></script>
 
 <script type="text/javascript">
-		
+	
 </script>
 <script type="text/javascript">
-$(function(){
-    /*
-    DOM Tree가 생성된후이벤트등록
-    */
-    /*############### event#################*/
-    /*********guest_home******************/
-    $('#menu_guest_home').click(function(e){
-		$('#content').html(guest_main_content());
-		e.preventDefault();
-    });
-    /*********guest_write_form************/
-    $('#menu_guest_write_form').click(function(e){
+	$(function() {
+		/*
+		DOM Tree가 생성된후이벤트등록
+		 */
+		/*############### event#################*/
+		/*********guest_home******************/
+		$('#menu_guest_home').click(function(e) {
+			$('#content').html(guest_main_content());
+			//하지 않으면, history 발생한다구?
+			e.preventDefault();
+		});
+		/*********guest_write_form************/
+		$('#menu_guest_write_form').click(function(e) {
 			$('#content').html(guest_write_form_content());
 			e.preventDefault();
-	 });
-    /*********guest_detail****************/
-    /*********guest_list******************/
-    $(document).on('click','#menu_guest_list',function(e){
-		$.ajax({
-		    url:'guest_list_json',
-		    method:'GET',
-		    success:function(jsonResult){
-				var guestArray = jsonResult.data;
-				$('#content').html(guest_list_content(guestArray));
-		    }
 		});
-		e.preventDefault();
-    });
-    /*********guest_write_action**********/
-    /*********guest_modify_form***********/
-    /*********guest_modify_action*********/
-    /*********guest_remove_action*********/
-});	
-	
 
-	
-	
-	
+		/*############### document event [dynamic content event]#################*/
+		/*********guest_list******************/
+		$(document).on('click', '#menu_guest_list,#btn_guest_list',
+				function(e) {
+					//-> controller에 옮겨야겠죠?
+					$.ajax({
+						url : 'guest_list_json',
+						method : 'GET',
+						dataType:'json',
+						success : function(jsonResult) {
+							//var guestArray = jsonResult.data;
+							//console.log(guestArray);
+							$('#content').html(guest_list_content(jsonResult.data));
+						}
+					});
+					e.preventDefault();
+				});
+  
+		/*********guest_detail****************/
+		$(document).on(
+				'click',
+				'.guest_item_a',
+				function(e) {
+					$.ajax({
+						url : 'guest_detail_json',
+						method : 'GET',
+						data : "guest_no="+$(e.target).attr('guest_no'),
+						dataType:'json',
+						success : function(resultJsonObject){
+							//var guest = resultJsonObject.data;
+							//console.log(resultJsonObject);
+							$('#content').html(guest_view_content(resultJsonObject.data));
+						},
+						complete : function() {},
+						error : function() {}
+					});
+					e.preventDefault();
+				});
+		/*********guest_write_action**********/
+		$(document).on('click', '#btn_guest_write_action', function(e) {
+			//console.log('click >>> '+$('#guest_write_form').serialize());
+			//$('#guest_write_form').serialize();
 
+			/************ 유효성체크 ************/
+			if ($("input[name='guest_name']").val() == "") {
+				alert("이름을 입력하십시요.");
+				$("input[name='guest_name']").focus();
+				return;
+			}
+			if ($("input[name='guest_email']").val() == "") {
+				alert("이메일을 입력하십시요.");
+				$("input[name='guest_email']").focus();
+				return;
+			}
+			if ($("input[name='guest_homepage']").val() == "") {
+				alert("홈페이지를 입력하십시요.");
+				$("input[name='guest_homepage']").focus();
+				return;
+			}
+			if ($("input[name='guest_title']").val() == "") {
+				alert("제목을 입력하십시요.");
+				$("input[name='guest_title']").focus();
+				return;
+			}
+			if ($("input[name='guest_content']").val() == "") {
+				alert("내용을 입력하십시요.");
+				$("input[name='guest_content']").focus();
+				return;
+			}
+			/*************************************/
 
+			$.ajax({
+				url : 'guest_write_action_json',
+				method : 'POST',
+				data : $('#guest_write_form').serialize(),
+				/*dataType:'json',*/
+				beforeSend:function(){
+				    $('#content').html(
+					    "<img src='image/loading.gif' width='100px' height='100px'>");
+				},
+				complete : function(resultJsonObject){
+					console.log(resultJsonObject);
+					//반환값의 형태가 다른 이유는, success와 complete의 차이일지도 모르겠다.
+					console.log(resultJsonObject.code);
+					console.log(resultJsonObject.responseJSON.code);
+					if(resultJsonObject.responseJSON.code==1){
+						$('#menu_guest_list').trigger('click');
+					}else if (resultJsonObject.responseJSON.code==2){
+						alert('GuestRestcontroller_error');
+					}
+					/*
+					if(responseData.responseText.trim()=="guest_list"){
+						$('#menu_guest_list').trigger('click');
+					}else if (responseData.responseText.trim()=="guest_error"){
+						alert('GuestRestcontroller_error');
+					}
+					*/
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+			e.preventDefault();
+		});
+		/*********guest_modify_form***********/
+		$(document).on('click', '#btn_guest_modify_form', function(e) {
+			$.ajax({
+				url : 'guest_modify_form_json',
+				method : 'POST',
+				data : { "guest_no" : $(e.target).attr('guest_no') },
+				dataType :'json',
+				success : function(resultJsonObject) {
+					//console.log(jsonResult);
+					//var guest = resultJsonObject.data;
+					$('#content').html(guest_modify_form_content(resultJsonObject.data));
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+			e.preventDefault();
+		});
+		/*********guest_modify_action*********/
+		$(document).on('click', '#btn_guest_modify_action', function(e) {
+			console.log($('#guest_modify_form').serialize());
+			$.ajax({
+				url : 'guest_modify_action_json',
+				method : 'POST',
+				data : $('#guest_modify_form').serialize(),
+				dataType : 'json',
+				success : function(resultJsonObject) {
+					console.log(resultJsonObject.data);
+					//var guest = jsonResult.data[0];
+					$('#content').html(guest_view_content(resultJsonObject.data));
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+			e.preventDefault();
 
-
- 
+		});
+		/*********guest_remove_action*********/
+		$(document).on('click', '#btn_guest_remove_action', function(e) {
+			if (window.confirm("정말 삭제하시겠습니까?")) {
+				console.log($(e.target).attr("guest_no"));
+				$.ajax({
+					url : 'guest_remove_action_json',
+					method : 'POST',
+					data : {
+						"guest_no" : $(e.target).attr('guest_no')
+					},
+					complete : function() {
+						$('#menu_guest_list').trigger('click')
+					},
+					error : function() {
+						alert('error');
+					}
+				});
+				e.preventDefault();
+			}
+		});
+		/*
+		load시 홈화면 보이게 함
+		 */
+		$('#menu_guest_home').trigger('click');
+	});
 </script>
 </head>
+
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
 	marginwidth=0 marginheight=0>
 	<!-- container start-->
@@ -69,7 +213,7 @@ $(function(){
 			<!-- include_common_top.jsp start-->
 
 			<h1>
-				<a href="">방명록 JQUERY</a>
+				<a href="">방명록 SPRING_JQUERY_AJAX</a>
 			</h1>
 			<!-- include_common_top.jsp end-->
 		</div>
@@ -94,10 +238,7 @@ $(function(){
 		<div id="wrapper">
 			<!-- content start -->
 			<!-- include_content.jsp start-->
-
-			<div id="content">
-				
-			</div>
+			<div id="content"></div>
 			<!-- include_content.jsp end-->
 			<!-- content end -->
 		</div>
@@ -105,11 +246,12 @@ $(function(){
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
 
-			<p align="center">Copyright (&copy;) By Kimkyoungho.[김경호] All
+			<p align="center">Copyright (&copy;) By Seo-young Choi.[최서영] All
 				rights reserved.</p>
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>
 	<!--container end-->
 </body>
+
 </html>

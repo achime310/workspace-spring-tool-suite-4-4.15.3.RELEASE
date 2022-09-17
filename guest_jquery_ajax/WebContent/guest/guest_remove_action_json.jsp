@@ -18,6 +18,7 @@
 		code=1;
 		url="guest_list_content";
 		msg="삭제성공";
+		System.out.println("###"+msg);
 	}
 %>
 {

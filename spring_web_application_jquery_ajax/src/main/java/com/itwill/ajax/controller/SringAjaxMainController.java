@@ -31,6 +31,7 @@ public class SringAjaxMainController {
 			msg="사용불가능";
 		}
 		Thread.sleep(1000);
+		System.out.println(msg);
 		return msg;
 	}
 	@RequestMapping(value = "03.ajaxRequestGETPOST",produces = "text/plain;charset=UTF-8")

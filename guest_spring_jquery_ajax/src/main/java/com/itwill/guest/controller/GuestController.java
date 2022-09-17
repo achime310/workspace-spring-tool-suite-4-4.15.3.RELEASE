@@ -25,6 +25,23 @@ import com.itwill.guest.GuestService;
 public class GuestController {
 	@Autowired
 	private GuestService guestService;
-	
+	@RequestMapping(value = "/guest_write_action", method = RequestMethod.GET)
+	public String guest_write_action_get() {
+		String forwardPath = "redirect:guest_main";
+		return forwardPath;
+	}
+	@RequestMapping(value = "/guest_write_action", method = RequestMethod.POST)
+	public String guest_write_action(@ModelAttribute Guest guest, Model model) {
+		String forwardPath = "";
+		try {
+			int insertRowCount = guestService.insertGuest(guest);
+			forwardPath = "redirect:guest_list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("MSG", "잘모르는실패!!!");
+			forwardPath = "/guest_error";
+		}
+		return forwardPath;
+	}
 
 }
