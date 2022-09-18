@@ -20,16 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.guest.Guest;
 import com.itwill.guest.GuestService;
 
-
 @Controller
 public class GuestController {
 	@Autowired
 	private GuestService guestService;
+
 	@RequestMapping(value = "/guest_write_action", method = RequestMethod.GET)
 	public String guest_write_action_get() {
 		String forwardPath = "redirect:guest_main";
 		return forwardPath;
 	}
+
 	@RequestMapping(value = "/guest_write_action", method = RequestMethod.POST)
 	public String guest_write_action(@ModelAttribute Guest guest, Model model) {
 		String forwardPath = "";
@@ -42,6 +43,22 @@ public class GuestController {
 			forwardPath = "/guest_error";
 		}
 		return forwardPath;
+	}
+
+	//GET방식 요청이 들어오면, main으로 redirect
+	@RequestMapping(value = { "/guest_write_action_json",
+								"/guest_modify_form_json",
+								"/guest_modify_action_json",
+								"/guest_remove_action_json",
+								"/" },  method = RequestMethod.GET)
+	public String user_action_get() {
+		/*
+		 * Map resultMap = new HashMap(); int code = 0; String url = ""; String msg =
+		 * ""; System.out.println(resultMap); resultMap.put("code", code);
+		 * resultMap.put("url", url); resultMap.put("msg", msg); resultMap.put("data",
+		 * ""); System.out.println(resultMap);
+		 */
+		return "redirect:guest.html";
 	}
 
 }

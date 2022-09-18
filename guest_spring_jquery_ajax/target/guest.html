@@ -227,16 +227,39 @@
 		/*
 		load시 홈화면 보이게 함
 		 */
-		//$('#menu_guest_home').trigger('click');
-		$('#content').html(guest_main_content);
+		$('#menu_guest_home').trigger('click');
+
 		/*
 		GET 방식
 		 */
+		$.get("/guest_write_action_json", function(data) {
+			console.log("get!!");
+			//$( ".result" ).html( data );
+			alert("Load was performed." + data);
+		}).done(function() {
+			console.log("get.done");
+			$('#menu_guest_list').trigger('click');
+
+		});
 		
+		/* 
+		$.ajax({
+			url : 'guest_write_action_json',
+			method : 'GET',
+			dataType : 'text',
+			success : function(responseData) {
+				console.log(responseData);
+				console.log("get!!");
+				$('#menu_guest_list').trigger('click');
+			},
+			error : function() {
+				alert('error');
+			}
+		});
+		 */
 		
 		
 	});
-		
 </script>
 </head>
 
@@ -288,11 +311,6 @@
 		</div>
 	</div>
 	<!--container end-->
-	<!-- 
-	<script type="text/javascript">
-	$('#content').html(guest_main_content);
-	</script>
-	 -->
 </body>
 
 </html>

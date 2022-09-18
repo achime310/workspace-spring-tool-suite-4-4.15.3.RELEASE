@@ -209,7 +209,6 @@ public class GuestRestController {
 		int code = 0;
 		String url = "";
 		String msg = "";
-		
 		try {
 			int rowCount=guestService.deleteGuest(Integer.parseInt(guest_no));
 			code=1;
@@ -235,4 +234,11 @@ public class GuestRestController {
 		resultMap.put("data", "");
 		return resultMap;
 	}
+	/*
+	 * GET방식
+	 */
+	//guest_spring_jquery_ajax_get_json
+
+	
 }
+
