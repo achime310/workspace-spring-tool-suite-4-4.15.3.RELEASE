@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,8 +73,8 @@ public class GuestRestController {
 				msg="성공";
 			} catch (Exception e) {
 				code=2;
-				url="guest_main";
-				msg="실패";
+				url="guest_error";
+				msg="(실패)방명록상세보기";
 				e.printStackTrace();
 			}    
 		}
@@ -115,29 +116,33 @@ public class GuestRestController {
 		return resultMap;
 	}
 	*/
-	@RequestMapping(value = "/guest_write_action_json",produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
+	
+	
+	//@RequestMapping(value = "/guest_write_action_json",produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
+	@PostMapping(value = "/guest_write_action_json",produces = "application/json;charset=UTF-8")
 	public Map guest_write_action(@ModelAttribute Guest guest) {
 		Map resultMap = new HashMap();
 		int code = 0;
 		String url = "";
 		String msg = "";
-		
+		Guest insertGuest = null;
 		try {
-			int insertRowCount = guestService.insertGuest(guest);
+			int insert_guest_no = guestService.insertGuest(guest);
+			insertGuest = guestService.selectByNo(insert_guest_no);
 			code=1;
 			url="guest_list";
 			msg="쓰기성공";
 		} catch (Exception e) {
 			e.printStackTrace();
 			code=2;
-			url="guest_main";
-			msg="쓰기실패";
+			url="guest_error";
+			msg="(실패)방명록쓰기";
 		}
 		//System.out.println(resultMap);
 		resultMap.put("code", code);
 		resultMap.put("url", url);
 		resultMap.put("msg", msg);
-		resultMap.put("data", "");
+		resultMap.put("data", insertGuest);
 		return resultMap;
 	}
 

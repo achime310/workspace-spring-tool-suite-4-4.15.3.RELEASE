@@ -36,15 +36,20 @@
 
 		/*############### document event [dynamic content event]#################*/
 		/*********guest_list******************/
-		$(document).on('click', '#menu_guest_list,#btn_guest_list',
+		$(document).on(
+				'click',
+				'#menu_guest_list,#btn_guest_list',
 				function(e) {
 					//-> controller에 옮겨야겠죠?
 					$.ajax({
 						url : 'guest/guest_list_json.jsp',
 						method : 'GET',
+						dataType : 'json',
 						success : function(jsonResult) {
-							var guestArray = jsonResult.data;
-							$('#content').html(guest_list_content(guestArray));
+							//var guestArray = jsonResult.data;
+							//console.log(guestArray);
+							$('#content').html(
+									guest_list_content(jsonResult.data));
 						}
 					});
 					e.preventDefault();
@@ -109,8 +114,12 @@
 				url : 'guest/guest_write_action_json.jsp',
 				method : 'POST',
 				data : $('#guest_write_form').serialize(),
-				complete : function() {
-					$('#menu_guest_list').trigger('click')
+				success : function(jsonResult) {
+					if(jsonResult.code==1){
+						$('#menu_guest_main').trigger('click');
+					}else if(jsonResult.code==2){
+						alert('error');
+					}
 				},
 				error : function() {
 					alert('error');
@@ -128,6 +137,7 @@
 				data : {
 					"guest_no" : $(e.target).attr('guest_no')
 				},
+				dataType:'json',
 				success : function(jsonResult) {
 					console.log(jsonResult.data[0]);
 					var guest = jsonResult.data[0];
@@ -182,6 +192,32 @@
 		load시 홈화면 보이게 함
 		 */
 		$('#menu_guest_home').trigger('click');
+		
+		
+		/**************jQuery Ajax Global Event**************/
+		//현재 페이지의 모든 객체를 지칭해야하므로, document
+		
+		$(document).ajaxStart(function(e){
+			console.log('ajaxStart');
+			
+			
+			//progress dialog show
+			$("<div id='loading'>loading...</div>").insertBefore('#content').show();
+			
+			//$('#content').html("<div id='loading'>loading...</div>");
+		
+		});
+		
+		
+		$(document).ajaxComplete(function(e){
+			console.log('ajaxComplete');
+			//progress dialog show
+			$('#loading').hide();
+			$('#loading').remove();
+			
+		});
+		
+		
 	});
 </script>
 </head>

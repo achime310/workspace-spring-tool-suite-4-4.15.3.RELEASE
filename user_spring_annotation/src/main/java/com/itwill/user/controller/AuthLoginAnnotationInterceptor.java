@@ -103,12 +103,14 @@ public class AuthLoginAnnotationInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
 		super.postHandle(request, response, handler, modelAndView);
+		System.out.println("### AuthLoginAnnotationInterceptor.postHandle()메써드");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("### AuthLoginAnnotationInterceptor.afterCompletion()메써드");
 		super.afterCompletion(request, response, handler, ex);
 	}
 }

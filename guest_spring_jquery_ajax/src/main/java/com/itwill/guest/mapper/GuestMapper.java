@@ -17,7 +17,17 @@ public interface GuestMapper {
 	 * 메쏘드인자타입은 GuestMapper.xml 파일의 parameterType 와일치
 	 * 메쏘드리턴타입은 GuestMapper.xml 파일의 resultType 와일치
 	 */
-	@Select("SELECT * FROM GUEST order by guest_no desc")
+	//@Select("SELECT * FROM GUEST order by guest_no desc")
+	@Select("select \r\n"
+			+ "        guest_no,\r\n"
+			+ "		guest_name,\r\n"
+			+ "		SUBSTR(guest_date,0,10) \"guest_date\",\r\n"
+			+ "		guest_email,\r\n"
+			+ "		guest_homepage,\r\n"
+			+ "		guest_title,\r\n"
+			+ "		guest_content\r\n"
+			+ "        \r\n"
+			+ "        from guest order by guest_no desc")
 	public List<Guest> selectAll();
 	/*
 	 <select id="selectAll" resultType="com.itwill.guest.Guest">

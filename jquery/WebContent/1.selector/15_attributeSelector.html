@@ -29,12 +29,12 @@ div {
 		/*
 		name 속성이 man글자을 포함하는( *= ) : (ex> iron man, bat man)
 		*/
-		$("input[name *='man']").css('font-size','20px');
+		//$("input[name *='man']").css('font-size','20px');
 		
 		/*
 		name 속성이 man단어를  포함하는( ~= )
 		*/
-		$("input[name ~= 'man']").css('color','red');
+		//$("input[name ~= 'man']").css('color','red');
 	});
 </script>
 </head>
@@ -51,6 +51,7 @@ div {
 	<div>
 		<p>"name"값에 man이 포함된 요소를 표시한다[토마토].(정확히일치[오렌지])</p>
 		<input type="text" name="man" value="name is man" /><br/>
+		<input type="text" name="man" value="name is man2" /><br/>
 		<input type="text" name="superman" value="name is superman" /><br/>
 		<input type="text" name="iron man" value="name is iron man" /><br/>
 		<input type="text" name="bat man" value="name is bat man" /><br/>
