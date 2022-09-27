@@ -18,7 +18,7 @@
     <b>Chrome 브라우저는 https 환경에서만 geolocation을 지원합니다.</b> 참고해주세요.
 </p>
 <div id="map" style="width:100%;height:350px;"></div>
-<br/><hr><br/>
+<br/>
 <div class="map_wrap">
     <div id="map2" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
     <div class="hAddr">
@@ -33,7 +33,7 @@
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 5 // 지도의 확대 레벨 
+	        level: 3 // 지도의 확대 레벨 
 	    }; 
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
