@@ -1,0 +1,19 @@
+{
+	"code":1,
+	"url":"user_main",
+	"msg":"메세지",
+	"data":[
+				{
+					"userid":"guard1",
+					"password":"1111",
+					"name":"김경일",
+					"email":"guard1@naver.com"
+				},
+				{
+					"userid":"guard2",
+					"password":"2222",
+					"name":"김경이",
+					"email":"guard2@naver.com"
+				}
+			]
+}

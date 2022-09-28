@@ -1,0 +1,12 @@
+
+0. web.xml 설정
+1. application-config.xml 설정 
+	- DataSource,Dao,Service 빈생성,의존성주입
+	
+2. mvc-config.xml 설정 
+	- HandlerMapping객체생성
+	- Controller객체생성 Service객체의존성주입
+
+3. Controller객체 메쏘드작성,url mapping
+
+4. jsp작성(el출력)

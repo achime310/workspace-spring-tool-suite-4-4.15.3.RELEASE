@@ -1,0 +1,169 @@
+
+# 0.pom.xml파일 project name변경(contextPath)
+
+		...
+		<groupId>com.itwill</groupId>
+		<artifactId>spring_web_application</artifactId>
+		<name>spring_web_application</name>
+		...
+	
+# 1. pom.xml파일 web 설정
+
+	A.java.version 와 spring-framework.version 설정
+	################################################
+			<properties>
+				<java-version>1.8</java-version>
+				<org.springframework-version>4.3.30.RELEASE</org.springframework-version>
+				...
+			</properties>
+	################################################		
+	
+	B.	java compiler설정
+	#################################################
+			<build>
+		        <plugins>
+		           ...
+		            <plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-compiler-plugin</artifactId>
+		                <version>3.8.1</version>
+		                <configuration>
+		                    <source>${java-version}</source>
+		                    <target>${java-version}</target>
+		                </configuration>
+		            </plugin>
+		            ...
+		        </plugins>
+		    </build>
+	##############################################		
+
+		
+	C. maven war plugin 	
+	#################################################
+			<build>
+		        <plugins>
+		           ...	
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>3.3.2</version>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+						</configuration>
+					</plugin>
+		            ...
+		        </plugins>
+		    </build>
+	##############################################				
+		
+		
+	D. servlet ,jsp dependency설정(버젼변경)  
+     ################################################		
+			<!-- servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>4.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- jsp -->
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>javax.servlet.jsp-api</artifactId>
+				<version>2.3.3</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- jstl -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>	
+				
+	E. log4j dependency설정
+	################################################ 
+			<dependency>
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			    <version>1.2.17</version>
+			</dependency>
+		  
+		   log4j.properties(log4j.xml)파일을 resources 디렉토리에 생성(classpath root)
+		
+	F. oracle driver dependency설정
+	################################################ 
+		   <dependency>
+			    <groupId>com.oracle.database.jdbc</groupId>
+			    <artifactId>ojdbc6</artifactId>
+			    <version>11.2.0.4</version>
+			</dependency>	
+	################################################ 
+	
+	G. spring-context,spring-webmvc dependency설정
+	################################################ 
+	<!-- Spring context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+	
+	
+		
+# 2. web.xml파일 설정 	
+
+		 A. spring 인코딩 필터설정
+	     ################################################ 
+			<filter>
+		    	<filter-name>encodingFilter</filter-name>
+			    <filter-class>
+			   			org.springframework.web.filter.CharacterEncodingFilter
+			  	</filter-class>
+			    <init-param>
+			      <param-name>encoding</param-name>
+			      <param-value>UTF-8</param-value>
+			    </init-param>
+		   	 </filter>
+		   	 <filter-mapping>
+		    	<filter-name>encodingFilter</filter-name>
+		    	<url-pattern>/*</url-pattern>
+		  	 </filter-mapping>  
+   
+	     B.  DisptcherServlet 설정(application-config.xml,mvc-config.xml)
+	     ################################################################# 
+		     <context-param>
+		        <param-name>contextConfigLocation</param-name>
+		        <param-value>classpath:spring/application-config.xml</param-value>
+		     </context-param>
+		    
+		     <listener>
+		        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		     </listener>
+		    
+		    <!--
+				- Servlet that dispatches request to registered handlers (Controller implementations).
+			-->
+		    <servlet>
+		        <servlet-name>dispatcherServlet</servlet-name>
+		        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		        <init-param>
+		            <param-name>contextConfigLocation</param-name>
+		            <param-value>classpath:spring/mvc-config.xml</param-value>
+		        </init-param>
+		        <load-on-startup>1</load-on-startup>
+		    </servlet>
+		
+		    <servlet-mapping>
+		        <servlet-name>dispatcherServlet</servlet-name>
+		        <url-pattern>/</url-pattern>
+		    </servlet-mapping>
+    		################################################################# 
+    
+		
+		

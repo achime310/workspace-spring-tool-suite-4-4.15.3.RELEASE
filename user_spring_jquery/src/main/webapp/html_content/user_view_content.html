@@ -1,0 +1,45 @@
+<table border=0 cellpadding=0 cellspacing=0>
+	<tr>
+		<td>
+			<!--contents--> <br />
+			<table style="padding-left: 10px" border=0 cellpadding=0
+				cellspacing=0>
+				<tr>
+					<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>사용자 관리 -
+							사용자 정보보기</b></td>
+				</tr>
+			</table> <!-- view Form  -->
+			<form name="f" method="post">
+				<input type="hidden" name="userId" value="guard" />
+				<table border="0" cellpadding="0" cellspacing="1" width="590"
+					bgcolor="BBBBBB">
+					<tr>
+						<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
+							아이디</td>
+						<td width=490 bgcolor="ffffff" style="padding-left: 10">
+							${loginUser.userId}</td>
+					</tr>
+					<tr>
+						<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
+						<td width=490 bgcolor="ffffff" style="padding-left: 10">
+							${loginUser.name}</td>
+					</tr>
+					<tr>
+						<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
+							주소</td>
+						<td width=490 bgcolor="ffffff" style="padding-left: 10">
+							${loginUser.email}</td>
+					</tr>
+				</table>
+			</form> <br />
+			<table border="0" cellpadding="0" cellspacing="1">
+				<tr>
+					<td align=center><input id="btn_user_modify_form"
+						type="button" value="수정"> &nbsp; <input
+						id="btn_user_remove_action" type="button" value="탈퇴">
+						&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
