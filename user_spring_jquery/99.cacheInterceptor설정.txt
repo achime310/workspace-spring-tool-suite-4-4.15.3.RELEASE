@@ -1,0 +1,78 @@
+	
+Spring MVC 브라우저 캐쉬 제어 설정 
+기본적인 browser cache 설정 방안
+	1. static resource에 대해서는 <mvc:resources> element의 cache-period 값 설정
+	2. dynamic resource에 대해서는 Spring에서 제공하는 WebContentInterceptor의 cacheSeconds 값 설정
+
+
+#############################################
+	1.<mvc:resources> 설정
+#############################################
+
+Spring Servlet Context 파일에 설정
+	설정 예
+	<mvc:resources mapping="/js/**" location="/js/" cache-period="0"/>
+	<mvc:resources mapping="/css/**" location="/css/" cache-period="0"/>
+	<mvc:resources mapping="/image/**" location="/image/" cache-period="0"/>
+
+	cache-period
+	Specifies the cache period for the resources served by this resource handler, in seconds.
+	The default is to not send any cache headers but rather to rely on last-modified timestamps only.
+	Set this to 0 in order to send cache headers that prevent caching, or to a positive number of seconds in order to send cache headers with the given max-age value.
+
+#############################################
+	2. WebContentInterceptor 설정
+#############################################
+Spring Servlet Context 파일에 설정
+
+설정 예 1) / 아래에 대해서 웹 브라우저 cache 방지
+
+<mvc:interceptors>
+     <mvc:interceptor>
+          <mvc:mapping path="/**"/>
+          <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+               <property name="cacheSeconds" value="0"/>
+          </bean>
+     </mvc:interceptor>
+</mvc-interceptors>
+
+
+설정 예 2) /아래에 대해서 웹 브라우저 cache 방지, 예외적으로 사진은 하루 동안 cache
+
+<mvc:interceptors>
+     <mvc:interceptor>
+          <mvc:mapping path="/**"/>
+          <bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+               <property name="cacheSeconds" value="0"/>
+               <property name="cacheMappings">
+                   <props>
+                      <prop key="/image/**">86400</prop>
+                   </props>
+               </property>
+           </bean>
+     </mvc:interceptor>
+</mvc-interceptors>
+
+WebContentInterceptor Cache 관련 속성
+1) cacheSeconds
+	Cache 기간, 초단위 (기본값: -1)
+	cacheSeconds < 0	cache 관련 헤더를 설정하지 않음
+	cacheSeconds == 0	
+	cache 방지
+	
+	Pragma: no-cache
+	Expires: Thu, 01 Jan 1970 00:00:00 GMT
+	Cache-Control: max-age=0, no-cache, no-store
+	cacheSeconds > 0	
+	cache
+	
+	Expires: Wed, 03 Jul 2013 05:58:02 GMT
+	Cache-Control: max-age=31536000
+2) useExpiresHeader
+	Expires 헤더 사용 여부 (기본값: true)
+3) useCacheControlHeader
+	Cache-Control 헤더 사용 여부 (기본값: true)
+4) useCacheControlNoStore
+	Cache 방지 시(cacheSeconds=0)에 Cache-Control 헤더를 사용할 경우 no-store를 함께 설정할지 여부 (기본값: true)
+
+(*) Annotation을 사용해서 개별 Controller의 메소드에서 Cache 설정을 하고자 할 경우에는 https://github.com/foo4u/spring-mvc-cache-control을 참고
