@@ -7,17 +7,17 @@ public interface UserDao {
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
-	int create(User user) throws Exception;
+	int createUser(User user) throws Exception;
 
 	/*
 	 * 기존의 사용자정보를 수정
 	 */
-	int update(User user) throws Exception;
+	int updateUser(User user) throws Exception;
 
 	/*
 	 * 사용자아이디에해당하는 사용자를 삭제
 	 */
-	int remove(String userId) throws Exception;
+	int removeUser(String userId) throws Exception;
 
 	/*
 	 * 사용자아이디에해당하는 정보를 데이타베이스에서 찾아서 User 도메인클래스에 저장하여 반환

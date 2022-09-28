@@ -1,10 +1,10 @@
 package com.itwill.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /*
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
+	@Qualifier("userDaoImplMyBatisMapperInterface")
 	private UserDao userDao;
 
 	public UserServiceImpl() throws Exception {
@@ -39,10 +40,7 @@ public class UserServiceImpl implements UserService{
 		}else {
 			//아이디안중복
 			//2.회원가입
-			BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-			String securePassword = encoder.encode(user.getUser_pw());
-			user.setUser_pw(securePassword); //암호화
-			int insertRowCount=userDao.create(user);
+			int insertRowCount=userDao.createUser(user);
 			return insertRowCount;
 		}
 	}
@@ -65,11 +63,7 @@ public class UserServiceImpl implements UserService{
 			result=0;
 		}else {
 			//아이디존재함
-			
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			if(encoder.matches(password,user.getUser_pw())){
-				System.out.println("out:"+password);
-				System.out.println("int:"+user.getUser_pw());
+			if(user.isMatchPassword(password)) {
 				//패쓰워드일치(로그인성공)
 				result=2;
 			}else {
@@ -89,18 +83,14 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public User findUser(String userId) throws Exception{
-		User user=userDao.findUser(userId);
-		return user;
+		return userDao.findUser(userId);
 	}
 	/*
 	 * 회원수정
 	 */
 	@Override
 	public int update(User user)throws Exception{
-		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-		String securePassword = encoder.encode(user.getUser_pw());
-		user.setUser_pw(securePassword);
-		return userDao.update(user);
+		return userDao.updateUser(user);
 	}
 	
 	/*
@@ -108,7 +98,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public int remove(String userId) throws Exception{
-		return userDao.remove(userId);
+		return userDao.removeUser(userId);
 	}
 	
 	/*
