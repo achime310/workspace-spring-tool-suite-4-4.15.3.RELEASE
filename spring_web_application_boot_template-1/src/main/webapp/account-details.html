@@ -324,7 +324,6 @@
         </div>
     </div>
     <!-- Breadcumb Area -->
-
     <!-- My Account Area -->
     <section class="my-account-area section_padding_100_50">
         <div class="container">
@@ -336,39 +335,22 @@
                             <li><a href="order-list.html">Orders</a></li>
                             <li><a href="downloads.html">Downloads</a></li>
                             <li><a href="addresses.html">Addresses</a></li>
-                            <li class="active"><a href="account-details.html">Account Details</a></li>
+                            <li class="active"><a href="account-details.html" id="user_account_details">Account Details</a></li>
                             <li><a href="login.html">Logout</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-12 col-lg-9">
-                    <div class="my-account-content mb-50">
+                    <div id="my-account-content" class="my-account-content mb-50">
+<!-- START!! ************************************************ -->
                         <h5 class="mb-3">Account Details</h5>
 
                         <form action="#" method="post">
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form-group">
-                                        <label for="firstName">First Name *</label>
-                                        <input type="text" class="form-control" id="firstName" placeholder="MD NAZRUL">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group">
-                                        <label for="lastName">Last Name *</label>
-                                        <input type="text" class="form-control" id="lastName" placeholder="ISLAM">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="displayName">Display Name *</label>
-                                        <input type="text" class="form-control" id="displayName" placeholder="Desinging World">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="emailAddress">Email Address *</label>
-                                        <input type="email" class="form-control" id="emailAddress" placeholder="care.designingworld@gmail.com">
+                                        <label for="user_id">ID *</label>
+                                        <input type="text" class="form-control" id="user_id" placeholder="${loginUser.user_id}">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -380,7 +362,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="newPass">New Password (Leave blank to leave unchanged)</label>
-                                        <input type="password" class="form-control" id="newPass">
+                                        <input type="password" class="form-control" id="user_pw">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -390,10 +372,30 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <div class="form-group">
+                                        <label for="user_name">Name *</label>
+                                        <input type="text" class="form-control" id="user_name" placeholder="${loginUser.user_name}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="user_email">Email *</label>
+                                        <input type="email" class="form-control" id="user_email" placeholder='${loginUser.user_email}'>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="user_phone">Phone *</label>
+                                        <input type="text" class="form-control" id="user_phone" placeholder="${loginUser.user_phone}">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <!-- <button type="submit" class="btn btn-primary">Save Changes</button> -->
+                                    <input type="button" id="btn_user_modify_action" class="btn btn-primary" value="Save Change">
                                 </div>
                             </div>
                         </form>
+<!-- END!! ************************************************** -->
                     </div>
                 </div>
             </div>

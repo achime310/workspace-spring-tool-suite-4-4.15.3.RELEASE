@@ -48,7 +48,7 @@
 	<insert id="createUser" parameterType="com.itwill.user.User">
 		<!-- INSERT INTO userinfo (user_id, user_pw, user_name, user_email, user_phone, user_freshness, user_point, user_profile ) -->
 		INSERT INTO userinfo
-			VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone}, #{user_freshness}, #{user_point}, #{user_profile})
+			VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_email}, #{user_phone}, 36.5, 0, 'newCarrot.jpg')
 	</insert>
 	
 	<insert id="createAddress" parameterType="com.itwill.user.Address">
@@ -65,7 +65,7 @@
 
 	<update id="updateUser" parameterType="com.itwill.user.User">
 	 	update  userinfo 
-		set user_pw=#{user_pw},user_name=#{user_name},user_email=#{user_email} 
+		set user_pw=#{user_pw},user_name=#{user_name},user_email=#{user_email},user_phone=#{user_phone} 
 		where user_id=#{user_id}
 	</update>
 	

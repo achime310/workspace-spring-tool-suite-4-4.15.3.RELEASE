@@ -29,6 +29,25 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
+	@LoginCheck
+	@PostMapping("/user_account_details")
+	public Map user_account_details_json(HttpServletRequest request) throws Exception{
+		Map resultMap=new HashMap();
+		int code=1;
+		String url="user_main";
+		String msg="";
+		List<User> resultList=new ArrayList<User>();
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		User loginUser=userService.findUser(sUserId);
+		resultList.add(loginUser);
+		
+		resultMap.put("code", code);
+		resultMap.put("url", url);
+		resultMap.put("msg", msg);
+		resultMap.put("data",resultList);
+		return resultMap;
+	}
 	
 	@LoginCheck
 	@PostMapping("/user_view_json")
@@ -139,7 +158,7 @@ public class UserRestController {
 	}
 
 	@PostMapping(value = "/user_login_action_json")
-	public Map user_login_action_json(@ModelAttribute(value = "fuser") User user,HttpServletRequest request) throws Exception{
+	public Map user_login_action_json(@ModelAttribute(value = "loginUser") User user,HttpServletRequest request) throws Exception{
 		
 		int code=0;
 		String url="";
@@ -216,7 +235,7 @@ public class UserRestController {
 	}
 	
 	@PostMapping(value="/user_write_action_json")
-	public Map user_write_action_json(@ModelAttribute User user,Model model) 
+	public Map user_write_action_json(@ModelAttribute(value = "fuser") User user,Model model) 
 			throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;

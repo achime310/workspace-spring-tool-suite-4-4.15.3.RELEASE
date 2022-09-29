@@ -56,7 +56,8 @@ public class UserController {
 
 	@RequestMapping("/user_login_form")
 	public String user_login_form() {
-		return "user_login_form";
+		//return "user_login_form";
+		return "login";
 	}
 
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
@@ -64,8 +65,11 @@ public class UserController {
 			@ModelAttribute(value = "fuser") User user,
 			HttpServletRequest request) throws Exception {
 		String forwardPath = "";
-
+		
 		int result = userService.login(user.getUser_id(), user.getUser_pw());
+		
+		System.out.println("user_login_action_post호출-result: "+result);
+		
 		/*
 		 * 회원로그인 0:아이디존재안함 1:패쓰워드 불일치 2:로그인성공(세션)
 		 */
@@ -73,11 +77,13 @@ public class UserController {
 			case 0 :
 				request.setAttribute("msg1",
 						user.getUser_id() + " 는 존재하지않는 아이디 입니다.");
-				forwardPath = "user_login_form";
+				//forwardPath = "user_login_form";
+				forwardPath = "login";
 				break;
 			case 1 :
 				request.setAttribute("msg2", "패쓰워드가 일치하지 않습니다.");
-				forwardPath = "user_login_form";
+				//forwardPath = "user_login_form";
+				forwardPath = "login";
 				break;
 			case 2 :
 				request.getSession().setAttribute("sUserId", user.getUser_id());
@@ -85,6 +91,17 @@ public class UserController {
 				break;
 		}
 		return forwardPath;
+	}
+
+	@LoginCheck
+	@RequestMapping("/user_my_account")
+	public String user_my_account(HttpServletRequest request) throws Exception{
+		/**************login check**************/
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		return "my-account";
 	}
 
 	@LoginCheck
@@ -127,7 +144,7 @@ public class UserController {
 	@RequestMapping(value = "/user_logout_action")
 	public String user_logout_action(HttpSession session) {
 		session.invalidate();
-		return "redirect:user_main";
+		return "redirect:user_login_form";
 	}
 	
 	
