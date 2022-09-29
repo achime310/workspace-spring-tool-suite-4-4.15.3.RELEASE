@@ -8,88 +8,77 @@ import org.springframework.stereotype.Repository;
 import com.itwill.user.mapper.UserMapper;
 @Repository(value = "userDaoImplMyBatisMapperInterface")
 public class UserDaoImplMyBatisMapperInterface implements UserDao {
-	
-	@Autowired(required = false)
+
+	@Autowired(required=true)
 	private UserMapper userMapper;
 
 	public UserDaoImplMyBatisMapperInterface() {
-		System.out.println("#### UserDaoImplMyBatisMapperInterface() : 디폴트생성자 호출  ");
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface() : 디폴트생성자 호출  ");
 	}
-	
+
 	public UserMapper getUserMapper() {
 		return userMapper;
 	}
 
 	public void setUserMapper(UserMapper userMapper) {
-		System.out.println("#### UserDaoImplMyBatisMapperInterface() : setUserMapper() 메쏘드호출  ");
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface() : setUserMapper() 메쏘드호출  ");
 		this.userMapper = userMapper;
 	}
 
 	@Override
-	public int create(User user) throws Exception {
-		System.out.println("#### UserDaoImplMyBatisMapperInterface : create() 호출  ");
-
+	public int createUser(User user) throws Exception {
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : create() 호출  ");
+		System.out.println("createUser()메소드 : "+userMapper);
 		return userMapper.createUser(user);
 	}
-	/*
-	 * @Override public int update(User user) throws Exception {
-	 * System.out.println("#### UserDaoImplMyBatisMapperInterface : update() 호출  ");
-	 * 
-	 * return userMapper.update(user); }
-	 * 
-	 * @Override public int remove(String userId) throws Exception {
-	 * System.out.println("#### UserDaoImplMyBatisMapperInterface : remove() 호출  ");
-	 * 
-	 * return userMapper.remove(userId); }
-	 * 
-	 * @Override public User findUser(String userId) throws Exception {
-	 * System.out.println("#### UserDaoImplMyBatisMapperInterface : findUser() 호출  "
-	 * );
-	 * 
-	 * return userMapper.findUser(userId); }
-	 * 
-	 * @Override public List<User> findUserList() throws Exception { System.out.
-	 * println("#### UserDaoImplMyBatisMapperInterface : findUserList 호출  ");
-	 * 
-	 * return userMapper.findUserList(); }
-	 * 
-	 * @Override public boolean existedUser(String userId) throws Exception {
-	 * System.out.
-	 * println("#### UserDaoImplMyBatisMapperInterface : existedUser 호출  ");
-	 * 
-	 * int count=userMapper.existedUser(userId); if(count==1) { return true; }else {
-	 * return false; }
-	 * 
-	 * }
-	 */
 
 	@Override
-	public int update(User user) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateUser(User user) throws Exception {
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : update() 호출  ");
+
+		return userMapper.updateUser(user);
 	}
 
 	@Override
-	public int remove(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeUser(String userId) throws Exception {
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : remove() 호출  ");
+
+		return userMapper.removeUser(userId);
 	}
 
 	@Override
 	public User findUser(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : findUser() 호출  ");
+
+		return userMapper.findUser(userId);
 	}
 
 	@Override
 	public List<User> findUserList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : findUserList 호출  ");
+
+		return userMapper.findUserList();
 	}
 
 	@Override
 	public boolean existedUser(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println(
+				"#### UserDaoImplMyBatisMapperInterface : existedUser 호출  ");
+		System.out.println("existedUser()메소드 : "+userMapper+"userId: "+userId);
+		int count = userMapper.existedUser(userId);
+		if (count == 1) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
+
 }

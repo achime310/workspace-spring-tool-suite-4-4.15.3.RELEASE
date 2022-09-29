@@ -20,8 +20,8 @@ public class User {
 	private String user_name;
 	private String user_email;
 	private String user_phone;
-	private int user_freshness;
-	private double user_point; 
+	private double user_freshness;
+	private int user_point; 
 	private String user_profile;
 	
 	private List<Address> addressList;
@@ -32,8 +32,9 @@ public class User {
 	}
 
 
-	public User(String user_id, String user_pw, String user_name, String user_email, String user_phone,
-			int user_freshness, double user_point, String user_profile, List<Address> addressList) {
+	public User(String user_id, String user_pw, String user_name,
+			String user_email, String user_phone, double user_freshness,
+			int user_point, String user_profile, List<Address> addressList) {
 		super();
 		this.user_id = user_id;
 		this.user_pw = user_pw;
@@ -97,22 +98,22 @@ public class User {
 	}
 
 
-	public int getUser_freshness() {
+	public double getUser_freshness() {
 		return user_freshness;
 	}
 
 
-	public void setUser_freshness(int user_freshness) {
+	public void setUser_freshness(double user_freshness) {
 		this.user_freshness = user_freshness;
 	}
 
 
-	public double getUser_point() {
+	public int getUser_point() {
 		return user_point;
 	}
 
 
-	public void setUser_point(double user_point) {
+	public void setUser_point(int user_point) {
 		this.user_point = user_point;
 	}
 
@@ -135,14 +136,27 @@ public class User {
 	public void setAddressList(List<Address> addressList) {
 		this.addressList = addressList;
 	}
-
+	/*
+	 *패쓰워드 일치여부 검사 
+	 */
+	public boolean isMatchPassword(String password){
+		boolean isMatch=false;
+		if(this.user_pw.equals(password)){
+			isMatch=true;
+		}
+		return isMatch;
+	}
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_email="
-				+ user_email + ", user_phone=" + user_phone + ", user_freshness=" + user_freshness + ", user_point="
-				+ user_point + ", user_profile=" + user_profile + ", addressList=" + addressList + "]";
+		return "User [user_id=" + user_id + ", user_pw=" + user_pw
+				+ ", user_name=" + user_name + ", user_email=" + user_email
+				+ ", user_phone=" + user_phone + ", user_freshness="
+				+ user_freshness + ", user_point=" + user_point
+				+ ", user_profile=" + user_profile + ", addressList="
+				+ addressList + "]";
 	}
+
 	
 
 }
