@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
-	@Qualifier("userDaoImplMyBatisMapperInterface")
+	@Qualifier("userDaoImpl")
 	private UserDao userDao;
 
 	public UserServiceImpl() throws Exception {
