@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 
 	public UserServiceImpl() throws Exception {
-		
+		System.out.println("#### UserServiceImpl() : 디폴트생성자 호출 ");
 	}
 	/*
 	 * 회원가입
