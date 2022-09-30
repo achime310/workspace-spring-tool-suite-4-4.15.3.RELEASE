@@ -49,19 +49,19 @@ public interface UserMapper {
 	
 	
 	
-	//@Update("update  userinfo set password=#{password},name=#{name},email=#{email} where userid=#{userId}")
+	//@Update("update  userinfo set password=#{password},name=#{name},email=#{email} where user_id=#{user_id}")
 	public int updateUser(User user);
 
-	//@Delete("delete userinfo where userid=#{userId}")
-	public int removeUser(String userId);
+	//@Delete("delete userinfo where user_id=#{user_id}")
+	public int removeUser(String user_id);
 
-	//@Select("select userid,password,name,email from userinfo where userid=#{userId}")
-	public User findUser(String userId);
+	//@Select("select user_id,password,name,email from userinfo where user_id=#{user_id}")
+	public User findUser(String user_id);
 
-	//@Select("select userid,password,name,email from userinfo")
+	//@Select("select user_id,password,name,email from userinfo")
 	public List<User> findUserList();
 
-	//@Select("select count(*) cnt from userinfo where userid=#{userId}")
-	public int existedUser(String userId);
+	//@Select("select count(*) cnt from userinfo where user_id=#{user_id}")
+	public int existedUser(String user_id);
 
 }

@@ -27,32 +27,32 @@
 </style>
 <script type="text/javascript">
 	function userCreate() {
-		if (document.f.userId.value == "") {
+		if (document.f.user_id.value == "") {
 			alert("사용자 아이디를 입력하십시요.");
 			f.userId.focus();
 			return false;
 		}
-		if (document.f.password.value == "") {
+		if (document.f.user_pw.value == "") {
 			alert("비밀번호를 입력하십시요.");
 			f.password.focus();
 			return false;
 		}
-		if (document.f.password2.value == "") {
+		if (document.f.user_pw2.value == "") {
 			alert("비밀번호확인을 입력하십시요.");
 			f.password2.focus();
 			return false;
 		}
-		if (document.f.name.value == "") {
+		if (document.f.user_name.value == "") {
 			alert("이름을 입력하십시요.");
 			f.name.focus();
 			return false;
 		}
-		if (document.f.email.value == "") {
+		if (document.f.user_email.value == "") {
 			alert("이메일 주소를 입력하십시요.");
 			f.email.focus();
 			return false;
 		}
-		if (document.f.password.value != document.f.password2.value) {
+		if (document.f.user_pw.value != document.f.user_pw2.value) {
 			alert("비밀번호와 비밀번호확인은 일치하여야합니다.");
 			f.password.focus();
 			f.password.select();
@@ -107,14 +107,14 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="userId"
+											<input type="text" style="width: 150px" name="user_id"
 											value="${fuser.user_id}">&nbsp;&nbsp;<font color="red">${msg}</font>
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="password" style="width: 150px" name="password"
+											<input type="password" style="width: 150px" name="user_pw"
 											value="${fuser.user_pw}">
 										</td>
 									</tr>
@@ -122,14 +122,14 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="password" style="width: 150px" name="password2"
+											<input type="password" style="width: 150px" name="user_pw2"
 											value="${fuser.user_pw}">
 										</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="name"
+											<input type="text" style="width: 150px" name="user_name"
 											value="${fuser.user_name}">
 										</td>
 									</tr>
@@ -137,8 +137,36 @@
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
-											<input type="text" style="width: 150px" name="email"
+											<input type="text" style="width: 150px" name="user_email"
 											value="${fuser.user_email}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">핸드폰번호</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_phone"
+											value="${fuser.user_phone}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">매너온도</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_freshness"
+											value="${fuser.user_freshness}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">포인트</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_point"
+											value="${fuser.user_point}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">프로필이미지</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_profile"
+											value="${fuser.user_profile}">
 										</td>
 									</tr>
 								</table>

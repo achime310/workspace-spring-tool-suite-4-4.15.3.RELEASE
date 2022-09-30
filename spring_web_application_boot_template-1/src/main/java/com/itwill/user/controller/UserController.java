@@ -36,17 +36,13 @@ public class UserController {
 	@RequestMapping(value = "/user_write_action", method = RequestMethod.POST)
 	public String user_write_action_post(@ModelAttribute(value = "fuser") User user, Model model)
 			throws Exception {
-		System.out.println(
-				"user_write_action 컨트롤러 호출-userService: " + userService);
+		System.out.println("parameter로 전달받은"+user);
+
 		String forward_path = "";
 		/*
 		 * -1:아이디중복 1:회원가입성공
 		 */
-
-		//user = new User("TEST1", "1111", "김당근", "carrot1@brown.com","010-1111-1111", 36.5, 0, "image.jpg", null);
-		System.out.println(user);
 		int result = userService.create(user);
-		System.out.println(result);
 		if (result == -1) {
 			model.addAttribute("msg",
 					user.getUser_id() + " 는 이미 존재하는 아이디 입니다.");
@@ -60,7 +56,8 @@ public class UserController {
 
 	@RequestMapping("/user_login_form")
 	public String user_login_form() {
-		return "user_login_form";
+		//return "user_login_form";
+		return "login";
 	}
 
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
@@ -68,8 +65,11 @@ public class UserController {
 			@ModelAttribute(value = "fuser") User user,
 			HttpServletRequest request) throws Exception {
 		String forwardPath = "";
-
+		
 		int result = userService.login(user.getUser_id(), user.getUser_pw());
+		
+		System.out.println("user_login_action_post호출-result: "+result);
+		
 		/*
 		 * 회원로그인 0:아이디존재안함 1:패쓰워드 불일치 2:로그인성공(세션)
 		 */
@@ -77,11 +77,13 @@ public class UserController {
 			case 0 :
 				request.setAttribute("msg1",
 						user.getUser_id() + " 는 존재하지않는 아이디 입니다.");
-				forwardPath = "user_login_form";
+				//forwardPath = "user_login_form";
+				forwardPath = "login";
 				break;
 			case 1 :
 				request.setAttribute("msg2", "패쓰워드가 일치하지 않습니다.");
-				forwardPath = "user_login_form";
+				//forwardPath = "user_login_form";
+				forwardPath = "login";
 				break;
 			case 2 :
 				request.getSession().setAttribute("sUserId", user.getUser_id());
@@ -91,6 +93,72 @@ public class UserController {
 		return forwardPath;
 	}
 
+	@LoginCheck
+	@RequestMapping("/user_my_account")
+	public String user_my_account(HttpServletRequest request) throws Exception{
+		/**************login check**************/
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		return "my-account";
+	}
+
+	@LoginCheck
+	@RequestMapping("/user_view")
+	public String user_view(HttpServletRequest request) throws Exception{
+		/**************login check**************/
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		return "user_view";
+	}
+	@LoginCheck
+	@RequestMapping(value = "/user_modify_form",method=RequestMethod.POST)
+	public String user_modify_form_post(HttpServletRequest request)throws Exception {
+		/**************login check**************/
+		
+		String sUserId=(String)request.getSession().getAttribute("sUserId");
+		User loginUser=userService.findUser(sUserId);
+		request.setAttribute("loginUser", loginUser);
+		return "user_modify_form";
+	}
+	@LoginCheck
+	@RequestMapping(value = "/user_modify_action",method = RequestMethod.POST)
+	public String user_modify_action_post(@ModelAttribute User user) throws Exception{
+		/**************login check**************/
+		int rowCount=userService.update(user);
+		return "redirect:user_view";
+	}
+	@LoginCheck
+	@RequestMapping(value = "/user_remove_action",method = RequestMethod.POST)
+	public String user_remove_action_post(HttpSession session) throws Exception{
+		/**************login check**************/
+		String sUserId=(String)session.getAttribute("sUserId");
+		int rowCount=userService.remove(sUserId);
+		session.invalidate();
+		return "redirect:user_main";
+	}
+	@LoginCheck
+	@RequestMapping(value = "/user_logout_action")
+	public String user_logout_action(HttpSession session) {
+		session.invalidate();
+		return "redirect:user_login_form";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = {"/user_modify_form",
 							 "/user_login_action",
 							 "/user_write_action",

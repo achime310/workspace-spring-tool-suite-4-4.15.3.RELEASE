@@ -21,7 +21,7 @@ User loginUser=(User)request.getAttribute("loginUser");
 
 <script type="text/javascript">
 	function userModifyAction() {
-		document.f.action = "user_modify_action.do";
+		document.f.action = "user_modify_action";
 		document.f.submit();
 	}
 
@@ -65,41 +65,71 @@ User loginUser=(User)request.getAttribute("loginUser");
 								</tr>
 							</table> <!-- update Form  -->
 							<form name="f" method="post">
-								<input type="hidden" name="userId" value="${ loginUser.getUserId()}" />
+								<input type="hidden" name="user_id" value="${ loginUser.getUser_id()}" />
 								<table border="0" cellpadding="0" cellspacing="1" width="590"
 									bgcolor="BBBBBB">
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">사용자
 											아이디</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
-											align="left">${loginUser.getUserId() }</td>
+											align="left">${loginUser.getUser_id() }</td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password" value="${loginUser.getPassword() }"></td>
+											name="user_pw" value="${loginUser.getUser_pw() }"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호
 											확인</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="password" style="width: 150px"
-											name="password2" value="${loginUser.getPassword() }"></td>
+											name="user_pw2" value="${loginUser.getUser_pw() }"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="name" value="${loginUser.getName()}"></td>
+											name="user_name" value="${loginUser.getUser_name()}"></td>
 									</tr>
 									<tr>
 										<td width=100 align=center bgcolor="E6ECDE" height="22">이메일
 											주소</td>
 										<td width=490 bgcolor="ffffff" style="padding-left: 10px"
 											align="left"><input type="text" style="width: 150px"
-											name="email" value="${ loginUser.getEmail()}"></td>
+											name="user_email" value="${ loginUser.getUser_email()}"></td>
 									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">핸드폰번호</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_phone"
+											value="${loginUser.user_phone}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">매너온도</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_freshness"
+											value="${loginUser.user_freshness}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">포인트</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_point"
+											value="${loginUser.user_point}">
+										</td>
+									</tr>
+									<tr>
+										<td width=100 align=center bgcolor="E6ECDE" height="22">프로필이미지</td>
+										<td width=490 bgcolor="ffffff" style="padding-left: 10px" align="left">
+											<input type="text" style="width: 150px" name="user_profile"
+											value="${loginUser.user_profile}">
+										</td>
+									</tr>
+									
+									
 								</table>
 							</form> <br>
 
