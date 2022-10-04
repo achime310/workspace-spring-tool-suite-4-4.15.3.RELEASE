@@ -2,7 +2,7 @@ package com.itwill.user;
 
 import java.util.List;
 
-public class User {
+public class UserInfo {
 	/*
 	 이름             널?       유형            
 	-------------- -------- ------------- 
@@ -27,12 +27,12 @@ public class User {
 	private List<Address> addressList;
 	
 	
-	public User() {
+	public UserInfo() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public User(String user_id, String user_pw, String user_name,
+	public UserInfo(String user_id, String user_pw, String user_name,
 			String user_email, String user_phone, double user_freshness,
 			int user_point, String user_profile, List<Address> addressList) {
 		super();

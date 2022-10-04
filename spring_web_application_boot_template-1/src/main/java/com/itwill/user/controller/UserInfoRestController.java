@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.itwill.user.User;
-import com.itwill.user.UserService;
+import com.itwill.user.UserInfo;
+import com.itwill.user.UserInfoService;
 
 @RestController
-public class UserRestController {
+public class UserInfoRestController {
 	@Autowired
-	private UserService userService;
+	private UserInfoService userService;
 	
 	@LoginCheck
 	@PostMapping("/user_account_details")
@@ -36,10 +36,10 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		resultList.add(loginUser);
 		
 		resultMap.put("code", code);
@@ -56,10 +56,10 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		resultList.add(loginUser);
 		
 		resultMap.put("code", code);
@@ -76,7 +76,7 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
 		int row_count=userService.remove(sUserId);
 		
@@ -95,10 +95,10 @@ public class UserRestController {
 		int code=1;
 		String url="user_modify_form";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		resultList.add(loginUser);
 		
 		resultMap.put("code", code);
@@ -109,18 +109,18 @@ public class UserRestController {
 	}
 
 	@PostMapping(value="/user_modify_action_json")
-	public Map user_modify_action_json(@ModelAttribute User user,Model model,HttpServletRequest request) 
+	public Map user_modify_action_json(@ModelAttribute UserInfo user,Model model,HttpServletRequest request) 
 			throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="user_main";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		try {
 			int row_count=userService.update(user);
 			String sUserId=(String)request.getSession().getAttribute("sUserId");
-			User loginUser=userService.findUser(sUserId);
+			UserInfo loginUser=userService.findUser(sUserId);
 			resultList.add(loginUser);
 			code=1;
 			url="user_main";
@@ -146,7 +146,7 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		request.getSession().invalidate();
 		
@@ -158,13 +158,13 @@ public class UserRestController {
 	}
 
 	@PostMapping(value = "/user_login_action_json")
-	public Map user_login_action_json(@ModelAttribute(value = "loginUser") User user,HttpServletRequest request) throws Exception{
+	public Map user_login_action_json(@ModelAttribute(value = "loginUser") UserInfo user,HttpServletRequest request) throws Exception{
 		
 		int code=0;
 		String url="";
 		String msg="";
 		Map resultMap=new HashMap();
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		
 		int result=
 				userService.login(user.getUser_id(), user.getUser_pw());
@@ -187,7 +187,7 @@ public class UserRestController {
 			break;
 		case 2:
 			request.getSession().setAttribute("sUserId", user.getUser_id());
-			User sUser=userService.findUser(user.getUser_id());
+			UserInfo sUser=userService.findUser(user.getUser_id());
 			
 			code=2;
 			url="user_main";
@@ -209,9 +209,9 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="세션존재함";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		String sUserId=(String)session.getAttribute("sUserId");
-		User sUser=userService.findUser(sUserId);
+		UserInfo sUser=userService.findUser(sUserId);
 		resultList.add(sUser);
 		
 		resultMap.put("code", code);
@@ -228,20 +228,20 @@ public class UserRestController {
 		int code=1;
 		String url="user_main";
 		String msg="세션존재함";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		boolean isDuplicate=userService.isDuplicateId(userId);
 		return !isDuplicate;
 		
 	}
 	
 	@PostMapping(value="/user_write_action_json")
-	public Map user_write_action_json(@ModelAttribute(value = "fuser") User user,Model model) 
+	public Map user_write_action_json(@ModelAttribute(value = "fuser") UserInfo user,Model model) 
 			throws Exception{
 		Map resultMap=new HashMap();
 		int code=1;
 		String url="user_main";
 		String msg="세션존재함";
-		List<User> resultList=new ArrayList<User>();
+		List<UserInfo> resultList=new ArrayList<UserInfo>();
 		/*
 		 *  0:아이디중복
 		 *  1:회원가입성공

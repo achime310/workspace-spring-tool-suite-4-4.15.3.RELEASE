@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	/*
+/*
 	0  . GET방식요청일때 user_main.jsp로 redirection
 	1  . 요청객체 인코딩설정
 	2  . 파라메타 받기
@@ -42,10 +42,10 @@
 		password = URLEncoder.encode(password,"UTF-8");
 		name = URLEncoder.encode(name,"UTF-8");
 		String queryString = "msg="+msgEncoded+
-							"&userId="+userId+
-							"&password="+password+
-							"&name="+name+
-							"&email="+email;
+			"&userId="+userId+
+			"&password="+password+
+			"&name="+name+
+			"&email="+email;
 		/************case1 script***************/
 /* 		 // 파라메타를 불러와서 넘겨주면된다~
 		out.println("<script>");
@@ -57,10 +57,10 @@
 		/***************************************/
 		//(예정)데이터를 남겨주는 작업을 할 예정
 		/*************case2 redirection*********/
-			//redirection에 parameter를 넘겨주는 방법도 있긴함...
-			//쿼리스트링에 정보가 다 노출되므로 보안상 위험.
-			//요청하고 뿌림
-			//response.sendRedirect("user_write_form.jsp?"+queryString);
+	//redirection에 parameter를 넘겨주는 방법도 있긴함...
+	//쿼리스트링에 정보가 다 노출되므로 보안상 위험.
+	//요청하고 뿌림
+	//response.sendRedirect("user_write_form.jsp?"+queryString);
 		 
 		/*************case3 forwarding***************/
 		request.setAttribute("msg", msg); //msg는 URL에 붙여보낼때는 인코딩하고, msg를 인코딩해서 보내면, 값을 얻은 후 다시 디코딩해야함.
@@ -75,7 +75,6 @@
 		response.sendRedirect("user_login_form.jsp");
 		
 	}
-	
 %>
 
 

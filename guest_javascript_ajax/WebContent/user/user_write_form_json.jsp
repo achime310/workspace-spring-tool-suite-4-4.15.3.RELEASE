@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
-	int code = 0;
+int code = 0;
 	String url = "";
 	String msg = "";
 	StringBuffer jsonData = new StringBuffer();
@@ -34,9 +33,9 @@
 		System.out.println("************************************************************");
   		/*
   			private String userId;
-			private String password;
-			private String name;
-			private String email;
+	private String password;
+	private String name;
+	private String email;
   		*/
 		jsonData.append("{");
 		jsonData.append("\"msg\":\"" + msgStr + "\"");

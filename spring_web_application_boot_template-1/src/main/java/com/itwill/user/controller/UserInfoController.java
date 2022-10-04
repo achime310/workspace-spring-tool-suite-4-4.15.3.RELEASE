@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwill.user.Address;
-import com.itwill.user.User;
-import com.itwill.user.UserService;
+import com.itwill.user.UserInfo;
+import com.itwill.user.UserInfoService;
 
 @Controller
-public class UserController {
+public class UserInfoController {
 	@Autowired
-	private UserService userService;
+	private UserInfoService userService;
 
 	@RequestMapping(value = "/user_main")
 	public String user_main() {
@@ -34,7 +34,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user_write_action", method = RequestMethod.POST)
-	public String user_write_action_post(@ModelAttribute(value = "fuser") User user, Model model)
+	public String user_write_action_post(@ModelAttribute(value = "fuser") UserInfo user, Model model)
 			throws Exception {
 		System.out.println("parameter로 전달받은"+user);
 
@@ -62,7 +62,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user_login_action", method = RequestMethod.POST)
 	public String user_login_action_post(
-			@ModelAttribute(value = "fuser") User user,
+			@ModelAttribute(value = "fuser") UserInfo user,
 			HttpServletRequest request) throws Exception {
 		String forwardPath = "";
 		
@@ -99,7 +99,7 @@ public class UserController {
 		/**************login check**************/
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		request.setAttribute("loginUser", loginUser);
 		return "my-account";
 	}
@@ -110,7 +110,7 @@ public class UserController {
 		/**************login check**************/
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		request.setAttribute("loginUser", loginUser);
 		return "user_view";
 	}
@@ -120,13 +120,13 @@ public class UserController {
 		/**************login check**************/
 		
 		String sUserId=(String)request.getSession().getAttribute("sUserId");
-		User loginUser=userService.findUser(sUserId);
+		UserInfo loginUser=userService.findUser(sUserId);
 		request.setAttribute("loginUser", loginUser);
 		return "user_modify_form";
 	}
 	@LoginCheck
 	@RequestMapping(value = "/user_modify_action",method = RequestMethod.POST)
-	public String user_modify_action_post(@ModelAttribute User user) throws Exception{
+	public String user_modify_action_post(@ModelAttribute UserInfo user) throws Exception{
 		/**************login check**************/
 		int rowCount=userService.update(user);
 		return "redirect:user_view";
