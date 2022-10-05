@@ -17,6 +17,6 @@
 <!-- <h3><a href="user_login_form">user_login_form</a></h3> -->
 <h3><a href="image_test.html">image_test.html</a></h3>
 <br>
-<h3><a href="upload1">upload1</a></h3>
+<h3><a href="multipart_form">multipart_form</a></h3>
 </body>
 </html>
