@@ -144,7 +144,7 @@ label {
 			
 			//showImage();
 			$.ajax({
-				url:'requestupload1_json',
+				url:'upload',
 				type:'POST',
 				processData:false,	//파일전송시 반드시 false
 				contentType:false,

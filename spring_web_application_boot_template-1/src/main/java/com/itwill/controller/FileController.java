@@ -62,7 +62,6 @@ public class FileController {
 		return "upload2";
 	}
 
-/*
 	@RequestMapping(value = "requestupload1")
 	public String requestupload1( MultipartHttpServletRequest mtfRequest) {
 		
@@ -91,7 +90,6 @@ public class FileController {
 
 		return "redirect:/upload1";
 	}
-	*/
 	
 	@RequestMapping("/requestupload1_json")
 	@ResponseBody

@@ -1,5 +1,6 @@
 package com.bezkoder.spring.files.uploadmultiple.controller;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,9 @@ public class FilesController {
      //storageService.deleteAll();
      //storageService.init();
 	 String message = "";
+	 
+	//storageService.root=Paths.get("c:\\upload/test/controller");
+	 
     try {
       List<String> fileNames = new ArrayList<>();
      
