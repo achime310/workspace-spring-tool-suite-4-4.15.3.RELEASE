@@ -29,11 +29,6 @@ public class UserDaoImpl implements UserDao{
 	@Autowired
 	private DataSource dataSource;
 
-	public UserDaoImpl() throws Exception {
-		
-		
-	}
-
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
