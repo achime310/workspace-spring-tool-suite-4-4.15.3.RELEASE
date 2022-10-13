@@ -18,5 +18,7 @@
 <h3><a href="image_test.html">image_test.html</a></h3>
 <br>
 <h3><a href="multipart_form">multipart_form</a></h3>
+<br>
+<h3><a href="multipart_form_dragndrop">multipart_form_dragndrop</a></h3>
 </body>
 </html>

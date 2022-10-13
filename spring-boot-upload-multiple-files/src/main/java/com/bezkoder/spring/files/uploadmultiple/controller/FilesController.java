@@ -34,24 +34,29 @@ public class FilesController {
   public String mutipart_form() {
 	  return "multipart_form";
   }
+  @GetMapping("/multipart_form_dragndrop")
+  public String multipart_form_dragndrop() {
+	  return "multipart_form_dragndrop";
+  }
   
   @PostMapping("/upload")
   public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
+	  System.out.println(files[0]);
      System.out.println(files.length);
      //storageService.deleteAll();
      //storageService.init();
 	 String message = "";
-	 
-	//storageService.root=Paths.get("c:\\upload/test/controller");
 	 
     try {
       List<String> fileNames = new ArrayList<>();
      
       for (MultipartFile file : files) {
     	  System.out.println(file.isEmpty());
+    	  
     	  if(!file.isEmpty()) {
     		  storageService.save(file);
     		  fileNames.add(file.getOriginalFilename());
+    		  System.out.println(file.getOriginalFilename());
     	  }
 	  }
       message = "Uploaded the files successfully: " + fileNames;
