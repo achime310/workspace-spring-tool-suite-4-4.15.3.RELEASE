@@ -76,7 +76,7 @@
 		</dependency>
 
 		<!-- Security -->
-<<<<<<< HEAD
+
 		<!-- 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -124,7 +124,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency> 
-=======
+
 		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-core</artifactId> 
 			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
 			<artifactId>spring-security-web</artifactId> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
@@ -132,7 +132,7 @@
 			<groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
 			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
 			<artifactId>spring-security-test</artifactId> </dependency> -->
->>>>>>> branch 'master' of https://github.com/achime310/workspace-spring-tool-suite-4-4.15.3.RELEASE.git
+
 		
 		<!-- image 라이브러리 -->
 
