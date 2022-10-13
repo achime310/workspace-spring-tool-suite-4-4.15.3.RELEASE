@@ -27,7 +27,7 @@
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="js/UserHtmlContents.js"></script>
 <script type="text/javascript">
-    $(function() {
+$(function() {
 	/* validator객체변수선언 */
 	var validator = null;
 	/*validator객체 디폴트속성 설정*/
@@ -261,7 +261,7 @@
 	    }
 	    e.preventDefault();
 	});
-    });
+ });
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
