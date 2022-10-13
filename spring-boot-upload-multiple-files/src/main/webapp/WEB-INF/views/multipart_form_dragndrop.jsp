@@ -32,12 +32,12 @@
 	<form id="image_form"  name="image_form" 
 		enctype="multipart/form-data">
 		사진1: <input type="file" name="files" id="chooseF"><br> 
-		<!-- 사진2: <input type="file" name="files"><br> 
+		사진2: <input type="file" name="files"><br> 
 		사진3: <input type="file" name="files"><br> 
-		사진4: <input type="file" name="files"><br>  -->
-		설명:
-		<textarea name="description" cols="50" rows="3"></textarea>
-		<div id="fileDrop" class="fileDrop" style="width:200px;height:200px;border:1px solid dimgray;"></div>
+		사진4: <input type="file" name="files"><br>
+		<div id="fileDrop" class="fileDrop" style="width:500px;height:200px;border:1px solid dimgray;"></div>
+		<br/>설명:<br/>
+		<textarea name="description" cols="50" rows="3" style="width:500px;height:200px;"></textarea>
 		<br> <input id="btn_submit" type="submit" value="추가"><br>
 	</form>
 	<hr>
@@ -45,6 +45,7 @@
 <script type="text/javascript">
 $(function() {
 	var fileList = []; //파일 정보를 담아 둘 배열
+	var files =[];
 	 //드래그앤드랍
     $("#fileDrop").on("dragenter", function(e){
         e.preventDefault();
@@ -60,41 +61,50 @@ $(function() {
     }).on("drop", function(e){
         e.preventDefault();
 
-        var files = e.originalEvent.dataTransfer.files;
+        //var files = e.originalEvent.dataTransfer.files;
+        files = e.originalEvent.dataTransfer.files;
         if(files != null && files != undefined){
             var tag = "";
             for(i=0; i<files.length; i++){
                 var f = files[i];
+	        	console.log($(f));
                 fileList.push(f);
                 var fileName = f.name;
                 var fileSize = f.size / 1024 / 1024;
                 fileSize = fileSize < 1 ? fileSize.toFixed(3) : fileSize.toFixed(1);
-                /* 
                 tag += 
                         "<div class='fileList'>" +
                             "<span class='fileName' name='files'>"+fileName+"</span>" +
                             "<span class='fileSize'>"+fileSize+" MB</span>" +
                             "<span class='clear'></span>" +
                         "</div>";
-                         */
-                tag += "<input type='file' name='files' id='chooseF'>"+fileName;
             }
             console.log($(this));
-            //$(this).append(tag);
-            $('#image_form').prepend(tag);
+            $(this).append(tag);
+            //$('#fileDrop').append(tag);
         }
 
         $(this).css("background-color", "#FFF");
     });
 	
 		
-	$(document).on('submit', '#image_form',function(e){
-		console.log(e.target.id);
 		console.log(1111);
-		//const formData = new FormData($('#image_form')[0]);
-		//formData.append('attachment', $('[name="files"]').files[0]);
 		const formData = new FormData($('#image_form')[0]);
-		formData.append("files",$('#image_form')[0]);
+		//formData.append('attachment', $('[name="files"]').files[0]);
+		//const formData = new FormData(files);
+		//const formData = new FormData(files);
+		formdata.append("files",files);
+		console.log("fileList.length > 0"+(fileList.length > 0));
+			/* 
+		if(fileList.length > 0){
+            fileList.forEach(function(f){
+            	console.log(f);
+            	console.log($(f));
+	           formData.append("files", fileList);
+            });
+           formData.append("files", fileList);
+        }   
+             */
 		console.log(2222);
 		 $.ajax({
 			url:'upload',
@@ -104,6 +114,9 @@ $(function() {
 			data:formData,
 			success:function(jsonResult){
 				 console.log('성공!!');
+			},
+			error:function(){
+				 console.log('error!!');
 			}
 		 });  
 		e.preventDefault();

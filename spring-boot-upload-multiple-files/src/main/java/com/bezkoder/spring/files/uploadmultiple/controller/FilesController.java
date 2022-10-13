@@ -41,8 +41,8 @@ public class FilesController {
   
   @PostMapping("/upload")
   public ResponseEntity<ResponseMessage> uploadFiles(@RequestParam("files") MultipartFile[] files) {
-	  System.out.println(files[0]);
-     System.out.println(files.length);
+	  //System.out.println("files[0]"+files[0]);
+     System.out.println("files.length"+files.length);
      //storageService.deleteAll();
      //storageService.init();
 	 String message = "";
@@ -51,12 +51,12 @@ public class FilesController {
       List<String> fileNames = new ArrayList<>();
      
       for (MultipartFile file : files) {
-    	  System.out.println(file.isEmpty());
+    	  System.out.println("file.isEmpty() >> "+file.isEmpty());
     	  
     	  if(!file.isEmpty()) {
     		  storageService.save(file);
     		  fileNames.add(file.getOriginalFilename());
-    		  System.out.println(file.getOriginalFilename());
+    		  System.out.println("file.getOriginalFilename(): "+file.getOriginalFilename());
     	  }
 	  }
       message = "Uploaded the files successfully: " + fileNames;

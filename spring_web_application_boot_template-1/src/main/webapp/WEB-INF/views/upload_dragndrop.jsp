@@ -61,6 +61,7 @@ $(function(){
         e.preventDefault();
 
         var files = e.originalEvent.dataTransfer.files;
+        console.log(files);
         if(files != null && files != undefined){
             var tag = "";
             for(i=0; i<files.length; i++){

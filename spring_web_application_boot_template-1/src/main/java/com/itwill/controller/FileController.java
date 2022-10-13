@@ -113,7 +113,7 @@ public class FileController {
 		//System.out.println("src value : " + src);
 		MultipartFile mf = mtfRequest.getFile("file");
 		
-		String path = "C:\\2022-05-JAVA-DEVELOPER\\git-repositories\\workspace-spring-tool-suite-4-4.15.3.RELEASE\\spring_web_application_boot_template-1\\src\\main\\webapp\\img\\user_profile\\";
+		String path = "C:\\2022-05-JAVA-DEVELOPER\\git-repositories\\workspace-spring-tool-suite-4-4.15.3.RELEASE\\spring_web_application_boot_template-1\\src\\main\\webapp\\img\\review_img";
 		
 		String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 		long fileSize = mf.getSize(); // 파일 사이즈
@@ -230,7 +230,7 @@ public class FileController {
 		System.out.println("src value : " + src);
 		MultipartFile mf = mtfRequest.getFile("file");
 		
-		String path = "C:\\2022-05-JAVA-DEVELOPER\\git-repositories\\workspace-spring-tool-suite-4-4.15.3.RELEASE\\spring_web_application_boot_template-1\\src\\main\\webapp\\img\\user_profile\\";
+		String path = "C:\\2022-05-JAVA-DEVELOPER\\git-repositories\\workspace-spring-tool-suite-4-4.15.3.RELEASE\\spring_web_application_boot_template-1\\src\\main\\webapp\\img\\review_img/";
 		
 		String originFileName = mf.getOriginalFilename(); // 원본 파일 명
 		long fileSize = mf.getSize(); // 파일 사이즈
