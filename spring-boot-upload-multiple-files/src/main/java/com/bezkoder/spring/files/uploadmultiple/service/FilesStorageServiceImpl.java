@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FilesStorageServiceImpl implements FilesStorageService {
 
-  private Path root = Paths.get("c:\\upload/test");
+  private Path root = Paths.get("C:\\upload");
 
 @Override
   public void init() {
@@ -31,6 +31,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
   @Override
   public void save(MultipartFile file) {
+	  System.out.println("FilesStorageServiceImpl - save()");
     try {
     	Files.copy(file.getInputStream(), this.root.resolve(System.currentTimeMillis()+file.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
     } catch (Exception e) {

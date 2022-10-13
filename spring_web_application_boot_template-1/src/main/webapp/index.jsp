@@ -91,6 +91,10 @@ function loadFile(input) {
 <h3><a href="image_test.html">image_test.html</a></h3>
 <br>
 <h3><a href="upload1">upload1</a></h3>
+<<<<<<< HEAD
+<h3><a href="upload_dragndrop">upload_dragndrop</a></h3>
+=======
+>>>>>>> branch 'master' of https://github.com/achime310/workspace-spring-tool-suite-4-4.15.3.RELEASE.git
 >>>>>>> branch 'master' of https://github.com/achime310/workspace-spring-tool-suite-4-4.15.3.RELEASE.git
 </body>
 </html>
