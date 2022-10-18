@@ -31,10 +31,10 @@
 	</p>
 	<form id="image_form"  name="image_form" 
 		enctype="multipart/form-data">
-		사진1: <input type="file" name="files" id="chooseF"><br> 
+		<!-- 사진1: <input type="file" name="files" id="chooseF"><br> 
 		사진2: <input type="file" name="files"><br> 
 		사진3: <input type="file" name="files"><br> 
-		사진4: <input type="file" name="files"><br>
+		사진4: <input type="file" name="files"><br> -->
 		<div id="fileDrop" class="fileDrop" style="width:500px;height:200px;border:1px solid dimgray;"></div>
 		<br/>설명:<br/>
 		<textarea name="description" cols="50" rows="3" style="width:500px;height:200px;"></textarea>
@@ -84,16 +84,19 @@ $(function() {
             //$('#fileDrop').append(tag);
         }
 
-        $(this).css("background-color", "#FFF");
+        $(this).css("bac4kground-color", "#FFF");
+	console.log("files"+files[0]);
+	console.log("fileList"+$(fileList));
     });
 	
 		
+	$(document).on('submit', '#image_form',function(e){
 		console.log(1111);
-		const formData = new FormData($('#image_form')[0]);
+		var formData = new FormData("files",fileList);
+		//var formData = new FormData($('#image_form')[0]);
 		//formData.append('attachment', $('[name="files"]').files[0]);
 		//const formData = new FormData(files);
-		//const formData = new FormData(files);
-		formdata.append("files",files);
+		//formdata.append("files",files);
 		console.log("fileList.length > 0"+(fileList.length > 0));
 			/* 
 		if(fileList.length > 0){

@@ -34,9 +34,15 @@ public class FilesController {
   public String mutipart_form() {
 	  return "multipart_form";
   }
+  //실패!
   @GetMapping("/multipart_form_dragndrop")
   public String multipart_form_dragndrop() {
 	  return "multipart_form_dragndrop";
+  }
+  //성공!!!
+  @GetMapping("/multipart_form_dragndrop2")
+  public String multipart_form_dragndrop2() {
+	  return "multipart_form_dragndrop2";
   }
   
   @PostMapping("/upload")
